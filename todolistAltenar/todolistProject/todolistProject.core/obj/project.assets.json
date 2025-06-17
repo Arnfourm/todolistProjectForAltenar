@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\todolistProject.core.csproj",
-      "projectName": "todolistProject.core",
-      "projectPath": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\todolistProject.core.csproj",
+      "projectUniqueName": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\todolistProject.Core.csproj",
+      "projectName": "todolistProject.Core",
+      "projectPath": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\todolistProject.Core.csproj",
       "packagesPath": "C:\\Users\\arnfo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\obj\\",
       "projectStyle": "PackageReference",

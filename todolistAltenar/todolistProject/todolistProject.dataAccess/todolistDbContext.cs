@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using todolistProject.Core.Models;
+using todolistProject.dataAccess.Entities;
 
 namespace todolistProject.dataAccess
 {
@@ -10,6 +11,6 @@ namespace todolistProject.dataAccess
         {
         }
 
-        public DbSet<Note> Notes { get; set; }
+        public DbSet<NoteEntity> Notes { get; set; }
     }
 }

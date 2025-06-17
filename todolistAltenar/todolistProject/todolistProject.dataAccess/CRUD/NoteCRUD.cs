@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using todolistProject.Core.Models;
+using todolistProject.dataAccess.Entities;
 
 namespace todolistProject.dataAccess.CRUD
 {
@@ -14,17 +15,29 @@ namespace todolistProject.dataAccess.CRUD
 
         public async Task<List<Note>> GetNotes()
         {
-            var NotesList = await _dbContext.Notes.ToListAsync();
+            var notesList = await _dbContext.Notes.ToListAsync();
 
-            return NotesList;
+            var notesListReturn = notesList
+                .Select(note => Note.Create(note.idNote, note.titleNote, note.notePath, note.titleGroup))
+                .ToList();
+
+            return notesListReturn;
         }
 
-        public async Task<int> CreateNote(Note currentNote)
+        public async Task<int> CreateNote(Note note)
         {
-            await _dbContext.Notes.AddAsync(currentNote);
+            var noteEntity = new NoteEntity
+            {
+                idNote = note.idNote,
+                titleNote = note.titleNote,
+                notePath = note.notePath,
+                titleGroup = note.titleGroup
+            };
+
+            await _dbContext.Notes.AddAsync(noteEntity);
             await _dbContext.SaveChangesAsync();
 
-            return currentNote.idNote;
+            return noteEntity.idNote;
         }
 
         public async Task<int> UpdateNote(int idNote, string titleNote, string titleGroup)
