@@ -1,0 +1,12 @@
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\bin\Debug\net8.0\todolistProject.Core.deps.json
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\bin\Debug\net8.0\todolistProject.Core.dll
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\bin\Debug\net8.0\todolistProject.Core.pdb
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.AssemblyInfoInputs.cache
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.AssemblyInfo.cs
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.csproj.CoreCompileInputs.cache
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.sourcelink.json
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.dll
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\refint\todolistProject.Core.dll
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\todolistProject.Core.pdb
+C:\Users\arnfo\Desktop\todolistProjectForAltenar\todolistAltenar\todolistProject\todolistProject.core\obj\Debug\net8.0\ref\todolistProject.Core.dll
