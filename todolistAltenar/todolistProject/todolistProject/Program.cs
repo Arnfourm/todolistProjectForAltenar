@@ -19,6 +19,10 @@ builder.Services.AddDbContext<todolistDbContext>(
 
 builder.Services.AddScoped<INotesService, NotesService>();
 builder.Services.AddScoped<INoteCRUD, NoteCRUD>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserCRUD, UserCRUD>();
+builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddScoped<IGroupCRUD, GroupCRUD>();
 
 var app = builder.Build();
 

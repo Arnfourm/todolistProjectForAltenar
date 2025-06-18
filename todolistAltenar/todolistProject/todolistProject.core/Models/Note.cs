@@ -16,10 +16,5 @@
             this.noteStorage = noteStorage;
             this.noteGroup = noteGroup;
         }
-           
-        //public static Note Create(int idNote, string titleNote, string notePath, string titleGroup)
-        //{
-        //    return new Note(idNote, titleNote, notePath, titleGroup);
-        //}
     }
 }
