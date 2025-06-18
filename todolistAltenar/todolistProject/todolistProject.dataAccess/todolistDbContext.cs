@@ -11,6 +11,9 @@ namespace todolistProject.dataAccess
         {
         }
 
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<GroupEntity> Groups { get; set; }
+        public DbSet<NoteStorageEntity> NoteStorages { get; set; }
         public DbSet<NoteEntity> Notes { get; set; }
     }
 }

@@ -10,13 +10,19 @@ namespace todolistProject.dataAccess.Entities
         [Column("idnote")]
         public int idNote { get; set; }
 
+        [Column("userid")]
+        public int userID { get; set; }
+        public required UserEntity user { get; set; }
+
         [Column("titlenote")]
         public required string titleNote { get; set; }
 
         [Column("notestorageid")]
-        public required string notePath { get; set; }
+        public required int noteStorageID { get; set; }
+        public required NoteStorageEntity noteStorage { get; set; }
 
         [Column("groupid")]
-        public required string titleGroup { get; set; }
+        public int groupID { get; set; }
+        public required GroupEntity group { get; set; }
     }
 }

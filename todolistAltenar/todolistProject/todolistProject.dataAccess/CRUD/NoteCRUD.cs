@@ -18,7 +18,7 @@ namespace todolistProject.dataAccess.CRUD
             var notesList = await _dbContext.Notes.ToListAsync();
 
             var notesListReturn = notesList
-                .Select(note => Note.Create(note.idNote, note.titleNote, note.notePath, note.titleGroup))
+                .Select(note => new Note(note.idNote, note.titleNote, note.notePath, note.titleGroup))
                 .ToList();
 
             return notesListReturn;
