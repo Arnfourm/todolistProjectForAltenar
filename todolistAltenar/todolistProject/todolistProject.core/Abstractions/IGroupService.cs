@@ -4,9 +4,9 @@ namespace todolistProject.Core.Abstractions
 {
     public interface IGroupService
     {
-        Task<int> CreateGroup(Group group);
-        Task<int> DeleteGroup(int idGroup);
+        Task<Guid> CreateGroup(Group group);
+        Task<Guid> DeleteGroup(Guid idGroup);
         Task<List<Group>> GetAllGroups();
-        Task<int> UpdateGroup(int idGroup, string titleGroup);
+        Task<Guid> UpdateGroup(Guid idGroup, string titleGroup);
     }
 }

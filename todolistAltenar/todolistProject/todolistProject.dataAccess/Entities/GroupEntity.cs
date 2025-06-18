@@ -8,10 +8,10 @@ namespace todolistProject.dataAccess.Entities
     {
         [Key]
         [Column("idgroup")]
-        public int idGroup { get; set; }
+        public Guid idGroup { get; set; }
 
         [Column("userid")]
-        public int userID { get; set; }
+        public Guid userID { get; set; }
 
         public required UserEntity user { get; set; }
 

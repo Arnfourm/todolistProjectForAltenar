@@ -8,7 +8,7 @@ namespace todolistProject.dataAccess.Entities
     {
         [Key]
         [Column("iduser")]
-        public int idUser { get; set; }
+        public Guid idUser { get; set; }
 
         [Column("username")]
         public required string username { get; set; }

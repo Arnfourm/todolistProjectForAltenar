@@ -17,17 +17,17 @@ namespace todolist.Application.Services
             return await _notesService.GetNotes();
         }
 
-        public async Task<int> CreateNote(Note currentNote)
+        public async Task<Guid> CreateNote(Note currentNote)
         {
             return await _notesService.CreateNote(currentNote);
         }
 
-        public async Task<int> UpdateNote(int idNote, string titleNote, int groupID)
+        public async Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID)
         {
             return await _notesService.UpdateNote(idNote, titleNote, groupID);
         }
 
-        public async Task<int> DeleteNote(int idNote)
+        public async Task<Guid> DeleteNote(Guid idNote)
         {
             return await _notesService.DeleteNote(idNote);
         }

@@ -2,12 +2,12 @@
 {
     public class User
     {
-        public int idUser { get; set; }
+        public Guid idUser { get; set; }
         public string username { get; set; }
         public string userEmail { get; set; }
         public string userPassword { get; set; }
 
-        public User(int idUser, string username, string userEmail, string userPassword)
+        public User(Guid idUser, string username, string userEmail, string userPassword)
         {
             this.idUser = idUser;
             this.username = username;

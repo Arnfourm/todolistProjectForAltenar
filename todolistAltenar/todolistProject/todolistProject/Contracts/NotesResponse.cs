@@ -2,10 +2,10 @@
 {
     public record NotesResponse
     (
-        int noteID,
-        int userID,
+        Guid noteID,
+        Guid userID,
         string titleNote,
-        int noteStorageID,
-        int groupID
+        Guid noteStorageID,
+        Guid groupID
     );
 }

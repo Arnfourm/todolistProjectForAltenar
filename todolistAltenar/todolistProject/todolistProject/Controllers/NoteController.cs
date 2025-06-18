@@ -48,13 +48,13 @@ namespace todolistProject.API.Controllers
             }
 
             var noteStorage = new NoteStorage(
-                1,
+                Guid.NewGuid(),
                 "123213213123",
                 "asdsadasd"
             );
 
             var newNote = new Note(
-                1000,
+                Guid.NewGuid(),
                 user,
                 request.titleNote,
                 noteStorage,

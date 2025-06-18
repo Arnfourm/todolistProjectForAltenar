@@ -4,9 +4,9 @@ namespace todolistProject.Core.Abstractions
 {
     public interface IUserService
     {
-        Task<int> CreateUser(User user);
-        Task<int> DeleteUser(int idUser);
+        Task<Guid> CreateUser(User user);
+        Task<Guid> DeleteUser(Guid idUser);
         Task<List<User>> GetAllUsers();
-        Task<int> UpdateUser(int idUser, string username, string userEmail, string userPassword);
+        Task<Guid> UpdateUser(Guid idUser, string username, string userEmail, string userPassword);
     }
 }

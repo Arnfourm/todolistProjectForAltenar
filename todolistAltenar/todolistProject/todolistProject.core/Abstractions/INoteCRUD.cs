@@ -4,9 +4,9 @@ namespace todolistProject.Core.Abstractions
 {
     public interface INoteCRUD
     {
-        Task<int> CreateNote(Note note);
-        Task<int> DeleteNote(int idNote);
+        Task<Guid> CreateNote(Note note);
+        Task<Guid> DeleteNote(Guid idNote);
         Task<List<Note>> GetNotes();
-        Task<int> UpdateNote(int idNote, string titleNote, int groupID);
+        Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID);
     }
 }

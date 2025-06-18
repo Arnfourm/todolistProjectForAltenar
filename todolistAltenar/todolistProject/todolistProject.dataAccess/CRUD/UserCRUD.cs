@@ -25,7 +25,7 @@ namespace todolistProject.dataAccess.CRUD
             return userListReturn;
         }
 
-        public async Task<int> CreateUser(User user)
+        public async Task<Guid> CreateUser(User user)
         {
             var userEntity = new UserEntity
             {
@@ -41,7 +41,7 @@ namespace todolistProject.dataAccess.CRUD
             return userEntity.idUser;
         }
 
-        public async Task<int> UpdateUser(int idUser, string username, string userEmail, string userPassword)
+        public async Task<Guid> UpdateUser(Guid idUser, string username, string userEmail, string userPassword)
         {
             await _dbContext.Users
                 .Where(user => user.idUser == idUser)
@@ -55,7 +55,7 @@ namespace todolistProject.dataAccess.CRUD
             return idUser;
         }
 
-        public async Task<int> DeleteUser(int idUser)
+        public async Task<Guid> DeleteUser(Guid idUser)
         {
             await _dbContext.Users
                 .Where(user => user.idUser == idUser)

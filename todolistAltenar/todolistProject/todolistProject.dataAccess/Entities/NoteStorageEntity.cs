@@ -8,7 +8,7 @@ namespace todolistProject.dataAccess.Entities
     {
         [Key]
         [Column("idnotestorage")]
-        public int idNoteStorage { get; set; }
+        public Guid idNoteStorage { get; set; }
 
         [Column("filenamenote")]
         public required string filenameNote { get; set; }

@@ -38,7 +38,7 @@ namespace todolistProject.dataAccess.CRUD
             return notesListReturn;
         }
 
-        public async Task<int> CreateNote(Note note)
+        public async Task<Guid> CreateNote(Note note)
         {
             var userEntity = await _dbContext.Users.FindAsync(note.user.idUser);
             var noteStorageEntity = await _dbContext.NoteStorages.FindAsync(note.noteStorage.idNoteStorage);
@@ -77,7 +77,7 @@ namespace todolistProject.dataAccess.CRUD
             return noteEntity.idNote;
         }
 
-        public async Task<int> UpdateNote(int idNote, string titleNote, int groupID)
+        public async Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID)
         {
             await _dbContext.Notes
                 .Where(note => note.idNote == idNote)
@@ -90,7 +90,7 @@ namespace todolistProject.dataAccess.CRUD
             return idNote;
         }
 
-        public async Task<int> DeleteNote(int idNote)
+        public async Task<Guid> DeleteNote(Guid idNote)
         {
             await _dbContext.Notes
                 .Where(note => note.idNote == idNote)

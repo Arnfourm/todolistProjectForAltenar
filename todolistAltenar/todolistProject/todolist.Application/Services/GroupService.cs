@@ -17,17 +17,17 @@ namespace todolist.Application.Services
             return await _groupsService.GetGroups();
         }
 
-        public async Task<int> CreateGroup(Group group)
+        public async Task<Guid> CreateGroup(Group group)
         {
             return await _groupsService.CreateGroup(group);
         }
 
-        public async Task<int> UpdateGroup(int idGroup, string titleGroup)
+        public async Task<Guid> UpdateGroup(Guid idGroup, string titleGroup)
         {
             return await _groupsService.UpdateGroup(idGroup, titleGroup);
         }
 
-        public async Task<int> DeleteGroup(int idGroup)
+        public async Task<Guid> DeleteGroup(Guid idGroup)
         {
             return await _groupsService.DeleteGroup(idGroup);
         }

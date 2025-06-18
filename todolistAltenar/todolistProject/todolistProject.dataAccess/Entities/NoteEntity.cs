@@ -8,21 +8,21 @@ namespace todolistProject.dataAccess.Entities
     {
         [Key]
         [Column("idnote")]
-        public int idNote { get; set; }
+        public Guid idNote { get; set; }
 
         [Column("userid")]
-        public int userID { get; set; }
+        public Guid userID { get; set; }
         public required UserEntity user { get; set; }
 
         [Column("titlenote")]
         public required string titleNote { get; set; }
 
         [Column("notestorageid")]
-        public required int noteStorageID { get; set; }
+        public required Guid noteStorageID { get; set; }
         public required NoteStorageEntity noteStorage { get; set; }
 
         [Column("groupid")]
-        public int groupID { get; set; }
+        public Guid groupID { get; set; }
         public required GroupEntity group { get; set; }
     }
 }

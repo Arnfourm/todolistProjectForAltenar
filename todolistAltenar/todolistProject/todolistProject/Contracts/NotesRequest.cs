@@ -2,9 +2,9 @@
 {
     public record NotesRequest
     (
-        int userID,
+        Guid userID,
         string titleNote,
-        int noteStorageID,
-        int groupID
+        Guid noteStorageID,
+        Guid groupID
     );
 }

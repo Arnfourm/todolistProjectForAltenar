@@ -30,7 +30,7 @@ namespace todolistProject.dataAccess.CRUD
             return groupListReturn;
         }
 
-        public async Task<int> CreateGroup(Group group)
+        public async Task<Guid> CreateGroup(Group group)
         {
             var userEntity = await _dbContext.Users.FindAsync(group.user.idUser);
             if (userEntity == null)
@@ -52,7 +52,7 @@ namespace todolistProject.dataAccess.CRUD
             return groupEntity.idGroup;
         }
 
-        public async Task<int> UpdateGroup(int idGroup, string titleGroup)
+        public async Task<Guid> UpdateGroup(Guid idGroup, string titleGroup)
         {
             await _dbContext.Groups
                 .Where(group => group.idGroup == idGroup)
@@ -64,7 +64,7 @@ namespace todolistProject.dataAccess.CRUD
             return idGroup;
         }
 
-        public async Task<int> DeleteGroup(int idGroup)
+        public async Task<Guid> DeleteGroup(Guid idGroup)
         {
             await _dbContext.Groups
                 .Where(group => group.idGroup == idGroup)

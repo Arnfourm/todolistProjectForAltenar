@@ -17,17 +17,17 @@ namespace todolist.Application.Services
             return await _usersService.GetUsers();
         }
 
-        public async Task<int> CreateUser(User user)
+        public async Task<Guid> CreateUser(User user)
         {
             return await _usersService.CreateUser(user);
         }
 
-        public async Task<int> UpdateUser(int idUser, string username, string userEmail, string userPassword)
+        public async Task<Guid> UpdateUser(Guid idUser, string username, string userEmail, string userPassword)
         {
             return await _usersService.UpdateUser(idUser, username, userEmail, userPassword);
         }
 
-        public async Task<int> DeleteUser(int idUser)
+        public async Task<Guid> DeleteUser(Guid idUser)
         {
             return await _usersService.DeleteUser(idUser);
         }
