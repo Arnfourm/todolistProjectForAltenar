@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using todolistProject.Core.Models;
 using todolistProject.dataAccess.Entities;
+using todolistProject.Core.Abstractions;
 
 namespace todolistProject.dataAccess.CRUD
 {
@@ -15,10 +16,23 @@ namespace todolistProject.dataAccess.CRUD
 
         public async Task<List<Note>> GetNotes()
         {
-            var notesList = await _dbContext.Notes.ToListAsync();
+            var notesList = await _dbContext.Notes
+                .Include(note => note.user)
+                .Include(note => note.noteStorage)
+                .Include(note => note.group)
+                .ToListAsync();
 
             var notesListReturn = notesList
-                .Select(note => new Note(note.idNote, note.titleNote, note.notePath, note.titleGroup))
+                .Select(note => new Note(
+                    note.idNote,
+                    new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                    note.titleNote,
+                    new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                    new Group(
+                        note.group.idGroup,
+                        new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                        note.group.titleGroup
+                    )))
                 .ToList();
 
             return notesListReturn;
@@ -26,12 +40,35 @@ namespace todolistProject.dataAccess.CRUD
 
         public async Task<int> CreateNote(Note note)
         {
+            var userEntity = await _dbContext.Users.FindAsync(note.user.idUser);
+            var noteStorageEntity = await _dbContext.NoteStorages.FindAsync(note.noteStorage.idNoteStorage);
+            var groupEntity = await _dbContext.Groups.FindAsync(note.noteGroup.idGroup);
+
+            if (userEntity == null)
+            {
+                throw new Exception($"User not found. ID: {note.user.idUser}");
+            }
+
+            if (noteStorageEntity == null)
+            {
+                throw new Exception($"NoteStorage not found. ID: {note.noteStorage.idNoteStorage}");
+            }
+
+            if (groupEntity == null)
+            {
+                throw new Exception($"Group not found. ID: {note.noteGroup.idGroup}");
+            }
+
             var noteEntity = new NoteEntity
             {
                 idNote = note.idNote,
+                userID = note.user.idUser,
                 titleNote = note.titleNote,
-                notePath = note.notePath,
-                titleGroup = note.titleGroup
+                noteStorageID = note.noteStorage.idNoteStorage,
+                groupID = note.noteGroup.idGroup,
+                user = userEntity,
+                noteStorage = noteStorageEntity,
+                group = groupEntity
             };
 
             await _dbContext.Notes.AddAsync(noteEntity);
@@ -40,13 +77,13 @@ namespace todolistProject.dataAccess.CRUD
             return noteEntity.idNote;
         }
 
-        public async Task<int> UpdateNote(int idNote, string titleNote, string titleGroup)
+        public async Task<int> UpdateNote(int idNote, string titleNote, int groupID)
         {
             await _dbContext.Notes
                 .Where(note => note.idNote == idNote)
                 .ExecuteUpdateAsync(update => update
                     .SetProperty(note => note.titleNote, note => titleNote)
-                    .SetProperty(note => note.titleGroup, note => titleGroup));
+                    .SetProperty(note => note.groupID, note => groupID));
 
             await _dbContext.SaveChangesAsync();
 

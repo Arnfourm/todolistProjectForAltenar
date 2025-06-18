@@ -1,12 +1,12 @@
 ﻿using todolistProject.Core.Models;
 
-namespace todolistProject.dataAccess.CRUD
+namespace todolistProject.Core.Abstractions
 {
     public interface INoteCRUD
     {
-        Task<int> CreateNote(Note currentNote);
+        Task<int> CreateNote(Note note);
         Task<int> DeleteNote(int idNote);
         Task<List<Note>> GetNotes();
-        Task<int> UpdateNote(int idNote, string titleNote, string titleGroup);
+        Task<int> UpdateNote(int idNote, string titleNote, int groupID);
     }
 }

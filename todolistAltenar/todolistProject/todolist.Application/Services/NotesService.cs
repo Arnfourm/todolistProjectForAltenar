@@ -1,5 +1,5 @@
 ﻿using todolistProject.Core.Models;
-using todolistProject.dataAccess.CRUD;
+using todolistProject.Core.Abstractions;
 
 namespace todolist.Application.Services
 {
@@ -22,9 +22,9 @@ namespace todolist.Application.Services
             return await _notesService.CreateNote(currentNote);
         }
 
-        public async Task<int> UpdateNote(int idNote, string titleNote, string titleGroup)
+        public async Task<int> UpdateNote(int idNote, string titleNote, int groupID)
         {
-            return await _notesService.UpdateNote(idNote, titleNote, titleGroup);
+            return await _notesService.UpdateNote(idNote, titleNote, groupID);
         }
 
         public async Task<int> DeleteNote(int idNote)

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using todolist.Application.Services;
+using todolistProject.Core.Abstractions;
 using todolistProject.API.Contracts;
 
 namespace todolistProject.API.Controllers
@@ -20,7 +20,7 @@ namespace todolistProject.API.Controllers
         {
             var notes = await _notesService.GetAllNotes();
 
-            var response = notes.Select(note => new NotesResponse(note.idNote, note.titleNote, note.notePath, note.titleGroup));
+            var response = notes.Select(note => new NotesResponse(note.idNote, note.user.idUser, note.titleNote, note.noteStorage.idNoteStorage, note.noteGroup.idGroup));
 
             return Ok(response);
         }

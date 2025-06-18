@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using todolistProject.Core.Models;
 using todolistProject.dataAccess.Entities;
+using todolistProject.Core.Abstractions;
 
 namespace todolistProject.dataAccess.CRUD
 {
-    public class UserCRUD
+    public class UserCRUD : IUserCRUD
     {
         private readonly todolistDbContext _dbContext;
 

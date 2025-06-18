@@ -13,7 +13,7 @@ namespace todolistProject.dataAccess.Entities
         [Column("userid")]
         public int userID { get; set; }
 
-        public required UserEntity User { get; set; }
+        public required UserEntity user { get; set; }
 
         [Column("titlegroup")]
         public required string titleGroup { get; set; }

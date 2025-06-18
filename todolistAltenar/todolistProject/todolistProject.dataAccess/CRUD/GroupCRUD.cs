@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using todolistProject.Core.Models;
 using todolistProject.dataAccess.Entities;
+using todolistProject.Core.Abstractions;
 
 namespace todolistProject.dataAccess.CRUD
 {
-    public class GroupCRUD
+    public class GroupCRUD : IGroupCRUD
     {
         private readonly todolistDbContext _dbContext;
 
@@ -17,13 +17,13 @@ namespace todolistProject.dataAccess.CRUD
         public async Task<List<Group>> GetGroups()
         {
             var groupsList = await _dbContext.Groups
-                .Include(group => group.User)
+                .Include(group => group.user)
                 .ToListAsync();
 
             var groupListReturn = groupsList
                 .Select(group => new Group(
-                    group.idGroup, 
-                    new User(group.User.idUser, group.User.username, group.User.userEmail, group.User.userPassword),
+                    group.idGroup,
+                    new User(group.user.idUser, group.user.username, group.user.userEmail, group.user.userPassword),
                     group.titleGroup))
                 .ToList();
 
@@ -43,7 +43,7 @@ namespace todolistProject.dataAccess.CRUD
                 idGroup = group.idGroup,
                 userID = group.user.idUser,
                 titleGroup = group.titleGroup,
-                User = userEntity
+                user = userEntity
             };
 
             await _dbContext.Groups.AddAsync(groupEntity);
@@ -57,7 +57,7 @@ namespace todolistProject.dataAccess.CRUD
             await _dbContext.Groups
                 .Where(group => group.idGroup == idGroup)
                 .ExecuteUpdateAsync(update => update
-                    .SetProperty(group => group.titleGroup, group => titleGroup);
+                    .SetProperty(group => group.titleGroup, group => titleGroup));
 
             await _dbContext.SaveChangesAsync();
 
