@@ -31,7 +31,7 @@ namespace todolistProject.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateNote([FromBody] NotesRequest request)
+        public async Task<ActionResult<Guid>> CreateNote([FromBody] NotesRequest request)
         {
             var allUsers = await _userService.GetAllUsers();
             var user = allUsers.FirstOrDefault(user => user.idUser == request.userID);
@@ -64,6 +64,20 @@ namespace todolistProject.API.Controllers
             await _notesService.CreateNote(newNote);
 
             return Ok(newNote);
+        }
+
+        [HttpPut("{idNote:Guid}")]
+        public async Task<ActionResult<Guid>> UpdateNote(Guid idNote, [FromBody] NotesRequest request)
+        {
+            var noteId = await _notesService.UpdateNote(idNote, request.titleNote, request.groupID);
+
+            return Ok(noteId);
+        }
+
+        [HttpDelete("{idNote:Guid}")]
+        public async Task<ActionResult<Guid>> DeleteNote(Guid idNote)
+        {
+            return Ok(await _notesService.DeleteNote(idNote));
         }
     }
 }

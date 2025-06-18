@@ -16,6 +16,6 @@ namespace todolistProject.dataAccess.Entities
         [Column("dirpathnote")]
         public required string dirPathNote { get; set; }
 
-        public required NoteEntity note { get; set; }
+        public NoteEntity? note { get; set; }
     }
 }
