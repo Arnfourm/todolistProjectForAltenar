@@ -9,7 +9,7 @@ async function fetchNote() {
 
         const responseNotes = await fetch(`http://localhost:5140/Note/${userId}/GetNoteByUserId`);
         let allNotes = await responseNotes.json();
-
+        
         const notesContainer = document.getElementById('noteContainer');
 
         allGroups.forEach(singleGroup => {
@@ -25,8 +25,6 @@ async function fetchNote() {
 
             allNotes.forEach(singleNote => {
                 if (singleNote.groupID === singleGroup.idGroup){
-                    allNotes = allNotes.filter(note => note != singleNote);
-
                     const noteShow = document.createElement('div');
                     noteShow.classList.add('noteDiv');
                     
@@ -34,8 +32,14 @@ async function fetchNote() {
                     noteNameShow.textContent = singleNote.titleNote;
                     noteNameShow.classList.add('noteName')
 
+                    noteShow.addEventListener('click', () => {
+                        openModal(singleNote);
+                    });
+
                     groupShow.appendChild(noteShow);
                     noteShow.appendChild(noteNameShow);
+                    
+                    allNotes = allNotes.filter(note => note != singleNote);
                 }
             });
         });

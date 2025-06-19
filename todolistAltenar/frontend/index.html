@@ -15,7 +15,15 @@
     </header>
 
     <main>
-        <div id="noteContainer"> </div>
+        <div id="noteContainer">
+            <div id="modalWindow" class="modal hidden">
+                <div class="modalContent">
+                    <span id="closeModal" class="close">&times;</span>
+                    <h3>Редактировать заметку</h3>
+                    <input type="text" id="editInput" />
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -25,6 +33,7 @@
 
     <script src="javascript/headerUserAction.js"></script>
     <script src="javascript/mainNoteAction.js"></script>
+    <script src="javascript//modalWindow.js"></script>
 </body>
 
 </html>
