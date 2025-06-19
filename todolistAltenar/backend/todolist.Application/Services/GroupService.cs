@@ -22,6 +22,11 @@ namespace todolist.Application.Services
             return await _groupsService.GetGroupById(idGroup);
         }
 
+        public async Task<List<Group>> GetGroupByUserId(Guid userId)
+        {
+            return await _groupsService.GetGroupByUserId(userId);
+        }
+
         public async Task<Guid> CreateGroup(Group group)
         {
             return await _groupsService.CreateGroup(group);

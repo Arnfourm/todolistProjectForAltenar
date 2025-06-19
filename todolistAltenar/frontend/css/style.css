@@ -1,0 +1,37 @@
+html{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #0a0a0a;
+    color: #ebedef;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 2px 0 rgba(35, 35, 35, 1);
+    height: 10vh;
+    padding: 0 10%;
+}
+.userName{
+    font-size: 25px;
+
+}
+
+main{
+    height: 80vh;
+}
+.groupDiv{
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    box-shadow: 0 -2px 0 rgba(35, 35, 35, 1);
+    font-size: 25px;
+}

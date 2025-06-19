@@ -58,6 +58,22 @@ namespace todolistProject.API.Controllers
             return Ok(responce);
         }
 
+        [HttpGet("{idUser:Guid}/GetNoteByUserId")]
+        public async Task<ActionResult<List<Note>>> GetNoteByUserId(Guid idUser)
+        {
+            var notes = await _notesService.GetAllNotes();
+
+            var response = notes.Select(note => new NotesResponse(
+                note.idNote,
+                note.user.idUser,
+                note.titleNote,
+                note.noteStorage.idNoteStorage,
+                note.noteGroup.idGroup)
+            );
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateNote([FromBody] NotesRequest request)
         {

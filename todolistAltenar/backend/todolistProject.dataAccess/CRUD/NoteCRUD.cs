@@ -67,6 +67,31 @@ namespace todolistProject.dataAccess.CRUD
             return noteToReturn;
         }
 
+        public async Task<List<Note>> GetNoteByUserId(Guid userId)
+        {
+            var notesList = await _dbContext.Notes
+                .Include(note => note.user)
+                .Include(note => note.noteStorage)
+                .Include(note => note.group)
+                .Where(note => note.idNote == userId)
+                .ToListAsync();
+
+            var notesListReturn = notesList
+                .Select(note => new Note(
+                    note.idNote,
+                    new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                    note.titleNote,
+                    new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                    new Group(
+                        note.group.idGroup,
+                        new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                        note.group.titleGroup
+                    )))
+                .ToList();
+
+            return notesListReturn;
+        }
+
         public async Task<Guid> CreateNote(Note note)
         {
             var userEntity = await _dbContext.Users.FindAsync(note.user.idUser);

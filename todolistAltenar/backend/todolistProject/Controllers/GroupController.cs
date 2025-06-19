@@ -38,6 +38,16 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{userId:Guid}/GetGroupByUserId")]
+        public async Task<ActionResult<List<Group>>> GetGroupByUserId(Guid userId)
+        {
+            var groups = await _GroupService.GetGroupByUserId(userId);
+
+            var response = groups.Select(group => new GroupsResponse(group.idGroup, group.user.idUser, group.titleGroup));
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateGroup([FromBody] GroupsRequest request)
         {

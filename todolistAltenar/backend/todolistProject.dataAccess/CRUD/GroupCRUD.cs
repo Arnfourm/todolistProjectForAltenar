@@ -49,6 +49,23 @@ namespace todolistProject.dataAccess.CRUD
             return groupReturn;
         }
 
+        public async Task<List<Group>> GetGroupByUserId(Guid userId)
+        {
+            var groupsList = await _dbContext.Groups
+                .Include (group => group.user)
+                .Where(group => group.userID == userId)
+                .ToListAsync();
+
+            var groupListReturn = groupsList
+                .Select(group => new Group(
+                    group.idGroup,
+                    new User(group.user.idUser, group.user.username, group.user.userEmail, group.user.userPassword),
+                    group.titleGroup))
+                .ToList();
+
+            return groupListReturn;
+        }
+
         public async Task<Guid> CreateGroup(Group group)
         {
             var userEntity = await _dbContext.Users.FindAsync(group.user.idUser);
