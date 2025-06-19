@@ -17,6 +17,11 @@ namespace todolist.Application.Services
             return await _notesService.GetNotes();
         }
 
+        public async Task<Note> GetNoteById(Guid idNote)
+        {
+            return await _notesService.GetNoteById(idNote);
+        }
+
         public async Task<Guid> CreateNote(Note currentNote)
         {
             return await _notesService.CreateNote(currentNote);

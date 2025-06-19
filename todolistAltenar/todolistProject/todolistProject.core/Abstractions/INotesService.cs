@@ -7,6 +7,7 @@ namespace todolistProject.Core.Abstractions
         Task<Guid> CreateNote(Note currentNote);
         Task<Guid> DeleteNote(Guid idNote);
         Task<List<Note>> GetAllNotes();
+        Task<Note> GetNoteById(Guid idNote);
         Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID);
     }
 }

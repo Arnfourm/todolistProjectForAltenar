@@ -26,6 +26,16 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{userId:Guid}/getUserById")]
+        public async Task<ActionResult<UsersResponse>> GetUserById(Guid userId)
+        {
+            var user = await _userService.GetUserById(userId);
+
+            var response = new UsersResponse(user.idUser, user.username, user.userEmail, user.userPassword);
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateUser([FromBody] UsersRequest request)
         {

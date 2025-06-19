@@ -7,6 +7,7 @@ namespace todolistProject.Core.Abstractions
         Task<Guid> CreateUser(User user);
         Task<Guid> DeleteUser(Guid idUser);
         Task<List<User>> GetAllUsers();
+        Task<User> GetUserById(Guid idUser);
         Task<Guid> UpdateUser(Guid idUser, string username, string userEmail, string userPassword);
     }
 }

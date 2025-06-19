@@ -17,6 +17,11 @@ namespace todolist.Application.Services
             return await _usersService.GetUsers();
         }
 
+        public async Task<User> GetUserById(Guid idUser)
+        {
+            return await _usersService.GetUserById(idUser);
+        }
+
         public async Task<Guid> CreateUser(User user)
         {
             return await _usersService.CreateUser(user);

@@ -7,12 +7,28 @@
       "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject\\contracts\\notescontentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\contracts\\notescontentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject\\contracts\\notescontentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\contracts\\notescontentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E823A8BC-5612-4DBD-9FEF-07CB85134EC4}|todolist.Application\\todolist.Application.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolist.application\\services\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E823A8BC-5612-4DBD-9FEF-07CB85134EC4}|todolist.Application\\todolist.Application.csproj|solutionrelative:todolist.application\\services\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject\\todolistProject.API.csproj|solutionrelative:todolistproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E823A8BC-5612-4DBD-9FEF-07CB85134EC4}|todolist.Application\\todolist.Application.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolist.application\\services\\notestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E823A8BC-5612-4DBD-9FEF-07CB85134EC4}|todolist.Application\\todolist.Application.csproj|solutionrelative:todolist.application\\services\\notestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BEAB7668-EDC3-4C49-8B80-44E8AA1DEC2B}|todolistProject.core\\todolistProject.Core.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\todolistproject\\todolistproject.core\\abstractions\\inotestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BEAB7668-EDC3-4C49-8B80-44E8AA1DEC2B}|todolistProject.core\\todolistProject.Core.csproj|solutionrelative:todolistproject.core\\abstractions\\inotestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,9 +37,48 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 1862,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 1643,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NotesContentResponse.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Contracts\\NotesContentResponse.cs",
+              "RelativeDocumentMoniker": "todolistProject\\Contracts\\NotesContentResponse.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Contracts\\NotesContentResponse.cs",
+              "RelativeToolTip": "todolistProject\\Contracts\\NotesContentResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T09:02:38.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotesContentRequest.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Contracts\\NotesContentRequest.cs",
+              "RelativeDocumentMoniker": "todolistProject\\Contracts\\NotesContentRequest.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Contracts\\NotesContentRequest.cs",
+              "RelativeToolTip": "todolistProject\\Contracts\\NotesContentRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T08:38:25.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "INoteStorageService.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\Abstractions\\INoteStorageService.cs",
+              "RelativeDocumentMoniker": "todolistProject.core\\Abstractions\\INoteStorageService.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject.core\\Abstractions\\INoteStorageService.cs",
+              "RelativeToolTip": "todolistProject.core\\Abstractions\\INoteStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T08:33:30.033Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -34,15 +89,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "todolistProject\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\UserController.cs",
-              "RelativeToolTip": "todolistProject\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "NoteStorageService.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolist.Application\\Services\\NoteStorageService.cs",
+              "RelativeDocumentMoniker": "todolist.Application\\Services\\NoteStorageService.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolist.Application\\Services\\NoteStorageService.cs",
+              "RelativeToolTip": "todolist.Application\\Services\\NoteStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T22:09:53.778Z",
+              "WhenOpened": "2025-06-19T08:07:06.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Program.cs",
+              "RelativeDocumentMoniker": "todolistProject\\Program.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Program.cs",
+              "RelativeToolTip": "todolistProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T07:56:36.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GroupService.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolist.Application\\Services\\GroupService.cs",
+              "RelativeDocumentMoniker": "todolist.Application\\Services\\GroupService.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolist.Application\\Services\\GroupService.cs",
+              "RelativeToolTip": "todolist.Application\\Services\\GroupService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T07:41:54.675Z",
               "EditorCaption": ""
             },
             {
@@ -51,30 +132,17 @@
               "Title": "NoteController.cs",
               "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\NoteController.cs",
               "RelativeDocumentMoniker": "todolistProject\\Controllers\\NoteController.cs",
-              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\NoteController.cs",
-              "RelativeToolTip": "todolistProject\\Controllers\\NoteController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAVAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\NoteController.cs*",
+              "RelativeToolTip": "todolistProject\\Controllers\\NoteController.cs*",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAkwHMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T22:08:53.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GroupController.cs",
-              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\GroupController.cs",
-              "RelativeDocumentMoniker": "todolistProject\\Controllers\\GroupController.cs",
-              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\todolistProject\\todolistProject\\Controllers\\GroupController.cs",
-              "RelativeToolTip": "todolistProject\\Controllers\\GroupController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwAsAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T21:54:48.945Z",
+              "WhenOpened": "2025-06-19T07:41:24.113Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 348,
+          "DockedWidth": 567,
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -84,6 +152,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

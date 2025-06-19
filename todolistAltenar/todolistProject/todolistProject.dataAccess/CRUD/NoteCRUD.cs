@@ -38,6 +38,35 @@ namespace todolistProject.dataAccess.CRUD
             return notesListReturn;
         }
 
+        public async Task<Note> GetNoteById(Guid idNote)
+        {
+            var note = await _dbContext.Notes
+                .Include(note => note.user)
+                .Include(note => note.noteStorage)
+                .Include(note => note.group)
+                .FirstOrDefaultAsync(note => note.idNote == idNote);
+
+
+            if (note == null)
+            {
+                throw new Exception($"Note not found. ID: {idNote}");
+            }
+
+            var noteToReturn = new Note(
+                note.idNote,
+                new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                note.titleNote,
+                new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                new Group(
+                    note.group.idGroup,
+                    new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
+                    note.group.titleGroup
+                )
+            );
+
+            return noteToReturn;
+        }
+
         public async Task<Guid> CreateNote(Note note)
         {
             var userEntity = await _dbContext.Users.FindAsync(note.user.idUser);

@@ -25,6 +25,20 @@ namespace todolistProject.dataAccess.CRUD
             return userListReturn;
         }
 
+        public async Task<User> GetUserById(Guid idUser)
+        {
+            var user = await _dbContext.Users.SingleOrDefaultAsync(user => user.idUser == idUser);
+
+            if (user == null)
+            {
+                throw new Exception($"User not found. ID: {idUser}");
+            }
+
+            var userReturn = new User(user.idUser, user.username, user.userEmail, user.userPassword);
+
+            return userReturn;
+        }
+
         public async Task<Guid> CreateUser(User user)
         {
             var userEntity = new UserEntity

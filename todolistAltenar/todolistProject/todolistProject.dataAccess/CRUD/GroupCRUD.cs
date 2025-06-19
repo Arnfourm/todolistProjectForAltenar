@@ -30,6 +30,25 @@ namespace todolistProject.dataAccess.CRUD
             return groupListReturn;
         }
 
+        public async Task<Group> GetGroupById(Guid idGroup)
+        {
+            var group = await _dbContext.Groups
+                .Include(group => group.user)
+                .SingleOrDefaultAsync(group => group.idGroup == idGroup);
+
+            if (group == null) {
+                throw new Exception($"Group not found. ID: {idGroup}");
+            }
+
+            var groupReturn = new Group(
+                group.idGroup,
+                new User(group.user.idUser, group.user.username, group.user.userEmail, group.user.userPassword),
+                group.titleGroup
+            );
+
+            return groupReturn;
+        }
+
         public async Task<Guid> CreateGroup(Group group)
         {
             var userEntity = await _dbContext.Users.FindAsync(group.user.idUser);

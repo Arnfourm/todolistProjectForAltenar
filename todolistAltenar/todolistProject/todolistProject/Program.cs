@@ -23,6 +23,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserCRUD, UserCRUD>();
 builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddScoped<IGroupCRUD, GroupCRUD>();
+builder.Services.AddScoped<INoteStorageService, NoteStorageService>();
+builder.Services.AddScoped<INoteStorageCRUD, NoteStorageCRUD>();
 
 var app = builder.Build();
 
