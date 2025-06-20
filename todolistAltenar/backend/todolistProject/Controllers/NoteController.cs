@@ -42,7 +42,7 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{idNote:Guid}/getNoteById")]
+        [HttpGet("ById/{idNote:Guid}")]
         public async Task<ActionResult<NotesResponse>> GetNoteById(Guid idNote)
         {
             var note = await _notesService.GetNoteById(idNote);
@@ -58,7 +58,7 @@ namespace todolistProject.API.Controllers
             return Ok(responce);
         }
 
-        [HttpGet("{idUser:Guid}/GetNoteByUserId")]
+        [HttpGet("ByUserId/{idUser:Guid}")]
         public async Task<ActionResult<List<Note>>> GetNoteByUserId(Guid idUser)
         {
             var notes = await _notesService.GetAllNotes();
@@ -123,7 +123,7 @@ namespace todolistProject.API.Controllers
             return Ok(idNote);
         }
 
-        [HttpGet("{idNote:Guid}/getContent")]
+        [HttpGet("Content/{idNote:Guid}")]
         public async Task<ActionResult<NotesContentResponse>> GetNoteContent(Guid idNote)
         {
             var note = await _notesService.GetNoteById(idNote);
@@ -133,7 +133,7 @@ namespace todolistProject.API.Controllers
             return Ok(new NotesContentResponse(idNote, noteContnt));
         }
 
-        [HttpPut("{idNote:Guid}/writeContent")]
+        [HttpPut("Content/{idNote:Guid}")]
         public async Task<ActionResult<Guid>> SaveNoteContext(Guid idNote, [FromBody] NotesContentRequest request)
         {
             var note = await _notesService.GetNoteById(idNote);

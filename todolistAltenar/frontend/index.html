@@ -19,8 +19,12 @@
             <div id="modalWindow" class="modal hidden">
                 <div class="modalContent">
                     <span id="closeModal" class="close">&times;</span>
-                    <h3>Редактировать заметку</h3>
-                    <input type="text" id="editInput" />
+                    <input type="text" id="nameNoteInput" class="nameNoteInput">
+                    <textarea id="editInput" class="editInput"></textarea>
+                    <section id="modalButtons" class="modalButtons">
+                        <button id="cancelEdit">Отмена</button>
+                        <button id="acceptEdit">Сохранить</button>
+                    </section>
                 </div>
             </div>
         </div>

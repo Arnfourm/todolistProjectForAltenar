@@ -28,7 +28,7 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{groupId:Guid}/getGroupById")]
+        [HttpGet("ById/{groupId:Guid}")]
         public async Task<ActionResult<Group>> GetGroupById(Guid groupId)
         {
             var group = await _GroupService.GetGroupById(groupId);
@@ -38,7 +38,7 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{userId:Guid}/GetGroupByUserId")]
+        [HttpGet("ByUserId/{userId:Guid}")]
         public async Task<ActionResult<List<Group>>> GetGroupByUserId(Guid userId)
         {
             var groups = await _GroupService.GetGroupByUserId(userId);

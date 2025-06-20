@@ -26,7 +26,7 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{userId:Guid}/getUserById")]
+        [HttpGet("ById/{userId:Guid}")]
         public async Task<ActionResult<UsersResponse>> GetUserById(Guid userId)
         {
             var user = await _userService.GetUserById(userId);
@@ -51,18 +51,18 @@ namespace todolistProject.API.Controllers
             return Ok(newUser);
         }
 
-        [HttpPut("{idUser:guid}")]
-        public async Task<ActionResult<Guid>> UpdateUser(Guid idUser, [FromBody] UsersRequest request)
+        [HttpPut("{userid:guid}")]
+        public async Task<ActionResult<Guid>> UpdateUser(Guid userid, [FromBody] UsersRequest request)
         {
-            var userId = await _userService.UpdateUser(idUser, request.username, request.userEmail, request.userPassword);
+            var user = await _userService.UpdateUser(userid, request.username, request.userEmail, request.userPassword);
 
-            return Ok(userId);
+            return Ok(user);
         }
 
-        [HttpDelete("{idUser:guid}")]
-        public async Task<ActionResult<Guid>> DeleteUser(Guid idUser)
+        [HttpDelete("{userid:guid}")]
+        public async Task<ActionResult<Guid>> DeleteUser(Guid userid)
         {
-            return Ok(await _userService.DeleteUser(idUser));
+            return Ok(await _userService.DeleteUser(userid));
         }
     }
 }

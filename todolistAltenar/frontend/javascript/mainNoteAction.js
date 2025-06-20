@@ -4,15 +4,15 @@ async function fetchNote() {
     try {
         const userId = '5eaa9aeb-390c-46d7-9ca8-bbd5a76ce74d';
         
-        const responseGroups = await fetch(`http://localhost:5140/Group/${userId}/GetGroupByUserId`);
+        const responseGroups = await fetch(`http://localhost:5140/Group/ByUserId/${userId}`);
         const allGroups = await responseGroups.json();
 
-        const responseNotes = await fetch(`http://localhost:5140/Note/${userId}/GetNoteByUserId`);
+        const responseNotes = await fetch(`http://localhost:5140/Note/ByUserId/${userId}`);
         let allNotes = await responseNotes.json();
-        
+
         const notesContainer = document.getElementById('noteContainer');
 
-        allGroups.forEach(singleGroup => {
+        for (const singleGroup of allGroups) {
             const groupShow = document.createElement('div');
             groupShow.classList.add('groupDiv');
 
@@ -22,9 +22,12 @@ async function fetchNote() {
 
             notesContainer.appendChild(groupShow);
             groupShow.appendChild(groupNameShow);
-
-            allNotes.forEach(singleNote => {
+            
+            for (const singleNote of allNotes) {
                 if (singleNote.groupID === singleGroup.idGroup){
+                    const responseNoteContent = await fetch(`http://localhost:5140/Note/Content/${singleNote.noteID}`);
+                    const noteContent = await responseNoteContent.json();
+
                     const noteShow = document.createElement('div');
                     noteShow.classList.add('noteDiv');
                     
@@ -33,7 +36,7 @@ async function fetchNote() {
                     noteNameShow.classList.add('noteName')
 
                     noteShow.addEventListener('click', () => {
-                        openModal(singleNote);
+                        openModal(singleNote, noteContent, noteNameShow);
                     });
 
                     groupShow.appendChild(noteShow);
@@ -41,8 +44,8 @@ async function fetchNote() {
                     
                     allNotes = allNotes.filter(note => note != singleNote);
                 }
-            });
-        });
+            };
+        };
     } catch (error) {
         console.error('ошибка', error);
     }
