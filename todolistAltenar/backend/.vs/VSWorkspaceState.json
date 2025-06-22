@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\todolist.Application",
+    "\\todolist.Application\\Services",
+    "\\todolistProject",
+    "\\todolistProject.core",
+    "\\todolistProject.dataAccess",
+    "\\todolistProject.dataAccess\\Migrations"
+  ],
+  "SelectedNode": "\\todolist.Application\\Services\\GroupService.cs",
+  "PreviewInSolutionExplorer": false
+}
