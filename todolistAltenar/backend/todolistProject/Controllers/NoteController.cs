@@ -84,7 +84,7 @@ namespace todolistProject.API.Controllers
             var newNoteStorage = new NoteStorage(
                 Guid.NewGuid(),
                 Guid.NewGuid().ToString(),
-                @"D:\noteStorage"
+                @"../todolistProject.dataAccess\data"
             );
 
             await _noteStorageService.CreateNoteStorage(newNoteStorage);
