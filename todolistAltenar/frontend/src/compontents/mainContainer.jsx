@@ -50,14 +50,27 @@ function MainContainer() {
             <div id="noteContainer">
                 {groups.map(singleGroup => (
                     <div key={singleGroup.idGroup} className="groupDiv">
-                        <p className="groupName">⇩ {singleGroup.titleGroup}</p>
+                        <div className="topOfGroup">
+                            <p className="groupName"><span>⇩</span> <input type="text" defaultValue={singleGroup.titleGroup} className="groupNameInput" /></p>
+                            <button className="topButtons">✎</button>
+                            <button className="topButtons">✘</button>
+                        </div>
                         {notes.filter(singleNote => singleNote.groupID === singleGroup.idGroup).map(singleNote => (
                             <div key={singleNote.noteID} className="noteDiv" onClick={() => handleNoteClick(singleNote)}>
+                                <div className="taskDoneCircle" onClick={(event) => event.stopPropagation()}> </div>
                                 <p className="noteName">{singleNote.titleNote}</p>
                             </div>
                         ))}
+
+                        <div className="createNewNote">
+                            <p> + Добавить задачу </p>
+                        </div>
                     </div>
                 ))}
+
+                <div className="createNewGroup">
+                    <p className="newGroupName"> + Добавить группу </p>
+                </div>
             </div>
 
             <ModalWindow
