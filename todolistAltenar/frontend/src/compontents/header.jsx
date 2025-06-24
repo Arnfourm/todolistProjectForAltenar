@@ -4,7 +4,7 @@ import '../styles/header.css';
 
 function Header() {
     const [user, setUser] = useState(null);
-    const userId = 'alsdkljhc';
+    const userId = 'a8aea2f7-c7fb-48a5-863b-e4b7633f8c36';
 
     useEffect(() => {
         axios.get(`http://localhost:5140/User/ById/${userId}`)
@@ -14,12 +14,12 @@ function Header() {
 
     return (
         <header>
-            <h1 class="headerName">To-do-List</h1>
+            <h1 className="headerName">To-do-List</h1>
             <div id="userContainer">
                 {user ? (
-                    <p class="userName">Current user: {user.username}</p>
+                    <p className="userName">Current user: {user.username}</p>
                 ) : (
-                    <p class="userName">Loading user..</p>
+                    <p className="userName">Loading user..</p>
                 )}
             </div>
         </header>
