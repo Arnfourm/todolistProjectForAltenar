@@ -1,0 +1,12 @@
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 2px 0 rgba(35, 35, 35, 1);
+    height: 10vh;
+    padding: 0 10%;
+}
+.userName{
+    font-size: 25px;
+
+}

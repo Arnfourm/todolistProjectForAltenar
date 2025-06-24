@@ -1,43 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>todolistProject</title>
-    <link rel="stylesheet" href="./css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todolistProject</title>
 </head>
 
 <body>
-    <header>
-        <h1 class="headerName">To-do-List</h1>
-        <div id="userContainer"> </div>
-    </header>
+  <div id="root"></div>
 
-    <main>
-        <div id="noteContainer">
-            <div id="modalWindow" class="modal hidden">
-                <div class="modalContent">
-                    <span id="closeModal" class="close">&times;</span>
-                    <input type="text" id="nameNoteInput" class="nameNoteInput">
-                    <textarea id="editInput" class="editInput"></textarea>
-                    <section id="modalButtons" class="modalButtons">
-                        <button id="cancelEdit">Отмена</button>
-                        <button id="acceptEdit">Сохранить</button>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p> Some information to read here. Made by Arthur </p>
-    </footer>
-
-
-    <script src="javascript/headerUserAction.js"></script>
-    <script src="javascript/mainNoteAction.js"></script>
-    <script src="javascript//modalWindow.js"></script>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>
