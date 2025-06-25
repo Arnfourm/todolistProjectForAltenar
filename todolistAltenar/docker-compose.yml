@@ -1,7 +1,7 @@
 services:
-  postgres:
-    container_name: todolist_postgres_db
+  todolist.db:
     image: postgres
+    container_name: todolist_postgres_db
     environment:
       POSTGRES_DB: "todolistDB"
       POSTGRES_USER: "luverov"
@@ -10,6 +10,16 @@ services:
       - postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  todolist.API:
+    image: todolistimage
+    container_name: todolistapi
+    build:
+      context: .
+      dockerfile: ./backend/dockerfile
+    ports:
+      - "5140:5140"
+      - "5141:5141"
 
 volumes:
   postgres:
