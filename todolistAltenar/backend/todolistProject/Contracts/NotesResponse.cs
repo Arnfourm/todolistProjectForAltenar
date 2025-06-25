@@ -5,7 +5,7 @@
         Guid noteID,
         Guid userID,
         string titleNote,
-        Guid noteStorageID,
+        string noteContent,
         Guid groupID
     );
 }

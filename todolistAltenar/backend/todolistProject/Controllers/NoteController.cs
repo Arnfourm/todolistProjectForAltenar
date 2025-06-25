@@ -12,18 +12,15 @@ namespace todolistProject.API.Controllers
         private readonly INotesService _notesService;
         private readonly IUserService _userService;
         private readonly IGroupService _groupService;
-        private readonly INoteStorageService _noteStorageService;
 
         public NoteController(
             INotesService notesService,
             IUserService userService, 
-            IGroupService groupService, 
-            INoteStorageService noteStorageService)
+            IGroupService groupService)
         {
             _notesService = notesService;
             _userService = userService;
             _groupService = groupService;
-            _noteStorageService = noteStorageService;
         }
 
         [HttpGet]
@@ -35,7 +32,7 @@ namespace todolistProject.API.Controllers
                 note.idNote,
                 note.user.idUser,
                 note.titleNote,
-                note.noteStorage.idNoteStorage,
+                note.noteContent,
                 note.noteGroup.idGroup)
             );
 
@@ -51,7 +48,7 @@ namespace todolistProject.API.Controllers
                 note.idNote,
                 note.user.idUser,
                 note.titleNote,
-                note.noteStorage.idNoteStorage,
+                note.noteContent,
                 note.noteGroup.idGroup
             );
 
@@ -67,7 +64,7 @@ namespace todolistProject.API.Controllers
                 note.idNote,
                 note.user.idUser,
                 note.titleNote,
-                note.noteStorage.idNoteStorage,
+                note.noteContent,
                 note.noteGroup.idGroup)
             );
 
@@ -81,19 +78,11 @@ namespace todolistProject.API.Controllers
 
             var group = await _groupService.GetGroupById(request.groupID);
 
-            var newNoteStorage = new NoteStorage(
-                Guid.NewGuid(),
-                Guid.NewGuid().ToString(),
-                @"../todolistProject.dataAccess\data"
-            );
-
-            await _noteStorageService.CreateNoteStorage(newNoteStorage);
-
             var newNote = new Note(
                 Guid.NewGuid(),
                 user,
                 request.titleNote,
-                newNoteStorage,
+                "",
                 group
             );
 
@@ -103,11 +92,12 @@ namespace todolistProject.API.Controllers
         }
 
         [HttpPut("{idNote:Guid}")]
-        public async Task<ActionResult<Guid>> UpdateNote(Guid idNote, [FromBody] NotesRequest request)
+        public async Task<ActionResult<Guid>> UpdateTitleNote(Guid idNote, [FromBody] NotesTitleRequest request)
         {
-            var group = await _groupService.GetGroupById(request.groupID);
+            //Добавить смену группы таска
+            var group = await _groupService.GetGroupById(request.groupId);
 
-            var noteId = await _notesService.UpdateNote(idNote, request.titleNote, group.idGroup);
+            var noteId = await _notesService.UpdateTitleNote(idNote, request.titleNote);
 
             return Ok(noteId);
         }
@@ -118,27 +108,26 @@ namespace todolistProject.API.Controllers
             var note = await _notesService.GetNoteById(idNote);
 
             await _notesService.DeleteNote(idNote);
-            await _noteStorageService.DeleteNoteStorage(note.noteStorage.idNoteStorage);
 
             return Ok(idNote);
         }
 
-        [HttpGet("Content/{idNote:Guid}")]
-        public async Task<ActionResult<NotesContentResponse>> GetNoteContent(Guid idNote)
-        {
-            var note = await _notesService.GetNoteById(idNote);
+        //[HttpGet("Content/{idNote:Guid}")]
+        //public async Task<ActionResult<NotesContentResponse>> GetNoteContent(Guid idNote)
+        //{
+        //    var note = await _notesService.GetNoteById(idNote);
 
-            string noteContnt = await _noteStorageService.GetNoteStorageContentById(note.noteStorage.idNoteStorage);
+        //    string noteContnt = await _noteStorageService.GetNoteStorageContentById(note.noteStorage.idNoteStorage);
 
-            return Ok(new NotesContentResponse(idNote, noteContnt));
-        }
+        //    return Ok(new NotesContentResponse(idNote, noteContnt));
+        //}
 
         [HttpPut("Content/{idNote:Guid}")]
         public async Task<ActionResult<Guid>> SaveNoteContext(Guid idNote, [FromBody] NotesContentRequest request)
         {
             var note = await _notesService.GetNoteById(idNote);
 
-            await _noteStorageService.SaveNoteContect(note.noteStorage.idNoteStorage, request.noteContent);
+            await _notesService.UpdateContentNote(idNote, request.noteContent);
 
             return note.idNote;
         }

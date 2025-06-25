@@ -5,15 +5,15 @@
         public Guid idNote { get; set; }
         public User user { get; set; }
         public string titleNote { get; set; }
-        public NoteStorage noteStorage { get; set; }
+        public string noteContent { get; set; }
         public Group noteGroup { get; set; }
-
-        public Note(Guid idNote, User user, string titleNote, NoteStorage noteStorage, Group noteGroup)
+        
+        public Note(Guid idNote, User user, string titleNote, string noteContent, Group noteGroup)
         {
             this.idNote = idNote;
             this.user = user;
             this.titleNote = titleNote;
-            this.noteStorage = noteStorage;
+            this.noteContent = noteContent;
             this.noteGroup = noteGroup;
         }
     }

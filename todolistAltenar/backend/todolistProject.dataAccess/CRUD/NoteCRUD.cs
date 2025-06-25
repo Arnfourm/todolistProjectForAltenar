@@ -18,7 +18,6 @@ namespace todolistProject.dataAccess.CRUD
         {
             var notesList = await _dbContext.Notes
                 .Include(note => note.user)
-                .Include(note => note.noteStorage)
                 .Include(note => note.group)
                 .ToListAsync();
 
@@ -27,7 +26,7 @@ namespace todolistProject.dataAccess.CRUD
                     note.idNote,
                     new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
                     note.titleNote,
-                    new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                    note.contentNote,
                     new Group(
                         note.group.idGroup,
                         new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
@@ -42,7 +41,6 @@ namespace todolistProject.dataAccess.CRUD
         {
             var note = await _dbContext.Notes
                 .Include(note => note.user)
-                .Include(note => note.noteStorage)
                 .Include(note => note.group)
                 .FirstOrDefaultAsync(note => note.idNote == idNote);
 
@@ -56,7 +54,7 @@ namespace todolistProject.dataAccess.CRUD
                 note.idNote,
                 new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
                 note.titleNote,
-                new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                note.contentNote,
                 new Group(
                     note.group.idGroup,
                     new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
@@ -71,7 +69,6 @@ namespace todolistProject.dataAccess.CRUD
         {
             var notesList = await _dbContext.Notes
                 .Include(note => note.user)
-                .Include(note => note.noteStorage)
                 .Include(note => note.group)
                 .Where(note => note.idNote == userId)
                 .ToListAsync();
@@ -81,7 +78,7 @@ namespace todolistProject.dataAccess.CRUD
                     note.idNote,
                     new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
                     note.titleNote,
-                    new NoteStorage(note.noteStorage.idNoteStorage, note.noteStorage.filenameNote, note.noteStorage.dirPathNote),
+                    note.contentNote,
                     new Group(
                         note.group.idGroup,
                         new User(note.user.idUser, note.user.username, note.user.userEmail, note.user.userPassword),
@@ -95,17 +92,11 @@ namespace todolistProject.dataAccess.CRUD
         public async Task<Guid> CreateNote(Note note)
         {
             var userEntity = await _dbContext.Users.FindAsync(note.user.idUser);
-            var noteStorageEntity = await _dbContext.NoteStorages.FindAsync(note.noteStorage.idNoteStorage);
             var groupEntity = await _dbContext.Groups.FindAsync(note.noteGroup.idGroup);
 
             if (userEntity == null)
             {
                 throw new Exception($"User not found. ID: {note.user.idUser}");
-            }
-
-            if (noteStorageEntity == null)
-            {
-                throw new Exception($"NoteStorage not found. ID: {note.noteStorage.idNoteStorage}");
             }
 
             if (groupEntity == null)
@@ -118,10 +109,9 @@ namespace todolistProject.dataAccess.CRUD
                 idNote = note.idNote,
                 userID = note.user.idUser,
                 titleNote = note.titleNote,
-                noteStorageID = note.noteStorage.idNoteStorage,
+                contentNote = note.noteContent,
                 groupID = note.noteGroup.idGroup,
                 user = userEntity,
-                noteStorage = noteStorageEntity,
                 group = groupEntity
             };
 
@@ -131,13 +121,12 @@ namespace todolistProject.dataAccess.CRUD
             return noteEntity.idNote;
         }
 
-        public async Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID)
+        public async Task<Guid> UpdateTitleNote(Guid idNote, string titleNote)
         {
             await _dbContext.Notes
                 .Where(note => note.idNote == idNote)
                 .ExecuteUpdateAsync(update => update
-                    .SetProperty(note => note.titleNote, note => titleNote)
-                    .SetProperty(note => note.groupID, note => groupID));
+                    .SetProperty(note => note.titleNote, note => titleNote));
 
             await _dbContext.SaveChangesAsync();
 
@@ -149,6 +138,18 @@ namespace todolistProject.dataAccess.CRUD
             await _dbContext.Notes
                 .Where(note => note.idNote == idNote)
                 .ExecuteDeleteAsync();
+
+            await _dbContext.SaveChangesAsync();
+
+            return idNote;
+        }
+
+        public async Task<Guid> UpdateContentNote(Guid idNote, string noteContent)
+        {
+            await _dbContext.Notes
+                .Where(note => note.idNote == idNote)
+                .ExecuteUpdateAsync(update => update
+                    .SetProperty(note => note.contentNote, note => noteContent));
 
             await _dbContext.SaveChangesAsync();
 
