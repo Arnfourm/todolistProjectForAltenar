@@ -4,6 +4,7 @@
     (
         Guid userID,
         string titleNote,
+        string noteContent,
         Guid groupID
     );
 }

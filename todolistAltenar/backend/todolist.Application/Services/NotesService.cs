@@ -32,14 +32,19 @@ namespace todolist.Application.Services
             return await _notesService.CreateNote(currentNote);
         }
 
-        public async Task<Guid> UpdateNote(Guid idNote, string titleNote, Guid groupID)
+        public async Task<Guid> UpdateTitleNote(Guid idNote, string titleNote)
         {
-            return await _notesService.UpdateNote(idNote, titleNote, groupID);
+            return await _notesService.UpdateTitleNote(idNote, titleNote);
         }
 
         public async Task<Guid> DeleteNote(Guid idNote)
         {
             return await _notesService.DeleteNote(idNote);
+        }
+
+        public async Task<Guid> UpdateContentNote(Guid idNote, string noteContent)
+        {
+            return await _notesService.UpdateContentNote(idNote, noteContent);
         }
     }
 }

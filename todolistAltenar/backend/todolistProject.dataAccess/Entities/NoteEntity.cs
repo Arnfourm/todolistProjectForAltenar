@@ -17,9 +17,8 @@ namespace todolistProject.dataAccess.Entities
         [Column("titlenote")]
         public required string titleNote { get; set; }
 
-        [Column("notestorageid")]
-        public required Guid noteStorageID { get; set; }
-        public required NoteStorageEntity noteStorage { get; set; }
+        [Column("ContentNote")]
+        public required string contentNote { get; set; }
 
         [Column("groupid")]
         public Guid groupID { get; set; }
