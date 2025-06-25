@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app/
+# EXPOSE 5140
+# EXPOSE 5141
 
 #Copy all projects
 COPY /backend/todolistProject.API/todolistProject.API.csproj ./backend/todolistProject.API/

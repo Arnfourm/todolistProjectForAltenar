@@ -20,6 +20,18 @@ services:
     ports:
       - "5140:5140"
       - "5141:5141"
+    # to use swaagger 
+    # environment:
+    #   - ASPNETCORE_ENVIRONMENT=Development
+
+  todolistFrontend:
+    image: todolistfrontendimage
+    container_name: todolistfrontend
+    build:
+      context: .
+      dockerfile: ./frontend/dockerfile
+    ports:
+     - "5173:5173"
 
 volumes:
   postgres:
