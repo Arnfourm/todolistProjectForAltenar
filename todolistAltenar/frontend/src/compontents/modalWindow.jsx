@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import '../styles/modalWindow.css'
 
-function ModalWindow({ isOpen, onClose, note, content }) {
+function ModalWindow({ isOpen, onClose, note }) {
     const [titleNote, SetTitle] = useState('');
     const [contentNote, SetContent] = useState('');
 
     useEffect(() => {
-        if (note && content) {
+        if (note) {
             SetTitle(note.titleNote);
-            SetContent(content.noteContent);
+            SetContent(note.noteContent);
         }
-    }, [note, content]);
+    }, [note]);
 
     if (!isOpen) return null;
 
@@ -24,12 +24,11 @@ function ModalWindow({ isOpen, onClose, note, content }) {
                 <section className="modalButtons">
                     <button onClick={() => {
                         SetTitle(note.titleNote);
-                        SetContent(content.noteContent);
+                        SetContent(note.noteContent);
                     }}>Отмена</button>
                     <button onClick={() => {
                         if (note.titleNote !== titleNote) {
                             const newTitleRequest = {
-                                userID: note.userID,
                                 titleNote: titleNote,
                                 groupID: note.groupID
                             }
@@ -41,14 +40,14 @@ function ModalWindow({ isOpen, onClose, note, content }) {
                                 .catch(error => ("Не удалось изменить название", error));
                         };
 
-                        if (content.noteContent !== contentNote) {
+                        if (note.noteContent !== contentNote) {
                             const newContentRequest = {
                                 noteContent: contentNote
                             };
                             axios.put(`http://localhost:5140/Note/Content/${note.noteID}`, newContentRequest)
                                 .then((data) => {
                                     console.log(data);
-                                    content.noteContent = contentNote;
+                                    note.noteContent = contentNote;
                                 })
                                 .catch(error => ("Не удалось изменить контент", error));
                         };
