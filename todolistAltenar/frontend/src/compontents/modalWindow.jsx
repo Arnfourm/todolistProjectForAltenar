@@ -34,7 +34,8 @@ function ModalWindow({ isOpen, onClose, note, content }) {
                                 groupID: note.groupID
                             }
                             axios.put(`http://localhost:5140/Note/${note.noteID}`, newTitleRequest)
-                                .then(() => {
+                                .then((data) => {
+                                    console.log(data);
                                     note.titleNote = titleNote;
                                 })
                                 .catch(error => ("Не удалось изменить название", error));
@@ -45,7 +46,8 @@ function ModalWindow({ isOpen, onClose, note, content }) {
                                 noteContent: contentNote
                             };
                             axios.put(`http://localhost:5140/Note/Content/${note.noteID}`, newContentRequest)
-                                .then(() => {
+                                .then((data) => {
+                                    console.log(data);
                                     content.noteContent = contentNote;
                                 })
                                 .catch(error => ("Не удалось изменить контент", error));
