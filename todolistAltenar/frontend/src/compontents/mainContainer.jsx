@@ -7,7 +7,6 @@ import '../styles/main.css';
 function MainContainer() {
     const [groups, SetGroups] = useState([]);
     const [notes, SetNotes] = useState([]);
-    const [noteContent, SetNoteContent] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
 
@@ -18,27 +17,11 @@ function MainContainer() {
             .catch(error => console.log("Не удалось загрузить группы: ", error));
     }, [])
 
-
     useEffect(() => {
         axios.get(`http://localhost:5140/Note/ByUserId/${userId}`)
             .then(res => SetNotes(res.data))
             .catch(error => console.log("Не удалось загрузить заметки: ", error))
     }, [])
-
-    useEffect(() => {
-        if (notes.length === 0) return;
-
-        notes.forEach(singleNote => {
-            axios.get(`http://localhost:5140/Note/Content/${singleNote.noteID}`)
-                .then(res => {
-                    SetNoteContent(prev => ({
-                        ...prev,
-                        [singleNote.noteID]: res.data
-                    }));
-                })
-                .catch(error => console.error("Не удалось получить контент", error));
-        })
-    }, [notes]);
 
     const handleNoteClick = (note) => {
         setSelectedNote(note);
@@ -82,10 +65,6 @@ function MainContainer() {
                                     event.stopPropagation();
                                     axios.delete(`http://localhost:5140/Note/${singleNote.noteID}`)
                                         .then(() => {
-                                            const updatedNoteContent = { ...noteContent };
-                                            delete updatedNoteContent[singleNote.noteStorageID];
-                                            SetNoteContent(updatedNoteContent);
-
                                             SetNotes(notes.filter(note => note.noteID !== singleNote.noteID));
                                         })
                                         .catch(error => console.log("Не удалось удалить таск", error));
@@ -98,15 +77,16 @@ function MainContainer() {
                             const newTaskRequest = {
                                 userID: userId,
                                 titleNote: "New task",
+                                noteContent: "",
                                 groupID: singleGroup.idGroup
                             };
                             axios.post(`http://localhost:5140/Note`, newTaskRequest)
                                 .then((data) => {
                                     const newTaskItem = {
-                                        idNote: data.data.idNote,
+                                        noteID: data.data.idNote,
                                         userID: data.data.user.idUser,
                                         titleNote: data.data.titleNote,
-                                        noteStorageID: data.data.noteStorage.idNoteStorage,
+                                        noteContent: data.data.contentNote,
                                         groupID: data.data.noteGroup.idGroup
                                     };
                                     SetNotes(prevTasks => [...prevTasks, newTaskItem]);
@@ -143,7 +123,6 @@ function MainContainer() {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 note={selectedNote}
-                content={selectedNote ? noteContent[selectedNote.noteID] : null}
             />
         </main>
     );
