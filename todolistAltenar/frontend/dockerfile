@@ -19,7 +19,6 @@ RUN npm run build -c Release
 # use new image to publish
 FROM node:24-alpine AS final
 COPY --from=build /app/frontend/dist ./dist
-COPY --from=build /app/frontend/node_modules ./node_modules
 
 RUN npm install -g serve
 
