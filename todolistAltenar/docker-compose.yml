@@ -1,6 +1,6 @@
 services:
   todolist.db:
-    image: postgres
+    image: postgres:17.5-alpine3.22
     container_name: todolist_postgres_db
     environment:
       POSTGRES_DB: "todolistDB"
