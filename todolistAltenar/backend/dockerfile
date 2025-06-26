@@ -19,8 +19,8 @@ COPY /backend/ ./backend/
 RUN dotnet publish ./backend/todolistProject.API/todolistProject.API.csproj -c Release -o /app/publish
 
 #aspnet runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "todolistProject.API.dll"]
+ENTRYPOINT ["dotnet", "todolistProject.API.dll", "-p", "5140"]
