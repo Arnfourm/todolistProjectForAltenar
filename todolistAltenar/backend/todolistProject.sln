@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "todolistProject.API", "todolistProject\todolistProject.API.csproj", "{E4A1BF8C-CFA1-4452-8857-54E4490282E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "todolistProject.API", "todolistProject.API\todolistProject.API.csproj", "{E4A1BF8C-CFA1-4452-8857-54E4490282E5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "todolistProject.Core", "todolistProject.core\todolistProject.Core.csproj", "{BEAB7668-EDC3-4C49-8B80-44E8AA1DEC2B}"
 EndProject

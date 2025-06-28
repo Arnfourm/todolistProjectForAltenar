@@ -40,15 +40,11 @@
         },
         {
           "DockedWidth": 567,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
@@ -60,7 +56,8 @@
               "RelativeToolTip": "todolistProject\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T20:20:37.139Z"
+              "WhenOpened": "2025-06-22T20:20:37.139Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +69,8 @@
               "RelativeToolTip": "todolistProject\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T20:20:33.071Z"
+              "WhenOpened": "2025-06-22T20:20:33.071Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -82,8 +80,10 @@
               "RelativeDocumentMoniker": "todolistProject\\Program.cs",
               "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject\\Program.cs",
               "RelativeToolTip": "todolistProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T20:17:08.583Z"
+              "WhenOpened": "2025-06-22T20:17:08.583Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -95,7 +95,16 @@
               "RelativeToolTip": "todolistProject.dataAccess\\todolistDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T20:16:49.536Z"
+              "WhenOpened": "2025-06-22T20:16:49.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
