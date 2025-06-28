@@ -3,11 +3,11 @@
     "",
     "\\todolist.Application",
     "\\todolist.Application\\Services",
-    "\\todolistProject",
     "\\todolistProject.core",
     "\\todolistProject.dataAccess",
+    "\\todolistProject.dataAccess\\Entities",
     "\\todolistProject.dataAccess\\Migrations"
   ],
-  "SelectedNode": "\\todolist.Application\\Services\\GroupService.cs",
+  "SelectedNode": "\\todolistProject.dataAccess\\Entities\\NoteEntity.cs",
   "PreviewInSolutionExplorer": false
 }

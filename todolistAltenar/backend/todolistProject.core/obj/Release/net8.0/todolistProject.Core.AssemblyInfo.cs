@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("todolistProject.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e03ba255e393247a702597240ac6ecec55b35a03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8cc7fdafd5fb6e749217941c187e76a6dd55bf2")]
 [assembly: System.Reflection.AssemblyProductAttribute("todolistProject.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("todolistProject.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

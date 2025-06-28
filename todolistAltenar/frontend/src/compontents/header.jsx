@@ -4,7 +4,7 @@ import '../styles/header.css';
 
 function Header() {
     const [user, setUser] = useState(null);
-    const userId = '65e411f2-6c49-4906-a217-bbd5529b8a24';
+    const userId = '13876536-8ce5-4673-84b5-a8f8efefc75f';
 
     useEffect(() => {
         axios.get(`http://localhost:5140/User/ById/${userId}`)
