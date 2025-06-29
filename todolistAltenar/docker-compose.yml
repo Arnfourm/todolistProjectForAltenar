@@ -7,7 +7,13 @@ services:
       POSTGRES_USER: "luverov"
       POSTGRES_PASSWORD: "123456789"
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U luverov -d todolistDB"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     ports:
       - 5432:5432
 
@@ -17,6 +23,9 @@ services:
     build:
       context: .
       dockerfile: ./backend/dockerfile
+    depends_on:
+      todolist.db:
+        condition: service_healthy
     ports:
       - "5140:5140"
       - "5141:5141"
