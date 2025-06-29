@@ -21,8 +21,8 @@ services:
     image: todolistimage
     container_name: todolistapi
     build:
-      context: .
-      dockerfile: ./backend/dockerfile
+      context: ./backend/
+      dockerfile: ./dockerfile
     depends_on:
       todolist.db:
         condition: service_healthy
@@ -37,8 +37,8 @@ services:
     image: todolistfrontendimage
     container_name: todolistfrontend
     build:
-      context: .
-      dockerfile: ./frontend/dockerfile
+      context: ./frontend/
+      dockerfile: ./dockerfile
     ports:
      - "5173:5173"
 
