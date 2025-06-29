@@ -4,16 +4,16 @@ WORKDIR /app/
 # EXPOSE 5141
 
 #Copy all projects
-COPY /backend/todolistProject.API/todolistProject.API.csproj ./backend/todolistProject.API/
-COPY /backend/todolist.Application/todolist.Application.csproj ./backend/todolist.Application/
-COPY /backend/todolistProject.core/todolistProject.Core.csproj ./backend/todolistProject.core/
-COPY /backend/todolistProject.dataAccess/todolistProject.dataAccess.csproj ./backend/todolistProject.dataAccess/
+COPY ./backend/todolistProject.API/todolistProject.API.csproj ./backend/todolistProject.API/
+COPY ./backend/todolist.Application/todolist.Application.csproj ./backend/todolist.Application/
+COPY ./backend/todolistProject.core/todolistProject.Core.csproj ./backend/todolistProject.core/
+COPY ./backend/todolistProject.dataAccess/todolistProject.dataAccess.csproj ./backend/todolistProject.dataAccess/
 
 #Restore
 RUN dotnet restore ./backend/todolistProject.API/todolistProject.API.csproj
 
 #Copy all to build
-COPY /backend/ ./backend/
+COPY ./backend/ ./backend/
 
 #Build project
 RUN dotnet publish ./backend/todolistProject.API/todolistProject.API.csproj -c Release -o /app/publish
