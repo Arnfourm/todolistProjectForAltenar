@@ -37,7 +37,7 @@ function ModalWindow({ isOpen, onClose, note }) {
                                     console.log(data);
                                     note.titleNote = titleNote;
                                 })
-                                .catch(error => ("Не удалось изменить название", error));
+                                .catch(error => console.log("Не удалось изменить название", error));
                         };
 
                         if (note.noteContent !== contentNote) {
@@ -49,7 +49,7 @@ function ModalWindow({ isOpen, onClose, note }) {
                                     console.log(data);
                                     note.noteContent = contentNote;
                                 })
-                                .catch(error => ("Не удалось изменить контент", error));
+                                .catch(error => console.log("Не удалось изменить контент", error));
                         };
                     }}>Сохранить</button>
                 </section>
