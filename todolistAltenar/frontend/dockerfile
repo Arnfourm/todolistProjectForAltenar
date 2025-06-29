@@ -17,9 +17,17 @@ WORKDIR /app/frontend/
 RUN npm run build -c Release
 
 # use new image to publish
-FROM node:24-alpine AS final
-COPY --from=build /app/frontend/dist ./dist
+# FROM node:24-alpine AS final
+# COPY --from=build /app/frontend/dist ./dist
 
-RUN npm install -g serve
 
-ENTRYPOINT ["serve", "-s", "dist", "-p", "5173"]
+FROM nginx:latest AS final
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/frontend/dist /app/dist
+
+
+
+
+# RUN npm install -g serve
+
+# ENTRYPOINT ["serve", "-s", "dist", "-p", "5173"]
