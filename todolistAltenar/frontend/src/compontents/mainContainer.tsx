@@ -12,7 +12,7 @@ function MainContainer() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedNote, setSelectedNote] = useState<Note | null>(null);
 
-    const userId:string = 'd3372125-9036-4060-86f2-728e1c4b0ef3';
+    const userId: string = '13876536-8ce5-4673-84b5-a8f8efefc75f';
     useEffect(() => {
         axios.get(`http://localhost:5140/Group/ByUserId/${userId}`)
             .then(res => SetGroups(res.data))
@@ -39,7 +39,7 @@ function MainContainer() {
                             <p className="groupName"><span>⇩</span> <input type="text" defaultValue={singleGroup.titleGroup} className="groupNameInput" id={`groupTitle-${singleGroup.idGroup}`} /></p>
                             <button className="topButtons" onClick={() => {
                                 const newTitle = (document.getElementById(`groupTitle-${singleGroup.idGroup}`) as HTMLInputElement).value;
-                                
+
                                 const newTitleGroupItem = {
                                     userID: userId,
                                     titleGroup: newTitle
