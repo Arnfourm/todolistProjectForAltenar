@@ -38,6 +38,15 @@ namespace todolistProject.dataAccess.Migrations
                     table.PrimaryKey("PK_User", x => x.iduser);
                 });
 
+            migrationBuilder.InsertData(
+            table: "User",
+            columns: new[] { "iduser", "username", "useremail", "userpassword" },
+            values: new object[,]
+            {
+                { "13876536-8ce5-4673-84b5-a8f8efefc75f", "luver", "luver@mail.ru", "1234" }
+            }
+            );
+
             migrationBuilder.CreateTable(
                 name: "Group",
                 columns: table => new
