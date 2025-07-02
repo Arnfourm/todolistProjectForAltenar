@@ -24,7 +24,6 @@ builder.Services.AddScoped<IUserCRUD, UserCRUD>();
 builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddScoped<IGroupCRUD, GroupCRUD>();
 
-// ask about dockerfile mapping
 builder.WebHost.UseUrls("http://0.0.0.0:5140");
 
 var app = builder.Build();
