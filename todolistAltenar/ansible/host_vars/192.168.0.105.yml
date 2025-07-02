@@ -1,2 +1,2 @@
 ansible_user: luver
-ansible_password: 08112005
+ansible_ssh_private_key_file: ./private_keys/private_key_for_192.168.0.105
