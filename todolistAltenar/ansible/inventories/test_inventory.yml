@@ -1,3 +1,5 @@
 linuxSystems:
   hosts:
     192.168.0.109:
+      ansible_user: "{{first_ansible_user}}"
+      ansible_password: "{{first_ansible_pass}}"
