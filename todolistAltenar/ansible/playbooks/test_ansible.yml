@@ -5,5 +5,5 @@
   tasks:
   - name: Create file in home dir
     ansible.builtin.file:
-      path: /home/luver/testasdasda
+      path: ~/testasdasda
       state: touch
