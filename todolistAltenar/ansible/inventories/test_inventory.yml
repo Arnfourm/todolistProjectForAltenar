@@ -1,5 +1,3 @@
 linuxSystems:
   hosts:
     192.168.0.109:
-      ansible_user: luver
-      ansible_password: 0811
