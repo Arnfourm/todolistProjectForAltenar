@@ -5,5 +5,9 @@
   tasks:
   - name: Create file in home dir
     ansible.builtin.file:
-      path: ~/testasdasda
+      path: ~/testFile
       state: touch
+  - name: Insert data into new file
+    ansible.builtin.lineinfile:
+      path: ~/testFile
+      line: "test data to insert"
