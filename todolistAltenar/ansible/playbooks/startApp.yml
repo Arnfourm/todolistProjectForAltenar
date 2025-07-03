@@ -6,4 +6,4 @@
   - name: Clone git repo with app
     ansible.builtin.git:
       repo: 'https://github.com/Arnfourm/todolistProjectForAltenar'
-      dest: /home/luver/
+      dest: /home/luver/todolistProjectForAltenar
