@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import React from 'react';
 import '../styles/header.css';
-import { User } from "../interfaces/userInterface";
+import { User } from "../interfaces/userInterface.tsx";
 
 function Header() {
     const [user, setUser] = useState<User | null>(null);

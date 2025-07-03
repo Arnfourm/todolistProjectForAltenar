@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './modalWindow';
-import ModalWindow from "./modalWindow";
+import React from "react";
+import ModalWindow from "./modalWindow.tsx";
 import '../styles/main.css';
-import { Group } from "../interfaces/groupInterface"
-import { Note } from "../interfaces/noteInterface"
+import { Group } from "../interfaces/groupInterface.tsx"
+import { Note } from "../interfaces/noteInterface.tsx"
 
 function MainContainer() {
     const [groups, SetGroups] = useState<Group[]>([]);
@@ -27,7 +27,7 @@ function MainContainer() {
             .catch(error => console.log("Не удалось загрузить заметки: ", error))
     }, [])
 
-    const handleNoteClick = (note) => {
+    const handleNoteClick = (note: any) => {
         setSelectedNote(note);
         setIsModalOpen(true);
     };

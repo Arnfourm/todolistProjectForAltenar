@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import React from "react";
 import '../styles/modalWindow.css'
 
-function ModalWindow({ isOpen, onClose, note }) {
+function ModalWindow({ isOpen, onClose, note }: any) {
     const [titleNote, SetTitle] = useState('');
     const [contentNote, SetContent] = useState('');
 
