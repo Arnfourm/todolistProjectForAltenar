@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "target": "es5",
+        "allowJs": true,
+        "checkJs": false,
+        "jsx": "react",
+        "removeComments": true,
+        "noEmit": true,
+        "pretty": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
+        "allowImportingTsExtensions": true,
+    },
+    "files": [
+        "./src/compontents/header.tsx",
+        "./src/compontents/footer.tsx",
+        "./src/compontents/mainContainer.tsx",
+        "./src/compontents/modalWindow.tsx",
+        "./src/interfaces/groupInterface.tsx",
+        "./src/interfaces/noteInterface.tsx",
+        "./src/interfaces/userInterface.tsx",
+    ],
+    "include": [
+        "src",
+        "env.d.ts"
+    ]
+}
