@@ -45,6 +45,3 @@
       groups: luver,docker
       state: present
       append: true
-
-  - name: To work without reboot
-    ansible.builtin.command: "newgrp docker"
