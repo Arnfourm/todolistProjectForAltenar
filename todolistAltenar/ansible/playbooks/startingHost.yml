@@ -1,0 +1,10 @@
+---
+- name: Simple tool for starting host
+  hosts: linuxSystems
+
+  tasks:
+  - name: Download python
+  become: true
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
