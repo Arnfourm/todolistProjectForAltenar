@@ -42,7 +42,7 @@
   - name: Add user to group docker
     ansible.builtin.user:
       name: luver
-      group: docker
+      groups: docker
       state: present
       append: true
 
