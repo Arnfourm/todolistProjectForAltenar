@@ -1,9 +1,0 @@
----
-- name: First test ansible
-  hosts: linuxSystems
-
-  tasks:
-  - name: Create file in home dir
-    ansible.builtin.file:
-      path: ~/testasdasda
-      state: touch

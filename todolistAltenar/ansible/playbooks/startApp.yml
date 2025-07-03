@@ -1,0 +1,9 @@
+---
+- name: Start todolist app
+  hosts: linuxSystems
+
+  tasks:
+  - name: Clone git repo with app
+    ansible.builtin.git:
+      repo: 'https://github.com/Arnfourm/todolistProjectForAltenar'
+      dest: /home/luver/
