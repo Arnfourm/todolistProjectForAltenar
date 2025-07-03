@@ -46,5 +46,5 @@
       state: present
       append: true
 
-  - name: Reset reboot to add groups
-    ansible.builtin.reboot:
+  - name: To work without reboot
+    ansible.builtin.command: "newgrp docker"
