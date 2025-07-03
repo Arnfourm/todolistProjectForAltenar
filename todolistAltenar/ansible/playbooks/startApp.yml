@@ -7,3 +7,8 @@
     ansible.builtin.git:
       repo: 'https://github.com/Arnfourm/todolistProjectForAltenar'
       dest: /home/luver/todolistProjectForAltenar
+
+  - name: Docker compose up app
+    ansible.docker.docker_compose_v2:
+      project_src: './todolistProjectForAltenar/todolistAltenar'
+      state: present
