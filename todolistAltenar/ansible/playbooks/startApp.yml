@@ -1,0 +1,14 @@
+---
+- name: Start todolist app
+  hosts: linuxSystems
+
+  tasks:
+  - name: Clone git repo with app
+    ansible.builtin.git:
+      repo: 'https://github.com/Arnfourm/todolistProjectForAltenar'
+      dest: /home/luver/todolistProjectForAltenar
+
+  - name: Docker compose up app
+    community.docker.docker_compose_v2:
+      project_src: /home/luver/todolistProjectForAltenar/todolistAltenar/
+      state: present
