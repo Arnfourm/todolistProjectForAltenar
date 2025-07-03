@@ -10,5 +10,5 @@
 
   - name: Docker compose up app
     community.docker.docker_compose_v2:
-      project_src: flask
+      project_src: /home/luver/todolistProjectForAltenar/todolistAltenar/
       state: present
