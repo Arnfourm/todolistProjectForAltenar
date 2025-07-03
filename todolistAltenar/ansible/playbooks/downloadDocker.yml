@@ -1,0 +1,26 @@
+---
+- name: Download docker
+  hosts: linuxSystems
+  become: true
+
+  tasks:
+  - name: Install repo docker
+    ansible.builtin.dnf:
+      name: 'https://download.docker.com/linux/rhel/docker-ce.repo'
+      state: present
+  
+  - name: Install docker
+    ansible.builtin.dnf:
+      name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin 
+        - docker-compose-plugin
+      state: present
+  
+  - name: Update && upgrade
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+      update_cache: yes
