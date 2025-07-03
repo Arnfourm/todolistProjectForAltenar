@@ -5,6 +5,6 @@
   tasks:
   - name: Download python
     become: true
-    ansible.builtin.apt:
-      upgrade: dist
+    ansible.builtin.dnf:
+      name: "*"
       update_cache: yes
