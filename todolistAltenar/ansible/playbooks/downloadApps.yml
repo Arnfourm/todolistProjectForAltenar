@@ -33,3 +33,18 @@
       name: docker
       enabled: true
       state: started
+
+  - name: Create new group for docker
+    ansible.builtin.group:
+      name: docker
+      state: present
+
+  - name: Add user to group docker
+    ansible.builtin.user:
+      name: luver
+      group: docker
+      state: present
+      append: true
+
+  - name: Reset ssh connection
+    ansible.builtin.meta: reset_connection
