@@ -42,9 +42,9 @@
   - name: Add user to group docker
     ansible.builtin.user:
       name: luver
-      groups: docker
+      groups: luver,docker
       state: present
       append: true
 
-  - name: Reset ssh connection
-    ansible.builtin.meta: reset_connection
+  - name: Reset reboot to add groups
+    ansible.builtin.reboot:
