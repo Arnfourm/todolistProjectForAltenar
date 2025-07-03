@@ -5,10 +5,11 @@ import { User } from "../interfaces/userInterface";
 
 function Header() {
     const [user, setUser] = useState<User | null>(null);
-    const userId: string = '13876536-8ce5-4673-84b5-a8f8efefc75f';
+    const userId: string = import.meta.env.VITE_USERID;
+    const backAddr: string = import.meta.env.VITE_BACKEND_ADDRESS;
 
     useEffect(() => {
-        axios.get(`http://localhost:5140/User/ById/${userId}`)
+        axios.get(`${backAddr}/User/ById/${userId}`)
             .then(res => setUser(res.data))
             .catch(error => console.error("Ошибка при получении пользователя: ", error))
     }, []);

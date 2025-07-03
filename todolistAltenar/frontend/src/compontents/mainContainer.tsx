@@ -12,15 +12,17 @@ function MainContainer() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedNote, setSelectedNote] = useState<Note | null>(null);
 
-    const userId: string = '13876536-8ce5-4673-84b5-a8f8efefc75f';
+    const userId: string = import.meta.env.VITE_USERID;
+    const backAddr: string = import.meta.env.VITE_BACKEND_ADDRESS;
+
     useEffect(() => {
-        axios.get(`http://localhost:5140/Group/ByUserId/${userId}`)
+        axios.get(`${backAddr}/Group/ByUserId/${userId}`)
             .then(res => SetGroups(res.data))
             .catch(error => console.log("Не удалось загрузить группы: ", error));
     }, [])
 
     useEffect(() => {
-        axios.get(`http://localhost:5140/Note/ByUserId/${userId}`)
+        axios.get(`${backAddr}/Note/ByUserId/${userId}`)
             .then(res => SetNotes(res.data))
             .catch(error => console.log("Не удалось загрузить заметки: ", error))
     }, [])
@@ -44,7 +46,7 @@ function MainContainer() {
                                     userID: userId,
                                     titleGroup: newTitle
                                 }
-                                axios.put(`http://localhost:5140/Group/${singleGroup.idGroup}`, newTitleGroupItem)
+                                axios.put(`${backAddr}/Group/${singleGroup.idGroup}`, newTitleGroupItem)
                                     .then(() => {
                                         const prevGroups = [...groups];
                                         prevGroups.map(group => group.idGroup === singleGroup.idGroup ? { groupId: singleGroup.idGroup, titleGroup: newTitle } : group);
@@ -54,7 +56,7 @@ function MainContainer() {
                                     .catch(error => console.log("Не удалось обновить название группы", error));
                             }}>✎</button>
                             <button className="topButtons" onClick={() => {
-                                axios.delete(`http://localhost:5140/Group/${singleGroup.idGroup}`)
+                                axios.delete(`${backAddr}/Group/${singleGroup.idGroup}`)
                                     .then((data) => {
                                         SetGroups(groups.filter(group => group.idGroup !== singleGroup.idGroup))
                                     })
@@ -65,7 +67,7 @@ function MainContainer() {
                             <div key={singleNote.noteID} className="noteDiv" onClick={() => handleNoteClick(singleNote)}>
                                 <div className="taskDoneCircle" onClick={(event) => {
                                     event.stopPropagation();
-                                    axios.delete(`http://localhost:5140/Note/${singleNote.noteID}`)
+                                    axios.delete(`${backAddr}/Note/${singleNote.noteID}`)
                                         .then(() => {
                                             SetNotes(notes.filter(note => note.noteID !== singleNote.noteID));
                                         })
@@ -82,7 +84,7 @@ function MainContainer() {
                                 noteContent: "",
                                 groupID: singleGroup.idGroup
                             };
-                            axios.post(`http://localhost:5140/Note`, newTaskRequest)
+                            axios.post(`${backAddr}/Note`, newTaskRequest)
                                 .then((data) => {
                                     const newTaskItem = {
                                         noteID: data.data.idNote,
@@ -106,7 +108,7 @@ function MainContainer() {
                             userID: userId,
                             titleGroup: "Новая группа"
                         };
-                        axios.post(`http://localhost:5140/Group`, newGroupRequest)
+                        axios.post(`${backAddr}/Group`, newGroupRequest)
                             .then((data) => {
                                 console.log(data);
                                 const newGroupItem = {

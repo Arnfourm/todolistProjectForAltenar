@@ -6,6 +6,8 @@ function ModalWindow({ isOpen, onClose, note }) {
     const [titleNote, SetTitle] = useState('');
     const [contentNote, SetContent] = useState('');
 
+    const backAddr: string = import.meta.env.VITE_BACKEND_ADDRESS;
+
     useEffect(() => {
         if (note) {
             SetTitle(note.titleNote);
@@ -32,7 +34,7 @@ function ModalWindow({ isOpen, onClose, note }) {
                                 titleNote: titleNote,
                                 groupID: note.groupID
                             }
-                            axios.put(`http://localhost:5140/Note/${note.noteID}`, newTitleRequest)
+                            axios.put(`${backAddr}/Note/${note.noteID}`, newTitleRequest)
                                 .then((data) => {
                                     console.log(data);
                                     note.titleNote = titleNote;
@@ -44,7 +46,7 @@ function ModalWindow({ isOpen, onClose, note }) {
                             const newContentRequest = {
                                 noteContent: contentNote
                             };
-                            axios.put(`http://localhost:5140/Note/Content/${note.noteID}`, newContentRequest)
+                            axios.put(`${backAddr}/Note/Content/${note.noteID}`, newContentRequest)
                                 .then((data) => {
                                     console.log(data);
                                     note.noteContent = contentNote;
