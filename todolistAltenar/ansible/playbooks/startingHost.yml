@@ -3,9 +3,17 @@
   hosts: linuxSystems
 
   tasks:
-  - name: Download python
+  - name: Update && upgrade
     become: true
     ansible.builtin.dnf:
       name: "*"
       state: latest
       update_cache: yes
+
+  - name: Download python
+    become: true
+    ansible.builtin.dnf:
+      name: 
+       - "python3.12"
+       - "python3.12-pip"
+      state: latest
