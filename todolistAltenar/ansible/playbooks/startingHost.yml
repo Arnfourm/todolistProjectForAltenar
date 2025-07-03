@@ -5,7 +5,7 @@
 
   tasks:
   - name: Download python
-    ansible.builtin.raw: dnf install python3 python3-pip
+    ansible.builtin.raw: dnf install -y python3 python3-pip
 
   - name: Update && upgrade
     ansible.builtin.dnf:
