@@ -5,9 +5,7 @@
 
   tasks:
   - name: Install repo docker
-    ansible.builtin.dnf:
-      name: 'https://download.docker.com/linux/rhel/docker-ce.repo'
-      state: present
+    ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
   
   - name: Install docker
     ansible.builtin.dnf:
