@@ -12,3 +12,17 @@
       name: "*"
       state: latest
       update_cache: yes
+
+  - name: Add DNS 8.8.8.8 server
+    ansible.builtin.lineinfile:
+      path: "/etc/resolv.conf"
+      line: "nameserver 8.8.8.8"
+      state: present
+      insertafter: EOF
+
+  - name: Add DNS 8.8.4.4 server
+    ansible.builtin.lineinfile:
+      path: "/etc/resolv.conf"
+      line: "nameserver 8.8.4.4"
+      state: present
+      insertafter: EOF
