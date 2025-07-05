@@ -45,3 +45,12 @@
       groups: luver,docker
       state: present
       append: true
+    register: add_to_docker_group
+
+  - name: Reboot server
+    ansible.builtin.reboot:
+    when: add_to_docker_group.changed == true
+
+  # - handlers:
+  #   - name: Restart server
+  #     ansible.builtin.reboot:
