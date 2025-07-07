@@ -8,8 +8,11 @@ services:
     ports:
       - "5140:5140"
       - "5141:5141"
+    
+    environment:
+      - DB_HOST=192.168.0.107
+      - DB_PORT=5432
     # to use swaagger 
-    # environment:
     #   - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - todolistApp
