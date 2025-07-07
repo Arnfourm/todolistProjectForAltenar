@@ -10,7 +10,7 @@ COPY ./frontend/package-lock.json/ ./frontend/
 RUN npm install ./frontend/
 
 # get all files
-COPY . ./frontend/
+COPY ./frontend/ ./frontend/
 
 # build app
 WORKDIR /app/frontend/
