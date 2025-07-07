@@ -6,7 +6,7 @@ using todolistProject.Core.Models;
 namespace todolistProject.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GroupController : ControllerBase
     {
         private readonly IGroupService _GroupService;

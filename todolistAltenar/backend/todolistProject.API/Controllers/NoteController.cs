@@ -6,7 +6,7 @@ using todolistProject.Core.Models;
 namespace todolistProject.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class NoteController : ControllerBase
     {
         private readonly INotesService _notesService;
@@ -111,16 +111,6 @@ namespace todolistProject.API.Controllers
 
             return Ok(idNote);
         }
-
-        //[HttpGet("Content/{idNote:Guid}")]
-        //public async Task<ActionResult<NotesContentResponse>> GetNoteContent(Guid idNote)
-        //{
-        //    var note = await _notesService.GetNoteById(idNote);
-
-        //    string noteContnt = await _noteStorageService.GetNoteStorageContentById(note.noteStorage.idNoteStorage);
-
-        //    return Ok(new NotesContentResponse(idNote, noteContnt));
-        //}
 
         [HttpPut("Content/{idNote:Guid}")]
         public async Task<ActionResult<Guid>> SaveNoteContext(Guid idNote, [FromBody] NotesContentRequest request)
