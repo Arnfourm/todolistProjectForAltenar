@@ -3,8 +3,8 @@ WORKDIR /app/
 # EXPOSE 5173
 
 # add all dependencies
-COPY ./package.json/ ./frontend/
-COPY ./package-lock.json/ ./frontend/
+COPY ./frontend/package.json/ ./frontend/
+COPY ./frontend/package-lock.json/ ./frontend/
 
 # download all dependencies
 RUN npm install ./frontend/
@@ -18,5 +18,5 @@ RUN npm run build -c Release
 
 # use new image to publish
 FROM nginx:alpine3.22 AS final
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ../nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/frontend/dist /app/dist
