@@ -15,8 +15,8 @@ services:
     image: todolistfrontendimage
     container_name: todolistfrontend
     build:
-      context: .
-      dockerfile: ./frontend/dockerfile
+      context: ./frontend/
+      dockerfile: ./dockerfile
     ports:
       - "5173:5173"
     networks:
