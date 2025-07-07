@@ -1,0 +1,21 @@
+services:
+  todolist.API:
+    image: todolistimage
+    container_name: todolistapi
+    build:
+      context: ./backend/
+      dockerfile: ./dockerfile
+    depends_on:
+      todolist.db:
+        condition: service_healthy
+    ports:
+      - "5140:5140"
+      - "5141:5141"
+    # to use swaagger 
+    # environment:
+    #   - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - todolistApp
+
+networks:
+  todolistApp:
