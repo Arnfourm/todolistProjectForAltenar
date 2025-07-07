@@ -26,3 +26,10 @@
       name: "*"
       state: latest
       update_cache: yes
+
+  - name: Add hostname
+    ansible.builtin.lineinfile:
+      path: "/etc/hosts"
+      line: "127.0.0.1      altenar-intership-2025.com"
+      state: present
+      insertafter: EOF
