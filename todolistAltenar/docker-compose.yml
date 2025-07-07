@@ -30,8 +30,8 @@ services:
       - "5140:5140"
       - "5141:5141"
     # to use swaagger 
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+    # environment:
+    #   - ASPNETCORE_ENVIRONMENT=Development
 
   todolistFrontend:
     image: todolistfrontendimage
