@@ -19,3 +19,4 @@ RUN npm run build -c Release
 # use new image to publish
 FROM nginx:alpine3.22 AS final
 COPY --from=build /app/frontend/dist /app/dist
+CMD ("nginx")
