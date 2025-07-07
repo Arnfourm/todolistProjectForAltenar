@@ -5,9 +5,6 @@ services:
     build:
       context: ./backend/
       dockerfile: ./dockerfile
-    depends_on:
-      todolist.db:
-        condition: service_healthy
     ports:
       - "5140:5140"
       - "5141:5141"
