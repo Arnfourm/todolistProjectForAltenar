@@ -34,5 +34,9 @@
       state: present
       insertafter: EOF
     when: 
-      - inventory_hostname in groups["frontend-hosts"]
-      - inventory_hostname in groups["jump-hosts"]
+      - inventory_hostname in groups['frontend-hosts']
+      - inventory_hostname in groups['jump-hosts']
+
+  - name: Debug!!
+    ansible.builtin.debug:
+      msg: "{{ inventory_hostname }} right now!"
