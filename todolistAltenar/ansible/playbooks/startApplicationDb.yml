@@ -8,9 +8,9 @@
   - name: Copy docker compose for db
     ansible.builtin.copy:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
-      dest: /home/{{ ansible_ssh_user }}/docker-compose.db.yml
+      dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
   
   - name: Docker compose up db
     community.docker.docker_compose_v2:
-      project_src: /home/{{ jumphost_user }}/docker-compose.db.yml
+      project_src: /home/{{ ansible_ssh_user }}
       state: present
