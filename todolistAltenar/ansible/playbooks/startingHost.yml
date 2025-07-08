@@ -1,6 +1,6 @@
 ---
 - name: Simple tool for starting host
-  hosts: linuxSystems
+  hosts: all
   become: true
 
   tasks:

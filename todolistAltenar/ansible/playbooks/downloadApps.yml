@@ -1,14 +1,9 @@
 ---
 - name: Download apps
-  hosts: linuxSystems
+  hosts: all
   become: true
 
-  tasks:
-  - name: Install git
-    ansible.builtin.dnf:
-      name: git
-      state: present
-      
+  tasks:      
   - name: Install repo docker
     ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
   
@@ -50,7 +45,3 @@
   - name: Reboot server
     ansible.builtin.reboot:
     when: add_to_docker_group.changed == true
-
-  # - handlers:
-  #   - name: Restart server
-  #     ansible.builtin.reboot:
