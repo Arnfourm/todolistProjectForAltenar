@@ -8,7 +8,7 @@
   tasks:
   - name: debug
     debug:
-      var: ansible_user
+      var: host_user_var
 
   - name: Copy docker compose for db
     ansible.builtin.copy:
