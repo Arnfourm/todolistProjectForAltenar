@@ -10,6 +10,10 @@
     debug:
       var: host_user_var
 
+  - name: debug v2
+    debug:
+      var: ansible_ssh_user
+
   - name: Copy docker compose for db
     ansible.builtin.copy:
       src: /home/luver/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
