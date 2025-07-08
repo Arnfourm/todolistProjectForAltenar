@@ -1,7 +1,7 @@
 services:
   todolist.API:
-    image: todolistimage
-    container_name: todolistapi
+    image: altenar-todolist-backend-image
+    container_name: altenar-todolist-backend
     build:
       context: ./backend/
       dockerfile: ./dockerfile
@@ -10,7 +10,6 @@ services:
       - "5141:5141"
     environment:
       - ConnectionStrings_todolistDbContext:USER ID=luverov;Password=123456789;Host=192.168.0.108;Port=5432;Database=todolistDB;
-    # to use swaagger 
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - todolistApp
