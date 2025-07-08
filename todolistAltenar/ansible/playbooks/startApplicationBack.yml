@@ -19,6 +19,7 @@
   - name: Image docker load
     community.docker.docker_image_load:
       path: /home/{{ ansible_ssh_user }}/backend/dockerfile.tar
+      use_ssh_client: true
     register: result
 
   - name: Print the loaded image names
