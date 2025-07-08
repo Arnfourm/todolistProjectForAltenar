@@ -9,10 +9,9 @@ services:
       - "5140:5140"
       - "5141:5141"
     environment:
-      - DB_HOST=192.168.0.108
-      - DB_PORT=5432
+      - ConnectionStrings_todolistDbContext:USER ID=luverov;Password=123456789;Host=192.168.0.108;Port=5432;Database=todolistDB;
     # to use swaagger 
-    #   - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - todolistApp
 
