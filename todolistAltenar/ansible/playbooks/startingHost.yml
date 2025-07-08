@@ -33,10 +33,4 @@
       line: "127.168.0.103      altenar-intership-2025.com"
       state: present
       insertafter: EOF
-    when: 
-      - inventory_hostname in groups['frontend-hosts']
-      - inventory_hostname in groups['jump-hosts']
-
-  - name: Debug!!
-    ansible.builtin.debug:
-      msg: "{{ inventory_hostname }} right now!"
+    when: inventory_hostname in groups['frontend-hosts'] or inventory_hostname in groups['jump-hosts']
