@@ -8,7 +8,7 @@
     ansible.builtin.dnf:
       name: git
       state: present
-    when: inventory_hostname in groups["jump-hosts"]
+    when: inventory_hostname in groups['jump-hosts']
 
   - name: Install repo docker
     ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
