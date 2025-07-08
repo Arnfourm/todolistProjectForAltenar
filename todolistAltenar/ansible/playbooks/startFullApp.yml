@@ -1,0 +1,16 @@
+---
+- name: Start/restart whole application
+  hosts: database-hosts:backend-hosts:frontend-hosts
+
+  tasks:
+  - ansible.builtin.debug:
+    msg: Started
+
+- name: Include start app db
+  ansible.builtin.import_playbook: startApplicationDb.yml
+
+- name: Include start app backend
+  ansible.builtin.import_playbook: startApplicationBack.yml
+
+- name: Include start app frontend
+  ansible.builtin.import_playbook: startApplicationFrontend.yml

@@ -1,6 +1,7 @@
 ---
 - name: Simple tool for starting host
-  hosts: all
+  #hosts: all
+  hosts: database-hosts:backend-hosts:frontend-hosts
   become: true
 
   tasks:
