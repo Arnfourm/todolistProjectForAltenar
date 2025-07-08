@@ -1,7 +1,7 @@
 services:
   todolist.API:
-    image: todolistimage
-    container_name: todolistapi
+    image: altenar-todolist-backend-image
+    container_name: altenar-todolist-backend
     build:
       context: ./backend/
       dockerfile: ./dockerfile

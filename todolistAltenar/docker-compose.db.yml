@@ -1,7 +1,7 @@
 services:
   todolist.db:
     image: postgres:17.5-alpine3.22
-    container_name: todolist_postgres_db
+    container_name: altenar-todolist-database
     environment:
       POSTGRES_DB: "todolistDB"
       POSTGRES_USER: "luverov"

@@ -1,6 +1,7 @@
 services:
   todolist.nginx:
     image: nginx:alpine3.22
+    container_name: altenar-todolist-nginx
     ports:
       - 80:80
     volumes:
@@ -9,8 +10,8 @@ services:
       - todolistApp
 
   todolistFrontend:
-    image: todolistfrontendimage
-    container_name: todolistfrontend
+    image: altenar-todolist-frontend-image
+    container_name: altenar-todolist-frontend
     build:
       context: ./frontend/
       dockerfile: ./dockerfile
