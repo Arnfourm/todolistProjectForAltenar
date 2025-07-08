@@ -1,8 +1,6 @@
 ---
 - name: Start todolist app
   hosts: database-hosts
-  vars_files:
-    - ../group_vars/database-hosts.yml
   # vars:
     # host_user: luver
     # jumphost_user: luver
