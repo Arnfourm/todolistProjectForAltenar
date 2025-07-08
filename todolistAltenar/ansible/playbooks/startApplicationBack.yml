@@ -22,10 +22,6 @@
       use_ssh_client: true
     register: result
 
-  - name: Print the loaded image names
-    ansible.builtin.debug:
-      msg: "Loaded the following images: {{ result.image_names | join(', ') }}"
-
   - name: Copy docker compose backend
     ansible.builtin.copy:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.backend.yml
