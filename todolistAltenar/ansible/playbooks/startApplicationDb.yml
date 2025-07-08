@@ -1,11 +1,16 @@
 ---
 - name: Start todolist app
   hosts: database-hosts
-
+  vars_files:
+    - /group_vars/database-hosts.yml
+  # vars:
+    # host_user: luver
+    # jumphost_user: luver
+  
   tasks:
   - name: debug
     debug:
-      var: "{{ ansible_ssh_user }}"
+      var: ansible_user
 
   - name: Copy docker compose for db
     ansible.builtin.copy:
