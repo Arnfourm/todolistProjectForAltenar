@@ -5,7 +5,7 @@
   tasks:
   - name: debug
     debug:
-      var: ansible_user
+      var: "{{ ansible_ssh_user }}"
 
   - name: Copy docker compose for db
     ansible.builtin.copy:
