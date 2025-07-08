@@ -5,14 +5,14 @@
   tasks:
   - name: debug
     debug:
-      var: ansible_ssh_user
+      var: ansible_user
 
   - name: Copy docker compose for db
     ansible.builtin.copy:
       src: /home/luver/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
-      dest: /home/"{{ansible_ssh_user}}"/docker-compose.db.yml
+      dest: /home/"{{ansible_user}}"/docker-compose.db.yml
   
   - name: Docker compose up db
     community.docker.docker_compose_v2:
-      project_src: /home/"{{ansible_ssh_user}}"/docker-compose.db.yml
+      project_src: /home/"{{ansible_user}}"/docker-compose.db.yml
       state: present
