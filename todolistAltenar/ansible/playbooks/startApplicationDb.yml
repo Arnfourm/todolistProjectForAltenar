@@ -1,25 +1,16 @@
 ---
 - name: Start todolist app
   hosts: database-hosts
-  # vars:
-    # host_user: luver
-    # jumphost_user: luver
+  vars:
+      jumphost_user: luver
   
   tasks:
-  - name: debug
-    debug:
-      var: host_user_var
-
-  - name: debug v2
-    debug:
-      var: ansible_ssh_user
-
   - name: Copy docker compose for db
     ansible.builtin.copy:
       src: /home/luver/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
-      dest: /home/"{{ansible_user}}"/docker-compose.db.yml
+      dest: /home/"{{ ansible_ssh_user }}"/docker-compose.db.yml
   
   - name: Docker compose up db
     community.docker.docker_compose_v2:
-      project_src: /home/"{{ansible_user}}"/docker-compose.db.yml
+      project_src: /home/"{{ jumphost_user }}"/docker-compose.db.yml
       state: present
