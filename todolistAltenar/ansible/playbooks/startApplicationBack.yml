@@ -16,10 +16,14 @@
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/backend/dockerfile.tar
       dest: /home/{{ ansible_ssh_user }}/backend/dockerfile.tar
 
-  - name: Image load
+  - name: Image docker load
     community.docker.docker_image_load:
       path: /home/{{ ansible_ssh_user }}/backend/dockerfile.tar
     register: result
+
+  - name: Print the loaded image names
+    ansible.builtin.debug:
+      msg: "Loaded the following images: {{ result.image_names | join(', ') }}"
 
   - name: Copy docker compose backend
     ansible.builtin.copy:
