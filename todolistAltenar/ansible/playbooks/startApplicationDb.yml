@@ -7,10 +7,10 @@
   tasks:
   - name: Copy docker compose for db
     ansible.builtin.copy:
-      src: /home/luver/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
-      dest: /home/"{{ ansible_ssh_user }}"/docker-compose.db.yml
+      src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
+      dest: /home/{{ ansible_ssh_user }}/docker-compose.db.yml
   
   - name: Docker compose up db
     community.docker.docker_compose_v2:
-      project_src: /home/"{{ jumphost_user }}"/docker-compose.db.yml
+      project_src: /home/{{ jumphost_user }}/docker-compose.db.yml
       state: present
