@@ -1,5 +1,5 @@
 ---
-- name: Simple tool for starting host
+- name: Tool for starting jump-host
   hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
   become: true
 
@@ -33,3 +33,6 @@
       line: "127.168.0.103      altenar-intership-2025.com"
       state: present
       insertafter: EOF
+    when: 
+      - inventory_hostname in groups["frontend-hosts"]
+      - inventory_hostname in groups["jump-hosts"]
