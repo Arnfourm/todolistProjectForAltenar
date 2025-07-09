@@ -17,24 +17,24 @@
   
   - name: Build backend image
     community.docker.docker_image:
-      name: {{ backend_image_name }}
+      name: '{{ backend_image_name }}'
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
       source: build
   
   - name: Build frontend image
     community.docker.docker_image:
-      name: {{ frontend_image_name }}
+      name: '{{ frontend_image_name }}'
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
       source: build
 
   - name: Save backend image
     community.docker.docker_image_export:
-      name: {{ backend_image_name }}
+      name: '{{ backend_image_name }}'
       path: '{{ dest }}/todolistAltenar/backend/dockerfile.tar'
 
   - name: Save frontend image
     community.docker.docker_image_export:
-      name: {{ frontend_image_name }}
+      name: '{{ frontend_image_name }}'
       path: '{{ dest }}/todolistAltenar/frontend/dockerfile.tar'
