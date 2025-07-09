@@ -18,10 +18,10 @@
   - name: Build backend image
     community.docker.docker_image:
       name: '{{ backend_image_name }}'
-      repository: '{{ backend_image_name }}:latest'
       tag: latest
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
+        rm: true
       source: build
   
   - name: Build frontend image
