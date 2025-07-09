@@ -31,11 +31,11 @@
     delegate_to: jumphost_ip
 
   - name: Copy nginx.conf
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/nginx.conf
       dest: /home/{{ ansible_ssh_user }}/nginx.conf
     delegate_to: jumphost_ip
-    
+
   - name: Docker compose up frontend
     community.docker.docker_compose_v2:
       project_src: /home/{{ ansible_ssh_user }}
