@@ -2,13 +2,13 @@
 - name: Start app from jumphost (build dockerfiles and etc. for NOW)
   hosts: jump-hosts
   vars:
-    git_repo: https://github.com/Arnfourm/todolistProjectForAltenar
+    git_repo: https://github.com/Arnfourm/todolistProjectForAltenar/tree/new-hosts/todolistAltenar/backend
     dest: /home/{{ ansible_user }}/todolistProjectForAltenar
 
   tasks:
+  #Do clone only /backend and /frontend
   - name: Update project files
     ansible.builtin.git:
       repo: '{{ git_repo }}'
       dest: '{{ dest }}'
-      separate_git_dir: /todolistAltenar/backend/
       version: main
