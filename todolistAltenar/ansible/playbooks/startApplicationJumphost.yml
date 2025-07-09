@@ -21,16 +21,16 @@
       tag: latest
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
-        rm: true
       source: build
+      state: absent
   
   - name: Build frontend image
     community.docker.docker_image:
       name: '{{ frontend_image_name }}'
       build:
-        path: '{{ dest }}/todolistAltenar/backend/'
-        rm: true
+        path: '{{ dest }}/todolistAltenar/frontend/'
       source: build
+      state: absent
 
   - name: Save backend image
     community.docker.docker_image_export:
