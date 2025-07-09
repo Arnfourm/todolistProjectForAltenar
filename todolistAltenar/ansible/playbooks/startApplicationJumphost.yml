@@ -22,7 +22,6 @@
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
       source: build
-      state: absent
   
   - name: Build frontend image
     community.docker.docker_image:
@@ -30,7 +29,6 @@
       build:
         path: '{{ dest }}/todolistAltenar/frontend/'
       source: build
-      state: absent
 
   - name: Save backend image
     community.docker.docker_image_export:
