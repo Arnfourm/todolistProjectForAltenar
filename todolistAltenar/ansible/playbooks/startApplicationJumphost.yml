@@ -3,7 +3,7 @@
   hosts: jump-hosts
   vars:
     git_repo: https://github.com/Arnfourm/todolistProjectForAltenar
-    dest: /home/{{ ansible_user }}/todolistProjectForAltena
+    dest: /home/{{ ansible_user }}/todolistProjectForAltenar
     backend_image_name: altenar-todolist-backend-image
     frontend_image_name: altenar-todolist-frontend-image
     
