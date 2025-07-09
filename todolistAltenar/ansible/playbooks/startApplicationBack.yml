@@ -3,7 +3,8 @@
   hosts: backend-hosts
   vars:
       jumphost_user: luver
-  
+      jumphost_ip: 192.168.0.111
+
   tasks:
   - name: Create dir backend
     ansible.builtin.file:
@@ -12,9 +13,10 @@
       mode: '0755'
 
   - name: Copy docker image
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/backend/dockerfile.tar
       dest: /home/{{ ansible_ssh_user }}/backend/dockerfile.tar
+    delegate_to: '{{ jumphost_ip }}'
 
   - name: Image docker load
     community.docker.docker_image_load:
@@ -23,10 +25,11 @@
     register: result
 
   - name: Copy docker compose backend
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.backend.yml
       dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
-    
+    delegate_to: '{{ jumphost_ip }}'
+
   - name: Docker compose up backend
     community.docker.docker_compose_v2:
       project_src: /home/{{ ansible_ssh_user }}

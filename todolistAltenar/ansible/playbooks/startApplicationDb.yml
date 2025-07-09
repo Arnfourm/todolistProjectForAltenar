@@ -3,13 +3,15 @@
   hosts: database-hosts
   vars:
       jumphost_user: luver
+      jumphost_ip: 192.168.0.111
   
   tasks:
   - name: Copy docker compose for db
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
       dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
-  
+    delegate_to: '{{ jumphost_ip }}'
+
   - name: Docker compose up db
     community.docker.docker_compose_v2:
       project_src: /home/{{ ansible_ssh_user }}

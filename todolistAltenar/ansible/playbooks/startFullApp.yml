@@ -7,6 +7,9 @@
     ansible.builtin.debug:
       msg: Started
 
+- name: Include start app jumphost
+  ansible.builtin.import_playbook: startApplicationJumphost.yml
+
 - name: Include start app db
   ansible.builtin.import_playbook: startApplicationDb.yml
 
