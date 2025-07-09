@@ -29,6 +29,7 @@
       name: '{{ frontend_image_name }}'
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
+        rm: true
       source: build
 
   - name: Save backend image
