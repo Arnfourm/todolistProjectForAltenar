@@ -48,6 +48,10 @@
       append: true
     register: add_to_docker_group
 
+  - name: Check
+    ansible.buildin.debug:
+      msg: '{{ add_to_docker_group || add_to_docker_group.changed }}'
+
   - name: Reboot server
     ansible.builtin.reboot:
     when: add_to_docker_group.changed == true
