@@ -10,4 +10,5 @@
     ansible.builtin.git:
       repo: '{{ git_repo }}'
       dest: '{{ dest }}'
+      separate_git_dir: /todolistAltenar/backend/
       version: main
