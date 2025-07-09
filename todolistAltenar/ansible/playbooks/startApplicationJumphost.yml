@@ -2,9 +2,11 @@
 - name: Start app from jumphost (build dockerfiles and etc. for NOW)
   hosts: jump-hosts
   vars:
-    git_repo: https://github.com/Arnfourm/todolistProjectForAltenar/tree/new-hosts/todolistAltenar/backend
-    dest: /home/{{ ansible_user }}/todolistProjectForAltenar
-
+    git_repo: https://github.com/Arnfourm/todolistProjectForAltenar
+    dest: /home/{{ ansible_user }}/todolistProjectForAltena
+    backend_image_name: altenar-todolist-backend-image
+    frontend_image_name: altenar-todolist-frontend-image
+    
   tasks:
   #Do clone only /backend and /frontend
   - name: Update project files
@@ -12,3 +14,27 @@
       repo: '{{ git_repo }}'
       dest: '{{ dest }}'
       version: main
+  
+  - name: Build backend image
+    community.docker.docker_image:
+      name: {{ backend_image_name }}
+      build:
+        path: '{{ dest }}/todolistAltenar/backend/'
+      source: build
+  
+  - name: Build frontend image
+    community.docker.docker_image:
+      name: {{ frontend_image_name }}
+      build:
+        path: '{{ dest }}/todolistAltenar/backend/'
+      source: build
+
+  - name: Save backend image
+    community.docker.docker_image_export:
+      name: {{ backend_image_name }}
+      path: '{{ dest }}/todolistAltenar/backend/dockerfile.tar'
+
+  - name: Save frontend image
+    community.docker.docker_image_export:
+      name: {{ frontend_image_name }}
+      path: '{{ dest }}/todolistAltenar/frontend/dockerfile.tar'
