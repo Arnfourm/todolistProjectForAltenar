@@ -16,7 +16,7 @@
     ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/backend/dockerfile.tar
       dest: /home/{{ ansible_ssh_user }}/backend/dockerfile.tar
-    delegate_to: {{ jumphost_ip }}
+    delegate_to: '{{ jumphost_ip }}'
 
   - name: Image docker load
     community.docker.docker_image_load:
@@ -28,7 +28,7 @@
     ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.backend.yml
       dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
-    delegate_to: {{ jumphost_ip }}
+    delegate_to: '{{ jumphost_ip }}'
 
   - name: Docker compose up backend
     community.docker.docker_compose_v2:
