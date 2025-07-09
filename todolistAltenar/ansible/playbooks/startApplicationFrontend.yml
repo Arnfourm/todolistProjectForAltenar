@@ -3,6 +3,7 @@
   hosts: frontend-hosts
   vars:
       jumphost_user: luver
+      jumphost_ip: 192.168.0.111
 
   tasks:
   - name: Create dir frontend
@@ -12,9 +13,10 @@
       mode: '0755'
 
   - name: Copy docker image
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/frontend/dockerfile.tar
       dest: /home/{{ ansible_ssh_user }}/frontend/dockerfile.tar
+    delegate_to: jumphost_ip
 
   - name: Image docker load
     community.docker.docker_image_load:
@@ -23,15 +25,17 @@
     register: result
 
   - name: Copy docker compose frontend
-    ansible.builtin.copy:
+    ansible.posix.synchronize:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.frontend.yml
       dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
-    
+    delegate_to: jumphost_ip
+
   - name: Copy nginx.conf
     ansible.builtin.copy:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/nginx.conf
       dest: /home/{{ ansible_ssh_user }}/nginx.conf
-
+    delegate_to: jumphost_ip
+    
   - name: Docker compose up frontend
     community.docker.docker_compose_v2:
       project_src: /home/{{ ansible_ssh_user }}

@@ -7,7 +7,7 @@
   
   tasks:
   - name: Copy docker compose for db
-    ansible.posix.synchronize:
+    ansible.builtin.copy:
       src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml
       dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
     delegate_to: 192.168.0.111
