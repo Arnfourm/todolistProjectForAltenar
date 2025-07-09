@@ -50,7 +50,7 @@
 
   - name: Check
     ansible.builtin.debug:
-      msg: '{{ add_to_docker_group || add_to_docker_group.changed }}'
+      msg: '{{ add_to_docker_group }} || {{ add_to_docker_group.changed }}'
 
   - name: Reboot server
     ansible.builtin.reboot:
