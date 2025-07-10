@@ -2,21 +2,8 @@
 - name: Download apps
   hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
   become: true
-
-  tasks:      
-  - name: Install git
-    ansible.builtin.dnf:
-      name: git
-      state: present
-    when: inventory_hostname in groups['jump-hosts']
-
   
-  
-  - name: Update && upgrade
-    ansible.builtin.dnf:
-      name: "*"
-      state: latest
-      update_cache: yes
-
   roles:
+    - { role: dowload_git, when: inventory_hostname in groups['jump-hosts'] }
     - docker_dowload
+    - update_everything
