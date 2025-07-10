@@ -17,7 +17,7 @@
     register: project_files_updated
 
   - name: Actions if project files update
-    when: project_files_updated.changed = true
+    when: project_files_updated.changed == true
     block:
       - name: Remove all images + cache
         community.docker.docker_prune:
