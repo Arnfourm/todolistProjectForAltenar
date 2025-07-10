@@ -1,6 +1,8 @@
 ---
 - name: Start/restart whole application
   hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
+  serial: 1
+  any_errors_fatal: true
 
   roles:
     - role: start_application_jumphost
