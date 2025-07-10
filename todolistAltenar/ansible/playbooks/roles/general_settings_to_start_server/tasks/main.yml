@@ -1,0 +1,32 @@
+---
+# tasks file for stgeneral_settings_to_start_server
+- name: Download python
+  ansible.builtin.raw: dnf install -y python3 python3-pip
+
+- name: Add DNS 8.8.8.8 server
+  ansible.builtin.lineinfile:
+    path: "/etc/resolv.conf"
+    line: "nameserver 8.8.8.8"
+    state: present
+    insertafter: EOF
+
+- name: Add DNS 8.8.4.4 server
+  ansible.builtin.lineinfile:
+    path: "/etc/resolv.conf"
+    line: "nameserver 8.8.4.4"
+    state: present
+    insertafter: EOF
+
+- name: Update && upgrade
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: yes
+
+- name: Add hostname
+  ansible.builtin.lineinfile:
+    path: "/etc/hosts"
+    line: "127.168.0.103      altenar-intership-2025.com"
+    state: present
+    insertafter: EOF
+  when: inventory_hostname in groups['frontend-hosts'] or inventory_hostname in groups['jump-hosts']
