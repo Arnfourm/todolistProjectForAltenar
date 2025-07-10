@@ -1,2 +1,36 @@
 ---
 # tasks file for start_application_frontend
+- name: Create dir frontend
+  ansible.builtin.file:
+    path: /home/{{ ansible_ssh_user }}/frontend
+    state: directory
+    mode: '0755'
+
+- name: Copy docker image
+  ansible.posix.synchronize:
+    src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/frontend/dockerfile.tar
+    dest: /home/{{ ansible_ssh_user }}/frontend/dockerfile.tar
+  delegate_to: '{{ jumphost_ip }}'
+
+- name: Image docker load
+  community.docker.docker_image_load:
+    path: /home/{{ ansible_ssh_user }}/frontend/dockerfile.tar
+    use_ssh_client: true
+  register: result
+
+- name: Copy docker compose frontend
+  ansible.posix.synchronize:
+    src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.frontend.yml
+    dest: /home/{{ ansible_ssh_user }}/docker-compose.yml
+  delegate_to: '{{ jumphost_ip }}'
+
+- name: Copy nginx.conf
+  ansible.posix.synchronize:
+    src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/nginx.conf
+    dest: /home/{{ ansible_ssh_user }}/nginx.conf
+  delegate_to: '{{ jumphost_ip }}'
+
+- name: Docker compose up frontend
+  community.docker.docker_compose_v2:
+    project_src: /home/{{ ansible_ssh_user }}
+    state: present
