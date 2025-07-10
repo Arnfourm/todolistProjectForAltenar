@@ -2,7 +2,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "GetGroups",
-    "RelativePath": "Group",
+    "RelativePath": "api/Group",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -22,7 +22,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "CreateGroup",
-    "RelativePath": "Group",
+    "RelativePath": "api/Group",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -48,7 +48,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "UpdateGroup",
-    "RelativePath": "Group/{idGroup}",
+    "RelativePath": "api/Group/{idGroup}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -79,7 +79,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "DeleteGroup",
-    "RelativePath": "Group/{idGroup}",
+    "RelativePath": "api/Group/{idGroup}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -105,7 +105,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "GetGroupById",
-    "RelativePath": "Group/ById/{groupId}",
+    "RelativePath": "api/Group/ById/{groupId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -131,7 +131,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.GroupController",
     "Method": "GetGroupByUserId",
-    "RelativePath": "Group/ByUserId/{userId}",
+    "RelativePath": "api/Group/ByUserId/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -157,7 +157,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "GetNotes",
-    "RelativePath": "Note",
+    "RelativePath": "api/Note",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -177,7 +177,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "CreateNote",
-    "RelativePath": "Note",
+    "RelativePath": "api/Note",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -202,8 +202,8 @@
   },
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
-    "Method": "UpdateNote",
-    "RelativePath": "Note/{idNote}",
+    "Method": "UpdateTitleNote",
+    "RelativePath": "api/Note/{idNote}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -215,7 +215,7 @@
       },
       {
         "Name": "request",
-        "Type": "todolistProject.API.Contracts.NotesRequest",
+        "Type": "todolistProject.API.Contracts.NotesTitleRequest",
         "IsRequired": true
       }
     ],
@@ -234,7 +234,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "DeleteNote",
-    "RelativePath": "Note/{idNote}",
+    "RelativePath": "api/Note/{idNote}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -260,7 +260,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "GetNoteById",
-    "RelativePath": "Note/ById/{idNote}",
+    "RelativePath": "api/Note/ById/{idNote}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -286,7 +286,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "GetNoteByUserId",
-    "RelativePath": "Note/ByUserId/{idUser}",
+    "RelativePath": "api/Note/ByUserId/{idUser}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -311,34 +311,8 @@
   },
   {
     "ContainingType": "todolistProject.API.Controllers.NoteController",
-    "Method": "GetNoteContent",
-    "RelativePath": "Note/Content/{idNote}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "idNote",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "todolistProject.API.Contracts.NotesContentResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "todolistProject.API.Controllers.NoteController",
     "Method": "SaveNoteContext",
-    "RelativePath": "Note/Content/{idNote}",
+    "RelativePath": "api/Note/Content/{idNote}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -369,7 +343,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.UserController",
     "Method": "GetNotes",
-    "RelativePath": "User",
+    "RelativePath": "api/User",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -389,7 +363,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.UserController",
     "Method": "CreateUser",
-    "RelativePath": "User",
+    "RelativePath": "api/User",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -415,7 +389,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.UserController",
     "Method": "UpdateUser",
-    "RelativePath": "User/{userid}",
+    "RelativePath": "api/User/{userid}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -446,7 +420,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.UserController",
     "Method": "DeleteUser",
-    "RelativePath": "User/{userid}",
+    "RelativePath": "api/User/{userid}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -472,7 +446,7 @@
   {
     "ContainingType": "todolistProject.API.Controllers.UserController",
     "Method": "GetUserById",
-    "RelativePath": "User/ById/{userId}",
+    "RelativePath": "api/User/ById/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
