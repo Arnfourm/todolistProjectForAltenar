@@ -21,6 +21,7 @@
       tag: latest
       build:
         path: '{{ dest }}/todolistAltenar/backend/'
+        nocache: true
       source: build
   
   - name: Build frontend image
@@ -28,6 +29,7 @@
       name: '{{ frontend_image_name }}'
       build:
         path: '{{ dest }}/todolistAltenar/frontend/'
+        nocache: true
       source: build
 
   - name: Save backend image
