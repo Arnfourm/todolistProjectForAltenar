@@ -1,18 +1,22 @@
 ---
-- name: Start/restart whole application
-  hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
-  serial: 1
-  any_errors_fatal: true
-
+- name: Start application jumphost
+  hosts: jump-hosts
   roles:
     - role: start_application_jumphost
-      when: inventory_hostname in groups['jump-hosts']
 
+- name: Start application database
+  hosts: database-hosts
+  roles:
     - role: start_application_database
-      when: inventory_hostname in groups['database-hosts']
 
+- name: Start application backend
+  hosts: backend-hosts
+  serial: 1
+  any_errors_fatal: true
+  roles:
     - role: start_application_backend
-      when: inventory_hostname in groups['backend-hosts']
 
+- name: Start applcation frontend
+  hosts: frontend-hosts
+  roles:
     - role: start_application_frontend
-      when: inventory_hostname in groups['frontend-hosts']

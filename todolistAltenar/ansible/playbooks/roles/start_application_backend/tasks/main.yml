@@ -29,4 +29,4 @@
     project_src: /home/{{ ansible_ssh_user }}
     state: present
   register: docker_compose_backend_info
-  failed_then: docker_compose_backend_info.failed
+  failed_when: docker_compose_backend_info.failed
