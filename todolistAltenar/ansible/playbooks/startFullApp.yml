@@ -1,20 +1,16 @@
 ---
 - name: Start/restart whole application
-  hosts: database-hosts:backend-hosts:frontend-hosts
+  hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
 
-  tasks:
-  - name: Debug message
-    ansible.builtin.debug:
-      msg: Started
+  roles:
+    - role: start_application_jumphost
+      when: inventory_hostname in groups['jump-hosts']
 
-- name: Include start app jumphost
-  ansible.builtin.import_playbook: startApplicationJumphost.yml
+    - role: start_application_database
+      when: inventory_hostname in groups['database-hosts']
 
-- name: Include start app db
-  ansible.builtin.import_playbook: startApplicationDb.yml
+    - role: start_application_backend
+      when: inventory_hostname in groups['backend-hosts']
 
-- name: Include start app backend
-  ansible.builtin.import_playbook: startApplicationBack.yml
-
-- name: Include start app frontend
-  ansible.builtin.import_playbook: startApplicationFrontend.yml
+    - role: start_application_frontend
+      when: inventory_hostname in groups['frontend-hosts']

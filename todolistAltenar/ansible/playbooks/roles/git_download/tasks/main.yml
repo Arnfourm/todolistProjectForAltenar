@@ -1,6 +1,0 @@
----
-# tasks file for dowload_git
-- name: Install git
-  ansible.builtin.dnf:
-    name: git
-    state: present

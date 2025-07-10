@@ -1,0 +1,4 @@
+---
+# defaults file for start_application_database
+jumphost_user: luver
+jumphost_ip: 192.168.0.111
