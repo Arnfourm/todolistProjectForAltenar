@@ -28,3 +28,8 @@
   community.docker.docker_compose_v2:
     project_src: /home/{{ ansible_ssh_user }}
     state: present
+  register: docker_compose_debug
+
+- name: Debug show
+  ansible.builtin.debug:
+    msg: docker_compose_debug

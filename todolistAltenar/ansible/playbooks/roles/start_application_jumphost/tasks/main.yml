@@ -26,6 +26,7 @@
           path: '{{ dest }}/todolistAltenar/backend/'
           nocache: true
         source: build
+      register: backend_build_reg
 
     - name: Build frontend image
       community.docker.docker_image:
@@ -34,6 +35,11 @@
           path: '{{ dest }}/todolistAltenar/frontend/'
           nocache: true
         source: build
+      register: frontend_build_reg
+
+    - name: debug show
+      ansible.builtin.debug:
+        msg: '{{ backend_build_reg }} |||| {{ frontend_build_reg }}'
 
     - name: Save backend image
       community.docker.docker_image_export:
