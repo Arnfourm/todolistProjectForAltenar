@@ -2,8 +2,9 @@
 - name: Download apps
   hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
   become: true
-  
+
   roles:
-    - { role: dowload_git, when: inventory_hostname in groups['jump-hosts'] }
-    - docker_dowload
-    - update_everything
+    - role: dowload_git
+      when: inventory_hostname in groups['jump-hosts']
+    - role: docker_dowload
+    - role: update_everything
