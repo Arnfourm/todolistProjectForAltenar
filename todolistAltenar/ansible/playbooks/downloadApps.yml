@@ -5,6 +5,6 @@
 
   roles:
     - role: dowload_git
-      when: inventory_hostname in groups['jump-hosts']
+      when: "inventory_hostname in groups['jump-hosts']"
     - role: docker_dowload
     - role: update_everything
