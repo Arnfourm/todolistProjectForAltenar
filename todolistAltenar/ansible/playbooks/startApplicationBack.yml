@@ -33,4 +33,5 @@
   - name: Docker compose up backend
     community.docker.docker_compose_v2:
       project_src: /home/{{ ansible_ssh_user }}
-      state: present
+      state: restarted
+    
