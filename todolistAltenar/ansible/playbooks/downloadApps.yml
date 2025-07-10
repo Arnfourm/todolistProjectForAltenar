@@ -4,7 +4,7 @@
   become: true
 
   roles:
-    - role: dowload_git
+    - role: git_download
       when: "inventory_hostname in groups['jump-hosts']"
-    - role: docker_dowload
+    - role: docker_download
     - role: update_everything
