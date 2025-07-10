@@ -32,4 +32,4 @@
 
 - name: Debug show
   ansible.builtin.debug:
-    msg: docker_compose_debug
+    msg: '{{ docker_compose_debug }}'
