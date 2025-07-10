@@ -23,7 +23,14 @@
         community.docker.docker_prune:
           images: true
           builder_cache: true
-        
+          images_filters:
+            dangling: false
+        register: debug_message_remove
+
+      - name: Debug
+        ansible.builtin.debug:
+          msg: "{{ debug_message_remove }}"
+
       - name: Build backend image
         community.docker.docker_image:
           name: '{{ backend_image_name }}'
