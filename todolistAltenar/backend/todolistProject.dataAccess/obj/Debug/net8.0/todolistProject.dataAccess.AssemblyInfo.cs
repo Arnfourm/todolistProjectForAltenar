@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("todolistProject.dataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8cc7fdafd5fb6e749217941c187e76a6dd55bf2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d7ac4314b6b5d02a867f3c2da2e46d9c7c170db")]
 [assembly: System.Reflection.AssemblyProductAttribute("todolistProject.dataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("todolistProject.dataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

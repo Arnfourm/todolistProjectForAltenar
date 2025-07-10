@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Servasdices.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<todolistDbContext>(
@@ -21,8 +21,8 @@ builder.Services.AddScoped<INotesService, NotesService>();
 builder.Services.AddScoped<INoteCRUD, NoteCRUD>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserCRUD, UserCRUD>();
-//builder.Services.AddScoped<IGroupService, GroupService>();
-//builder.Services.AddScoped<IGroupCRUD, GroupCRUD>();
+builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddScoped<IGroupCRUD, GroupCRUD>();
 
 builder.WebHost.UseUrls("http://0.0.0.0:5140");
 
