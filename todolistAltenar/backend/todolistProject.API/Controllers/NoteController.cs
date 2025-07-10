@@ -2,9 +2,11 @@
 using todolistProject.Core.Abstractions;
 using todolistProject.API.Contracts;
 using todolistProject.Core.Models;
+using Asp.Versioning;
 
 namespace todolistProject.API.Controllers
 {
+    [ApiVersion(1.0)]
     [ApiController]
     [Route("api/[controller]")]
     public class NoteController : ControllerBase
