@@ -7,19 +7,15 @@
       "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|solutionrelative:todolistproject.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\backend\\todolistproject.api\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|solutionrelative:todolistproject.api\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\arnfo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\build\\Swashbuckle.AspNetCore.props||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\backend\\todolistproject.api\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|solutionrelative:todolistproject.api\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\backend\\todolistproject.api\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|solutionrelative:todolistproject.api\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|c:\\users\\arnfo\\desktop\\todolistprojectforaltenar\\todolistaltenar\\backend\\todolistproject.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4A1BF8C-CFA1-4452-8857-54E4490282E5}|todolistProject.API\\todolistProject.API.csproj|solutionrelative:todolistproject.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,8 +25,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 499,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Program.cs",
+              "RelativeDocumentMoniker": "todolistProject.API\\Program.cs",
+              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Program.cs",
+              "RelativeToolTip": "todolistProject.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T10:04:10.513Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -41,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Swashbuckle.AspNetCore.props",
               "DocumentMoniker": "C:\\Users\\arnfo\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\build\\Swashbuckle.AspNetCore.props",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\build\\Swashbuckle.AspNetCore.props",
@@ -54,32 +64,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Program.cs",
-              "RelativeDocumentMoniker": "todolistProject.API\\Program.cs",
-              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Program.cs",
-              "RelativeToolTip": "todolistProject.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T10:04:10.513Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "todolistProject.API\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "todolistProject.API\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T09:58:54.704Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "NoteController.cs",
               "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Controllers\\NoteController.cs",
               "RelativeDocumentMoniker": "todolistProject.API\\Controllers\\NoteController.cs",
@@ -87,11 +72,12 @@
               "RelativeToolTip": "todolistProject.API\\Controllers\\NoteController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T09:57:36.568Z"
+              "WhenOpened": "2025-07-07T09:57:36.568Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GroupController.cs",
               "DocumentMoniker": "C:\\Users\\arnfo\\Desktop\\todolistProjectForAltenar\\todolistAltenar\\backend\\todolistProject.API\\Controllers\\GroupController.cs",
               "RelativeDocumentMoniker": "todolistProject.API\\Controllers\\GroupController.cs",
@@ -99,7 +85,8 @@
               "RelativeToolTip": "todolistProject.API\\Controllers\\GroupController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T09:56:11.875Z"
+              "WhenOpened": "2025-07-07T09:56:11.875Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -110,6 +97,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
