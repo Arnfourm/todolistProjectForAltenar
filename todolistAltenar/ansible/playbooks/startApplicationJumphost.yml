@@ -14,28 +14,39 @@
       repo: '{{ git_repo }}'
       dest: '{{ dest }}'
       version: main
-  
-  - name: Build backend image
-    community.docker.docker_image:
-      name: '{{ backend_image_name }}'
-      tag: latest
-      build:
-        path: '{{ dest }}/todolistAltenar/backend/'
-      source: build
-  
-  - name: Build frontend image
-    community.docker.docker_image:
-      name: '{{ frontend_image_name }}'
-      build:
-        path: '{{ dest }}/todolistAltenar/frontend/'
-      source: build
+    register: project_files_updated
 
-  - name: Save backend image
-    community.docker.docker_image_export:
-      name: '{{ backend_image_name }}'
-      path: '{{ dest }}/todolistAltenar/backend/dockerfile.tar'
+  - name: Actions if project files update
+    when: project_files_updated.changed == true
+    block:
+      - name: Remove all images + cache
+        community.docker.docker_prune:
+          images: true
+          builder_cache: true
+        
+      - name: Build backend image
+        community.docker.docker_image:
+          name: '{{ backend_image_name }}'
+          tag: latest
+          build:
+            path: '{{ dest }}/todolistAltenar/backend/'
+            nocache: true
+          source: build
 
-  - name: Save frontend image
-    community.docker.docker_image_export:
-      name: '{{ frontend_image_name }}'
-      path: '{{ dest }}/todolistAltenar/frontend/dockerfile.tar'
+      - name: Build frontend image
+        community.docker.docker_image:
+          name: '{{ frontend_image_name }}'
+          build:
+            path: '{{ dest }}/todolistAltenar/frontend/'
+            nocache: true
+          source: build
+
+      - name: Save backend image
+        community.docker.docker_image_export:
+          name: '{{ backend_image_name }}'
+          path: '{{ dest }}/todolistAltenar/backend/dockerfile.tar'
+
+      - name: Save frontend image
+        community.docker.docker_image_export:
+          name: '{{ frontend_image_name }}'
+          path: '{{ dest }}/todolistAltenar/frontend/dockerfile.tar'
