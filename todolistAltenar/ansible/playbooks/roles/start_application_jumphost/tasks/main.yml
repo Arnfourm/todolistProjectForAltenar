@@ -17,9 +17,9 @@
     #     images_filters:
     #       dangling: false
 
-    - name: Remove none images
-      ansible.builtin.shell: docker image rm $(docker images --filter "dangling=true" -q)
-      ignore_errors: true
+    # - name: Remove none images
+    #   ansible.builtin.shell: docker image rm $(docker images --filter "dangling=true" -q)
+    #   ignore_errors: true
 
     - name: Remove images backend and frontend
       community.docker.docker_image:
