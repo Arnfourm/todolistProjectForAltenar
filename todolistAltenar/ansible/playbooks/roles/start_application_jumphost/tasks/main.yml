@@ -16,7 +16,6 @@
     #     builder_cache: true
     #     images_filters:
     #       dangling: false
-    #   register: debug_message_remove
 
     - name: Remove images
       community.docker.docker_image:
