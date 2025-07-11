@@ -10,13 +10,22 @@
 - name: Actions if project files update
   when: project_files_updated.changed == true
   block:
-    - name: Remove all images + cache
-      community.docker.docker_prune:
-        images: true
-        builder_cache: true
-        images_filters:
-          dangling: false
-      register: debug_message_remove
+    # - name: Remove all images + cache
+    #   community.docker.docker_prune:
+    #     images: true
+    #     builder_cache: true
+    #     images_filters:
+    #       dangling: false
+
+    - name: Remove images
+      community.docker.docker_image:
+        name: '{{ item }}'
+        tag: latest
+        state: absent
+      loop:
+        - '{{ backend_image_name }}'
+        - '{{ frontend_image_name }}'
+      ignore_errors: true
 
     - name: Build backend image
       community.docker.docker_image:
