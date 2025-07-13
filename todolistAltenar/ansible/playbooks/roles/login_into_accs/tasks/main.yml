@@ -3,3 +3,8 @@
 - name: Gh login into Github
   shell: gh auth login --git-protocol https --hostname GitHub.com --with-token <<< '{{ gh_token }}'
   when: inventory_hostname in groups['jump-hosts']
+  register: debug_gh_auth
+
+- name: Debug show
+  debug: 
+    msg: debug_gh_auth
