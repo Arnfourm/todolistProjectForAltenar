@@ -53,6 +53,10 @@
       shell: git tag -a {{ git_deploy_tag }} -m "{{ git_deploy_tag_message }}"
       args:
         chdir: ./todolistProjectForAltenar/
+      register: create_new_tag
 
     - name: Add new tag to repo
       shell: git push origin {{ git_deploy_tag }}
+      args:
+        chdir: ./todolistProjectForAltenar/
+      when: create_new_tag.changed == true
