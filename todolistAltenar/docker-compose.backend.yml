@@ -9,7 +9,7 @@ services:
       - "5140:5140"
       - "5141:5141"
     environment:
-      - ConnectionStrings_todolistDbContext:USER ID=luverov;Password=123456789;Host=192.168.0.108;Port=5432;Database=todolistDB;
+      - ConnectionStrings_todolistDbContext:USER ID=luverov;Password=123456789;Host=192.168.0.110;Port=5432;Database=todolistDB;
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - todolistApp
