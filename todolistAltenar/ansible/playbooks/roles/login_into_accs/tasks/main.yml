@@ -7,4 +7,4 @@
 
 - name: Debug show
   debug: 
-    msg: debug_gh_auth
+    msg: '{{ debug_gh_auth }}'
