@@ -1,7 +1,7 @@
 ---
 # tasks file for login-into-accs
 - name: Gh login into Github
-  shell: echo '{{ gh_token }}' | gh auth login --git-protocol https --hostname GitHub.com --with-token
+  shell: "echo '{{ gh_token }}' | gh auth login --git-protocol https --hostname GitHub.com --with-token"
   when: inventory_hostname in groups['jump-hosts']
   register: debug_gh_auth
 
