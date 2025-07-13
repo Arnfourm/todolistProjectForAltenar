@@ -5,6 +5,11 @@
   when: inventory_hostname in groups['jump-hosts']
   register: debug_gh_auth
 
-- name: Debug show
-  debug: 
-    msg: '{{ debug_gh_auth }}'
+# - name: Debug show
+#   debug: 
+#     msg: '{{ debug_gh_auth }}'
+
+- name: Docker login
+  community.docker.docker_login:
+    username: '{{ docker_login }}'
+    password: '{{ docker_password }}'
