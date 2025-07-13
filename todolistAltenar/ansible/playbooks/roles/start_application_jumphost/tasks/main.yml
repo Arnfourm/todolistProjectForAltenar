@@ -50,7 +50,7 @@
       when: image_build_frontend_res.failed == False
 
     - name: Create new tag
-      shell: cd ./todolistProjectForAltenar/ && git tag -a {{ git_deploy_tag }} -m {{ git_deploy_tag_message }}
+      shell: cd ./todolistProjectForAltenar/ && git tag -a {{ git_deploy_tag }} -m "{{ git_deploy_tag_message }}"
 
     - name: Add new tag to repo
       shell: git push origin {{ git_deploy_tag }}
