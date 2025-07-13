@@ -1,8 +1,14 @@
 ---
 # tasks file for download_apps
-- name: Install git
+- name: Add gh auth repo
+  shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
+  when: inventory_hostname in groups['jump-hosts']
+
+- name: Install git + gh auth login
   ansible.builtin.dnf:
-    name: git
+    name: 
+      - git
+      - gh
     state: present
   when: inventory_hostname in groups['jump-hosts']
 
