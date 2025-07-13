@@ -49,12 +49,8 @@
         path: '{{ dest }}/todolistAltenar/frontend/dockerfile.tar'
       when: image_build_frontend_res.failed == False
 
-    - name: Craete new release
-      community.general.github_release:
-        user: Arnfourm
-        repo: '{{ git_repo }}'
-        action: create_release
-        tag: v1.2
-        target: main
-        name: Test release via Ansible
-        body: Trying to craete new release with ansible
+    - name: Create new tag
+      community.builtin.shell: git tag -a {{ git_deploy_tag }} -m {{ git_deploy_tag_message }}
+
+    - name: Add new tag to repo
+      community.builtin.shell: git push origin {{ git_deploy_tag }}
