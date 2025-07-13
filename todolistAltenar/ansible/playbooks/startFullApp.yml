@@ -4,7 +4,7 @@
   roles:
     - role: start_application_jumphost
       vars: 
-        git_deploy_tag: v1.3
+        git_deploy_tag: v1.2
         git_deploy_tag_message: Test deploy to check variable from playbook to role
 
 - name: Start application database
