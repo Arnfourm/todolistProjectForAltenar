@@ -54,7 +54,7 @@
         user: Arnfourm
         repo: '{{ git_repo }}'
         action: create_release
-        tag: v1.1
+        tag: v1.2
         target: main
         name: Test release via Ansible
         body: Trying to craete new release with ansible
