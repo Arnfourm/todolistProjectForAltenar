@@ -13,10 +13,9 @@
   community.docker.docker_login:
     username: '{{ docker_login }}'
     password: '{{ docker_password }}'
-    email: arnfourm@gmail.com
+    reauthorize: true
   register: debug_docker_auth
 
 - name: Debug show
   debug: 
     msg: '{{ debug_docker_auth }}'
-
