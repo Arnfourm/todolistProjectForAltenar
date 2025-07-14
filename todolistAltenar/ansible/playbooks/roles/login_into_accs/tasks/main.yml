@@ -13,6 +13,7 @@
   community.docker.docker_login:
     username: '{{ docker_login }}'
     password: '{{ docker_password }}'
+    use_ssh_client: true
   register: debug_docker_auth
 
 - name: Debug show
