@@ -19,3 +19,8 @@
 - name: Debug show
   debug: 
     msg: '{{ debug_docker_auth }}'
+
+- name: Test create
+  ansible.builtin.file:
+    path: /home/luver/test.txt
+    state: touch
