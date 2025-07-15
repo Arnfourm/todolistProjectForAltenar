@@ -6,3 +6,4 @@
   roles:
     - role: general_settings_to_start_server
     - role: download_apps
+    - role: login_into_accs
