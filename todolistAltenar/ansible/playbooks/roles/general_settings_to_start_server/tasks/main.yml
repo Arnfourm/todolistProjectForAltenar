@@ -23,10 +23,14 @@
     state: latest
     update_cache: yes
 
-- name: Add hostname
+- name: Add address for host
   ansible.builtin.lineinfile:
     path: "/etc/hosts"
-    line: "127.168.0.103      altenar-intership-2025.com"
+    line: "127.168.0.116      altenar-intership-2025.com"
     state: present
     insertafter: EOF
-  when: inventory_hostname in groups['frontend-hosts'] or inventory_hostname in groups['jump-hosts']
+  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
+
+- name: Add host name for master node
+  ansible.builtin.hostname:
+    name: inventory_hostname in groups['master-nodes']
