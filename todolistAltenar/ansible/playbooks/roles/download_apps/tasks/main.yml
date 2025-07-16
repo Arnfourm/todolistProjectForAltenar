@@ -4,7 +4,7 @@
   when: inventory_hostname in groups['jump-hosts']
   block:
     - name: Add gh auth repo
-      shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
+      ansible.builtin.shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
       
     - name: Install git + gh auth login
       ansible.builtin.dnf:
@@ -145,7 +145,38 @@
         state: restarted
       when: containerd_config.changed = true
 
-    
+    - name: Create k8s repo
+      ansible.builtin.file:
+        path: /etc/yum.repos.d/kubernetes.repo
+        state: touch
+        mode: '0544'
+
+    - name: Write k8s repo
+      ansible.builtin.block:
+        path: /etc/yum.repos.d/kubernetes.repo
+        block: | 
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+          exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+
+    - name: Install kubelet, kubeadm, kubectl
+      ansible.builtin.dnf:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+        disable_excludes: kubernetes
+
+    - name: Start and enable kubelet
+      ansible.builtin.systemd_service:
+        name: kubelet
+        enabled: true
+        state: start
 
 - name: Install docker for master nodes and jumphosts
   when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
@@ -172,19 +203,18 @@
         name: docker
         state: present
 
+    - name: Add user to group docker
+      ansible.builtin.user:
+        name: luver
+        groups: luver,docker
+        state: present
+        append: true
+      register: add_to_docker_group
+      notify:
+        - Reboot server
 
-# - name: Update && upgrade
-#   ansible.builtin.dnf:
-#     name: "*"
-#     state: latest
-#     update_cache: yes
-
-- name: Add user to group docker
-  ansible.builtin.user:
-    name: luver
-    groups: luver,docker
-    state: present
-    append: true
-  register: add_to_docker_group
-  notify:
-    - Reboot server
+- name: Update && upgrade
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: yes
