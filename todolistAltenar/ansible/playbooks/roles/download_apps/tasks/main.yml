@@ -140,8 +140,9 @@
     - name: Change SystemdCgroup to true
       ansible.builtin.lineinfile:
         path: /tmp/containerd_config.toml
-        regexp: '(\s*)SystemdCgroup\s*=\s*false(\s*$)'
-        replace: '\1SystemdCgroup = true\2'
+        insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+        line: '          SystemdCgroup = true'
+        state: present
 
     - name: Copy config to default path
       ansible.builtin.:
