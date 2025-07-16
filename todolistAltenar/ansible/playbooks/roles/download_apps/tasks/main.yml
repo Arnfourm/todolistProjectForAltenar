@@ -145,7 +145,7 @@
         state: present
 
     - name: Copy config to default path
-      ansible.builtin.:
+      ansible.builtin.copy:
         src: /tmp/containerd_config.toml
         dest: /etc/containerd/config.toml
         mode: '0644'
