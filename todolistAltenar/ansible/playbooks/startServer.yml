@@ -1,6 +1,6 @@
 ---
 - name: Start server
-  hosts: database-hosts:backend-hosts:frontend-hosts:jump-hosts
+  hosts: master-nodes:worker-nodes
   become: true
 
   roles:
