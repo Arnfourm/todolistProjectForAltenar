@@ -5,10 +5,10 @@
   block:
     - name: Add gh auth repo
       ansible.builtin.shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
-      
+
     - name: Install git + gh auth login
       ansible.builtin.dnf:
-        name: 
+        name:
           - git
           - gh
         state: present
@@ -29,7 +29,7 @@
         replace: '# \1'
 
     - name: Turn off swap
-      ansible.builtin.shell: swapdoff -a
+      ansible.builtin.shell: swapoff -a
 
     - name: Create file to start modules
       ansible.builtin.file:
@@ -44,7 +44,7 @@
           overlay
           br_netfilter
 
-    - name: Create file to turn on core options 
+    - name: Create file to turn on core options
       ansible.builtin.file:
         path: /etc/sysctl.d/k8s.conf
         state: touch
@@ -62,7 +62,7 @@
         port: '{{ item }}/tcp'
         permanent: true
         state: enabled
-      loop: 
+      loop:
         - '6443'
         - '2379'
         - '10250'
@@ -74,7 +74,7 @@
         - Reboot server
 
     - name: Add listening ports in filewalld for worker nodes
-      ansible.posix.filewalld:
+      ansible.posix.firewalld:
         port: '{{ item }}/tcp'
         permanent: true
         state: enabled
@@ -93,16 +93,16 @@
 
     - name: Install runC
       ansible.builtin.shell: install -m 755 runc.amd64 /usr/local/sbin/runc
-      args:     
+      args:
         chdir: /opt/
 
     - name: Download containerd repo
       ansible.builtin.get_url:
         url: https://github.com/containerd/containerd/releases/download/v2.1.2/containerd-2.1.2-linux-amd64.tar.gz
-        dest: /etc/containerd-2.1.2-linux-amd64.tar.gz
+        dest: /opt/containerd-2.1.2-linux-amd64.tar.gz
 
     - name: Unarchive containerd repo
-      ansible.builtin.unarchive: 
+      ansible.builtin.unarchive:
         src: /opt/containerd-2.1.2-linux-amd64.tar.gz
         dest: /usr/local/
         remote_src: true
@@ -122,20 +122,33 @@
         enabled: true
         state: started
 
-    - name: Create dir for containerd 
+    - name: Create dir for containerd
       ansible.builtin.file:
         path: /etc/containerd/
         state: directory
         mode: '0755'
 
-    - name: Copy containerd config default
-      shell: containerd config default > /etc/containerd/config.toml
+    - name: Copy stdout containerd default config
+      ansible.builtin.shell: /usr/local/bin/containerd config default
+      register: containerd_config_default_write
+
+    - name: Copy config to temp
+      ansible.builtin.copy:
+        dest: /tmp/containerd_config.toml
+        content: '{{ containerd_config_default_write.stdout }}'
 
     - name: Change SystemdCgroup to true
-      ansible.builtin.replace:
-        path: /etc/containerd/config.toml
-        regexp: '^\s*SystemdCgroup\s*=\s*false\s*$'
-        replace: 'SystemdCgroup = true'
+      ansible.builtin.lineinfile:
+        path: /tmp/containerd_config.toml
+        regexp: '(\s*)SystemdCgroup\s*=\s*false(\s*$)'
+        replace: '\1SystemdCgroup = true\2'
+
+    - name: Copy config to default path
+      ansible.builtin.:
+        src: /tmp/containerd_config.toml
+        dest: /etc/containerd/config.toml
+        mode: '0644'
+        remote_src: true
       register: containerd_config
 
     - name: Restart containerd daemon
@@ -143,7 +156,7 @@
         name: containerd
         enabled: true
         state: restarted
-      when: containerd_config.changed = true
+      when: containerd_config.changed == true
 
     - name: Create k8s repo
       ansible.builtin.file:
@@ -152,9 +165,9 @@
         mode: '0544'
 
     - name: Write k8s repo
-      ansible.builtin.block:
+      ansible.builtin.blockinfile:
         path: /etc/yum.repos.d/kubernetes.repo
-        block: | 
+        block: |
           [kubernetes]
           name=Kubernetes
           baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
@@ -176,42 +189,42 @@
       ansible.builtin.systemd_service:
         name: kubelet
         enabled: true
-        state: start
-
-- name: Install docker for master nodes and jumphosts
-  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
-  block:
-    - name: Install repo docker
-      ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
-  
-    - name: Install docker
-      ansible.builtin.dnf:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - docker-buildx-plugin 
-        state: present
-
-    - name: Starting docker daemon
-      ansible.builtin.systemd_service:
-        name: docker
-        enabled: true
         state: started
 
-    - name: Create new group for docker
-      ansible.builtin.group:
-        name: docker
-        state: present
+#- name: Install docker for master nodes and jumphosts
+#  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
+#  block:
+#    - name: Install repo docker
+#      ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
 
-    - name: Add user to group docker
-      ansible.builtin.user:
-        name: luver
-        groups: luver,docker
-        state: present
-        append: true
-      register: add_to_docker_group
-      notify:
-        - Reboot server
+#    - name: Install docker
+#      ansible.builtin.dnf:
+#        name:
+#          - docker-ce
+#          - docker-ce-cli
+#          - docker-buildx-plugin
+#        state: present
+
+#    - name: Starting docker daemon
+#      ansible.builtin.systemd_service:
+#        name: docker
+#        enabled: true
+#        state: started
+
+#    - name: Create new group for docker
+#      ansible.builtin.group:
+#        name: docker
+#        state: present
+
+#    - name: Add user to group docker
+#      ansible.builtin.user:
+#        name: luver
+#        groups: luver,docker
+#        state: present
+#        append: true
+#      register: add_to_docker_group
+#      notify:
+#        - Reboot server
 
 - name: Update && upgrade
   ansible.builtin.dnf:
