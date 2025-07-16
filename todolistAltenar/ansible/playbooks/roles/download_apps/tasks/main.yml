@@ -1,55 +1,234 @@
 ---
 # tasks file for download_apps
-- name: Add gh auth repo
-  shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
+- name: Install git and gh for jumphosts
   when: inventory_hostname in groups['jump-hosts']
+  block:
+    - name: Add gh auth repo
+      ansible.builtin.shell: curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo | sudo tee /etc/yum.repos.d/github-cli.repo
 
-- name: Install git + gh auth login
-  ansible.builtin.dnf:
-    name: 
-      - git
-      - gh
-    state: present
-  when: inventory_hostname in groups['jump-hosts']
+    - name: Install git + gh auth login
+      ansible.builtin.dnf:
+        name:
+          - git
+          - gh
+        state: present
 
-- name: Install repo docker
-  ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
-  
-- name: Install docker
-  ansible.builtin.dnf:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin 
-      - docker-compose-plugin
-    state: present
-  
+- name: Install k8s for master nodes and worker nodes
+  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['worker-nodes']
+  block:
+    - name: Turn off SELinux
+      ansible.builtin.replace:
+        path: /etc/selinux/config
+        regexp: 's/^SELINUX[^ ]*'
+        replace: '/SELINUX=permissive/'
+
+    - name: Turn off swap config file
+      ansible.builtin.replace:
+        path: /etc/fstab
+        regexp: '^([^#].*\bswap\b.*)$'
+        replace: '# \1'
+
+    - name: Turn off swap
+      ansible.builtin.shell: swapoff -a
+
+    - name: Create file to start modules
+      ansible.builtin.file:
+        path: /etc/modules-load.d/k8s.conf
+        state: touch
+        mode: '0544'
+
+    - name: Write modules in file
+      ansible.builtin.blockinfile:
+        path: /etc/modules-load.d/k8s.conf
+        block: |
+          overlay
+          br_netfilter
+
+    - name: Create file to turn on core options
+      ansible.builtin.file:
+        path: /etc/sysctl.d/k8s.conf
+        state: touch
+        mode: '0544'
+
+    - name: Write core options in file
+      ansible.builtin.blockinfile:
+        path: /etc/sysctl.d/k8s.conf
+        block: |
+          net.bridge.bridge-nf-call-iptables = 1
+          net.ipv4.ip_forward = 1
+
+    - name: Add listening ports in firewalld for master nodes
+      ansible.posix.firewalld:
+        port: '{{ item }}/tcp'
+        permanent: true
+        state: enabled
+      loop:
+        - '6443'
+        - '2379'
+        - '10250'
+        - '10259'
+        - '10257'
+      when: inventory_hostname in groups['master-nodes']
+      notify:
+        - Reload firewalld
+        - Reboot server
+
+    - name: Add listening ports in filewalld for worker nodes
+      ansible.posix.firewalld:
+        port: '{{ item }}/tcp'
+        permanent: true
+        state: enabled
+      loop:
+        - '10250'
+        - '30000-32767'
+      when: inventory_hostname in groups['worker-nodes']
+      notify:
+        - Reload firewalld
+        - Reboot server
+
+    - name: Download runC repo
+      ansible.builtin.get_url:
+        url: https://github.com/opencontainers/runc/releases/download/v1.2.5/runc.amd64
+        dest: /opt/runc.amd64
+
+    - name: Install runC
+      ansible.builtin.shell: install -m 755 runc.amd64 /usr/local/sbin/runc
+      args:
+        chdir: /opt/
+
+    - name: Download containerd repo
+      ansible.builtin.get_url:
+        url: https://github.com/containerd/containerd/releases/download/v2.1.2/containerd-2.1.2-linux-amd64.tar.gz
+        dest: /opt/containerd-2.1.2-linux-amd64.tar.gz
+
+    - name: Unarchive containerd repo
+      ansible.builtin.unarchive:
+        src: /opt/containerd-2.1.2-linux-amd64.tar.gz
+        dest: /usr/local/
+        remote_src: true
+
+    - name: Download containerd systemd unit
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+        dest: /etc/systemd/system/containerd.service
+
+    - name: Systemd reread configs
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+    - name: Start containerd daemon
+      ansible.builtin.systemd_service:
+        name: containerd
+        enabled: true
+        state: started
+
+    - name: Create dir for containerd
+      ansible.builtin.file:
+        path: /etc/containerd/
+        state: directory
+        mode: '0755'
+
+    - name: Copy stdout containerd default config
+      ansible.builtin.shell: /usr/local/bin/containerd config default
+      register: containerd_config_default_write
+
+    - name: Copy config to temp
+      ansible.builtin.copy:
+        dest: /tmp/containerd_config.toml
+        content: '{{ containerd_config_default_write.stdout }}'
+
+    - name: Change SystemdCgroup to true
+      ansible.builtin.lineinfile:
+        path: /tmp/containerd_config.toml
+        insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+        line: '          SystemdCgroup = true'
+        state: present
+
+    - name: Copy config to default path
+      ansible.builtin.copy:
+        src: /tmp/containerd_config.toml
+        dest: /etc/containerd/config.toml
+        mode: '0644'
+        remote_src: true
+      register: containerd_config
+
+    - name: Restart containerd daemon
+      ansible.builtin.systemd_service:
+        name: containerd
+        enabled: true
+        state: restarted
+      when: containerd_config.changed == true
+
+    - name: Create k8s repo
+      ansible.builtin.file:
+        path: /etc/yum.repos.d/kubernetes.repo
+        state: touch
+        mode: '0544'
+
+    - name: Write k8s repo
+      ansible.builtin.blockinfile:
+        path: /etc/yum.repos.d/kubernetes.repo
+        block: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+          exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+
+    - name: Install kubelet, kubeadm, kubectl
+      ansible.builtin.dnf:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+        disable_excludes: kubernetes
+
+    - name: Start and enable kubelet
+      ansible.builtin.systemd_service:
+        name: kubelet
+        enabled: true
+        state: started
+
+#- name: Install docker for master nodes and jumphosts
+#  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
+#  block:
+#    - name: Install repo docker
+#      ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
+
+#    - name: Install docker
+#      ansible.builtin.dnf:
+#        name:
+#          - docker-ce
+#          - docker-ce-cli
+#          - docker-buildx-plugin
+#        state: present
+
+#    - name: Starting docker daemon
+#      ansible.builtin.systemd_service:
+#        name: docker
+#        enabled: true
+#        state: started
+
+#    - name: Create new group for docker
+#      ansible.builtin.group:
+#        name: docker
+#        state: present
+
+#    - name: Add user to group docker
+#      ansible.builtin.user:
+#        name: luver
+#        groups: luver,docker
+#        state: present
+#        append: true
+#      register: add_to_docker_group
+#      notify:
+#        - Reboot server
+
 - name: Update && upgrade
   ansible.builtin.dnf:
     name: "*"
     state: latest
     update_cache: yes
-
-- name: Starting docker daemon
-  ansible.builtin.systemd_service:
-    name: docker
-    enabled: true
-    state: started
-
-- name: Create new group for docker
-  ansible.builtin.group:
-    name: docker
-    state: present
-
-- name: Add user to group docker
-  ansible.builtin.user:
-    name: luver
-    groups: luver,docker
-    state: present
-    append: true
-  register: add_to_docker_group
-
-- name: Reboot server
-  ansible.builtin.reboot:
-  when: add_to_docker_group.changed == true

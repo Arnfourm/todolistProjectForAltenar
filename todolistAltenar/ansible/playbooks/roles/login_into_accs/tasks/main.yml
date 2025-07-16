@@ -14,6 +14,7 @@
     username: '{{ docker_login }}'
     password: '{{ docker_password }}'
     reauthorize: true
+  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
   register: debug_docker_auth
 
 # - name: Debug show
