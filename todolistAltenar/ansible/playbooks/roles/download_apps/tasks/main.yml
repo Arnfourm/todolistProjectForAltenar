@@ -192,40 +192,40 @@
         enabled: true
         state: started
 
-#- name: Install docker for master nodes and jumphosts
-#  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
-#  block:
-#    - name: Install repo docker
-#      ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
+- name: Install docker for master nodes and jumphosts
+  when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
+  block:
+    - name: Install repo docker
+      ansible.builtin.command: "dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo"
 
-#    - name: Install docker
-#      ansible.builtin.dnf:
-#        name:
-#          - docker-ce
-#          - docker-ce-cli
-#          - docker-buildx-plugin
-#        state: present
+    - name: Install docker
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - docker-buildx-plugin
+        state: present
 
-#    - name: Starting docker daemon
-#      ansible.builtin.systemd_service:
-#        name: docker
-#        enabled: true
-#        state: started
+    - name: Starting docker daemon
+      ansible.builtin.systemd_service:
+        name: docker
+        enabled: true
+        state: started
 
-#    - name: Create new group for docker
-#      ansible.builtin.group:
-#        name: docker
-#        state: present
+    - name: Create new group for docker
+      ansible.builtin.group:
+        name: docker
+        state: present
 
-#    - name: Add user to group docker
-#      ansible.builtin.user:
-#        name: luver
-#        groups: luver,docker
-#        state: present
-#        append: true
-#      register: add_to_docker_group
-#      notify:
-#        - Reboot server
+    - name: Add user to group docker
+      ansible.builtin.user:
+        name: luver
+        groups: luver,docker
+        state: present
+        append: true
+      register: add_to_docker_group
+      notify:
+        - Reboot server
 
 - name: Update && upgrade
   ansible.builtin.dnf:
