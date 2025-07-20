@@ -33,4 +33,4 @@
 
 - name: Add host name for master node
   ansible.builtin.hostname:
-    name: '{{ inventory_hostname }}'
+    name: '{{ group_names[0] }}: {{ inventory_hostname }}'
