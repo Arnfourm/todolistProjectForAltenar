@@ -1,5 +1,7 @@
 ---
 # tasks file for start_application_database
+
+## Проверить существует ли /var/lib/postgresql/
 - name: Copy docker compose for db
   ansible.posix.synchronize:
     src: /home/{{ jumphost_user }}/todolistProjectForAltenar/todolistAltenar/docker-compose.db.yml

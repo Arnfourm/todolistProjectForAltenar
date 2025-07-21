@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: deployment
+metadata: 
+  name: backend-deploy
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: altenar-todolist-backend
+        image: altenar-todolist-backend-image
+        ports:
+        - containerPort: 5140
