@@ -1,15 +1,22 @@
 apiVersion: apps/v1
-kind: deployment
-metadata: 
+kind: Deployment
+metadata:
   name: backend-deploy
   labels:
     app: backend
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: backend-pod
   template:
+    metadata:
+      labels:
+        app: backend-pod
     spec:
       containers:
       - name: altenar-todolist-backend
-        image: altenar-todolist-backend-image
+        image: luverk1d/dotnet-project-for-altenar:backend-image
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5140

@@ -4,8 +4,8 @@ metadata:
   name: backend-service
 spec:
   selector:
-    app: backen
+    app: backend
   ports:
     - protocol: TCP
       port: 5140
-      targerPort: 5140
+      targetPort: 5140
