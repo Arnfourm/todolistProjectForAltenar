@@ -4,7 +4,7 @@ metadata:
   name: backend-service
 spec:
   selector:
-    app: backend
+    app: backend-pod
   ports:
     - protocol: TCP
       port: 5140
