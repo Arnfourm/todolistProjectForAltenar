@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-application
   annotations:
-    kubernetes.io/ingress.class: contour
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
   - host: altenar-intership-2025.com
