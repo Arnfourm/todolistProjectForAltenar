@@ -84,7 +84,7 @@
       notify:
         - Reboot server
 
-- name:: Install postgres db
+- name: Install postgres db
   when: inventory_hostname in groups['postgres-hosts']
   block:
     - name: Install postgres repo
