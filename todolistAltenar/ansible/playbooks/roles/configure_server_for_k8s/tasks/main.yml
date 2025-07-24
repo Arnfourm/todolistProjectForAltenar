@@ -121,10 +121,10 @@
     dest: /tmp/containerd_config.toml
     content: '{{ containerd_config_default_write.stdout }}'
 
-- name: Change SystemdCgroup to true
+- name: Ensure SystemdCgroup = true is set correctly
   ansible.builtin.lineinfile:
     path: /tmp/containerd_config.toml
-    insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+    insertafter: '^\[plugins\."io\.containerd\.grpc\.v1\.cri"\.containerd\.runtimes\.runc\.options\]$'
     line: '          SystemdCgroup = true'
     state: present
 
