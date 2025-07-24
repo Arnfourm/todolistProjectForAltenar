@@ -31,6 +31,6 @@
 #     insertafter: EOF
 #   when: inventory_hostname in groups['master-nodes'] or inventory_hostname in groups['jump-hosts']
 
-- name: Add host name for master node
-  ansible.builtin.hostname:
-    name: '{{ group_names[0] }}-{{ inventory_hostname }}'
+# - name: Add host name for master node
+#   ansible.builtin.hostname:
+#     name: '{{ group_names[0] }}-{{ inventory_hostname }}'
