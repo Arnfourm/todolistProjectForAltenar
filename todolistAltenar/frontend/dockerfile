@@ -1,6 +1,6 @@
 FROM node:24 AS build
 WORKDIR /app/
-# EXPOSE 5173
+EXPOSE 5173
 
 # add all dependencies
 COPY ./package.json/ ./frontend/
