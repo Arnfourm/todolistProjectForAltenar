@@ -20,3 +20,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 5140
+        env:
+        - name: ConnectionStrings__todolistDbContext
+          valueFrom:
+            secretKeyRef:
+              name: db-connection
+              key: connection-string
