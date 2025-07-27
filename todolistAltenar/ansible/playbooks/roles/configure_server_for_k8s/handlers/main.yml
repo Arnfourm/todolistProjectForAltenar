@@ -1,2 +1,9 @@
 ---
 # handlers file for configure_server__for_k8s
+- name: Reload firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded
+
+- name: Reboot server
+  ansible.builtin.reboot:

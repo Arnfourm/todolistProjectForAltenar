@@ -1,9 +1,4 @@
 ---
 # handlers file for download_apps
-- name: Reload firewalld
-  ansible.builtin.service:
-    name: firewalld
-    state: reloaded
-
 - name: Reboot server
   ansible.builtin.reboot:

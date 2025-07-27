@@ -17,6 +17,6 @@ spec:
       containers:
       - name: altenar-todolist-backend
         image: luverk1d/todolistproject:backend-image
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5140
