@@ -1,0 +1,16 @@
+{{- if .Values.service.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "deploy-app.fullname" . }}
+  labels:
+    {{- include "deploy-app.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.containerport }}
+      protocol: TCP
+  selector:
+    {{- include "deploy-app.selectorLabels" . | nindent 4 }}
+{{- end  }}

@@ -22,3 +22,15 @@ ingress:
       pathType: Prefix
       serviceName: backend-deploy
       servicePort: 5140
+
+deployment:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+service:
+  enabled: false
+
+serviceAccount:
+  create: false
