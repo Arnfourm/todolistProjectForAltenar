@@ -12,7 +12,7 @@ image:
 imagePullSecrets: []
 
 # Name override
-nameOverride: ""
+nameOverride: "backend-deploy"
 fullnameOverride: ""
 
 # Service account values
