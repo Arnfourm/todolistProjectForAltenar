@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+deployment:
+  enabled: true
+
 # Image values
 image:
   repository: luverk1d/todolistproject
@@ -29,6 +32,7 @@ podLabels:
 
 # Service values
 service:
+  enabled: true
   type: ClusterIP
   port: 5140
   portname: backend-http
