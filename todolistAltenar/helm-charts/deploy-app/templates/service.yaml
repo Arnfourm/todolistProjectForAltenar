@@ -9,7 +9,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.portname }}
+      targetPort: {{ .Values.service.containerport }}
       protocol: TCP
   selector:
     {{- include "deploy-app.selectorLabels" . | nindent 4 }}

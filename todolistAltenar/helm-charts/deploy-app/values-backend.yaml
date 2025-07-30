@@ -35,7 +35,7 @@ service:
   enabled: true
   type: ClusterIP
   port: 5140
-  portname: backend-http
+  containerport: 5140
 
 # Env values
 envs:
