@@ -29,9 +29,6 @@ deployment:
 autoscaling:
   enabled: false
 
-ingress:
-  enabled: false
-
 service:
   enabled: false
 
