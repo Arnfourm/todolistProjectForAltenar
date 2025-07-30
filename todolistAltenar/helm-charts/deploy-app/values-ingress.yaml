@@ -1,0 +1,39 @@
+# Default values for deploy-ingress.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Chart name override
+nameOverride: "ingress-deploy"
+fullnameOverride: ""
+
+# Ingress values
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  host: altenar-intership-2025.com
+  paths:
+    - path: /
+      pathType: Prefix
+      serviceName: frontend-deploy
+      servicePort: 8080
+    - path: /api/
+      pathType: Prefix
+      serviceName: backend-deploy
+      servicePort: 5140
+
+deployment:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+ingress:
+  enabled: false
+
+service:
+  enabled: false
+
+serviceAccount:
+  create: false

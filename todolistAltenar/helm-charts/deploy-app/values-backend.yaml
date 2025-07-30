@@ -1,0 +1,88 @@
+# Default values for deploy-backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Image values
+image:
+  repository: luverk1d/todolistproject
+  pullPolicy: Always
+  tag: "backend-image"
+
+# image pull secrets
+imagePullSecrets: []
+
+# Name override
+nameOverride: "backend-deploy"
+fullnameOverride: ""
+
+# Service account values
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: "backend-service"
+
+# Pod values
+podAnnotations: {}
+podLabels:
+  app: backend-pod
+
+# Service values
+service:
+  type: ClusterIP
+  port: 5140
+  portname: backend-http
+
+# Env values
+envs:
+  - envname: ConnectionStrings__todolistDbContext
+    secretname: db-connection
+    secretkey: connection-string
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# Liveness/readiness
+#livenessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+#readinessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+
+# hpa
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  # targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# volume values
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# volume mount
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingress:
+  enabled: false

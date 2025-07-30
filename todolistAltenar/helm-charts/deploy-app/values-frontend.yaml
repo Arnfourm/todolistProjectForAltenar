@@ -1,0 +1,76 @@
+# Default values for deploy-frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Image values
+image:
+  repository: luverk1d/todolistproject
+  pullPolicy: Always
+  tag: "frontend-image"
+
+# Image pull secrets
+imagePullSecrets: []
+
+# Chart name override
+nameOverride: "frontend-deploy"
+fullnameOverride: ""
+
+# Service acc
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: "frontend-service"
+
+# Pod values
+podAnnotations: {}
+podLabels:
+  app: frontend-pod
+
+# Servuce values
+service:
+  type: ClusterIP
+  port: 8080
+  containerport: 5173
+
+# Resources
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# Liveness/readiness
+#livenessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+#readinessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+
+# hpa
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  # targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Volumes
+volumes: []
+
+# Volume mount
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ingress:
+  enabled: false
