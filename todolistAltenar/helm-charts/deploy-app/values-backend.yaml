@@ -7,12 +7,13 @@ deployment:
 
 # Image values
 image:
-  repository: luverk1d/todolistproject
+  repository: luverk1d/dotnet-project-for-altenar
   pullPolicy: Always
   tag: "backend-image"
 
 # image pull secrets
-imagePullSecrets: []
+imagePullSecrets:
+  - name: docker-connection-key
 
 # Name override
 nameOverride: "backend-deploy"
@@ -40,7 +41,7 @@ service:
 # Env values
 envs:
   - envname: ConnectionStrings__todolistDbContext
-    secretname: db-connection
+    secretname: db-connection-temp
     secretkey: connection-string
 
 resources: {}
