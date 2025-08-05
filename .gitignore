@@ -1,0 +1,9 @@
+# Terraform state ignoring
+*.tfstate
+*.tfstate*
+
+# Terraform provider
+**/.terraform/
+
+# Box files ignoring
+*.box
