@@ -7,3 +7,9 @@
 
 # Box files ignoring
 *.box
+
+# Vagrant ignoring
+.vagrant
+
+# tfvars
+*.tfvars
