@@ -12,11 +12,11 @@ variable "vm_image_path" {
 variable "vm_ssh_name" {
   type = string
   description = "name to acces via ssh connection"
-  #sensitive = true
+  sensitive = true
 }
 
 variable "vm_ssh_pass" {
   type = string
   description = "password to access via ssh connection"
-  #sensitive = true
+  sensitive = true
 }
