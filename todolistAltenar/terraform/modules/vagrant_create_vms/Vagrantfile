@@ -1,0 +1,40 @@
+# Requirements:
+# Vagrant provisioner downloaded
+# Some plugins: 
+#   1. vagrant-disksize
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "rockylinux/9"
+    config.vm.box_version = "6.0.0"
+
+    config.disksize.size = "#{ENV['vm_diskstorage_size']}"
+
+    config.ssh.insert_key = false
+    config.ssh.forward_agent = true
+
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
+    config.vm.network "public_network", bridge: "#{ENV['vm_bridge_interface']}"
+  
+    config.vm.provision "shell" do |s|
+        ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+        s.inline = <<-SHELL
+            echo #{ssh_pub_key} > /home/vagrant/.ssh/authorized_keys
+            echo #{ssh_pub_key} > /root/.ssh/authorized_keys
+        SHELL
+    end
+    
+    config.vm.provider :virtualbox do |vb|
+        vb.gui = false
+        vb.cpus = ENV['vm_cpus']
+        vb.memory = ENV['vm_memory']
+    end
+
+    config.vm.define "masternode" do |masternode|
+        masternode.vm.hostname = "masternode"
+    end
+
+    config.vm.define "workernode" do |workernode|
+        workernode.vm.hostname = "workernode"
+    end
+end
