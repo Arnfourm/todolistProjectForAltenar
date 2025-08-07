@@ -13,3 +13,6 @@
 
 # tfvars
 *.tfvars
+
+# ansible passwork skip
+pass
