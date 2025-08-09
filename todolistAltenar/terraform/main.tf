@@ -14,8 +14,6 @@ terraform {
   }
 }
 
-provider "vagrant" {}
-
 module "Vms-create-via-Vagrant" {
   source = "./modules/vagrant_create_vms"
   vagrantfile_dir_path = var.vagrantfile_path
@@ -25,7 +23,7 @@ module "Vms-create-via-Vagrant" {
 
 resource "terraform_data" "start-server-playbook-exec" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass"
+    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass -i ../ansible/inventories/infra/hosts.yml"
   }
 
   depends_on = [ 
