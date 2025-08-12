@@ -1,0 +1,33 @@
+---
+- name: Post installation settings
+  hosts: all
+  become: true
+
+  tasks:
+    - name: kube config editing + fetch block
+      run_once: true
+      when: inventory_hostname in groups["master-nodes"]
+      block:
+        - name: Create dir /opt/.kube/
+          file:
+            path: /opt/.kube/
+            state: directory
+            mode: '0755'
+
+        - name: Copy kube config file on remote 
+          copy:
+            src: /root/.kube/config
+            dest: /opt/.kube/config
+            remote_src: yes
+
+        - name: Edit file to ip remote host
+          lineinfile:
+            path: /opt/.kube/config
+            search_string: 'server: https://127.0.0.1:6443'
+            line: '    server: https://{{ inventory_hostname }}:6443'
+
+        - name: Copy kube config from remote to local host
+          fetch:
+            src: /opt/.kube/config
+            dest: /home/luver/.kube/config
+            flat: true
