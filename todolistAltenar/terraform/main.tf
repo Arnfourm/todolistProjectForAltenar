@@ -40,3 +40,14 @@ resource "terraform_data" "kubespray-creation-cluster" {
     terraform_data.start-server-playbook-exec
   ]
 }
+
+# Изменить путь + vault в файл
+resource "terraform_data" "post-installation-settings" {
+  provisioner "local-exec" {
+    command = "ansible-playbook ../ansible/playbooks/post-installation-configure.yml --vault-password-file ./pass -i ../ansible/inventories/infra/hosts.yml"
+  }
+
+  depends_on = [ 
+    terraform_data.kubespray-creation-cluster
+  ]
+}

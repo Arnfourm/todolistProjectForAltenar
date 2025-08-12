@@ -1,0 +1,7 @@
+---
+- name: deploy database postgres
+  hosts: postgres-hosts
+  become: true
+
+  # tasks:
+  #   - name: 
