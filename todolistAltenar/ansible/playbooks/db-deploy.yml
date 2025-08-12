@@ -3,5 +3,23 @@
   hosts: postgres-hosts
   become: true
 
-  # tasks:
-  #   - name: 
+  tasks:
+    - name: Get postgres rpm
+      get_url:
+        url: https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+        dest: /opt/pgdg-redhat-repo-latest.noarch.rpm
+        mode: '0755'
+
+    - name: Install postgres repo
+      ansible.builtin.dnf:
+        name: /opt/pgdg-redhat-repo-latest.noarch.rpm
+        state: present
+
+    - name: Disable dnf module
+      community.general.dnf_config_manager:
+        name: postgresql
+        state: disabled
+
+    - name: Install postgres
+      ansible.builtin.dnf:
+        name: postgresql17-server
