@@ -6,23 +6,16 @@
   roles:
     - role: general_settings_to_start_server
 
-- name: Configuration server for k8s
-  hosts: master-nodes:worker-nodes
-  become: true
+# - name: Configuration server for k8s
+#   hosts: master-nodes:worker-nodes
+#   become: true
 
-  roles:
-    - role: configure_server_for_k8s
+#   roles:
+#     - role: configure_server_for_k8s
 
-- name: Install all needs apps for each server
-  hosts: all
-  become: true
+# - name: Install all needs apps for each server
+#   hosts: all
+#   become: true
 
-  roles:
-    - role: download_apps
-
-- name: Login into accs
-  hosts: master-nodes:jump-hosts
-  become: true
-
-  roles:
-    - role: login_into_accs
+#   roles:
+#     - role: download_apps
