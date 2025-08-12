@@ -19,10 +19,3 @@
 
 #   roles:
 #     - role: download_apps
-
-# - name: Login into accs
-#   hosts: master-nodes:jump-hosts
-#   become: true
-
-#   roles:
-#     - role: login_into_accs

@@ -31,7 +31,12 @@ resource "terraform_data" "start-server-playbook-exec" {
   ]
 }
 
-# resource "ansible_vault" "secrets" {
-#  vault_file = "../ansible/inventories/group_vars/backend-hosts.yml"
-#  vault_password_file = "./pass"
-# }
+resource "terraform_data" "kubespray-creation-cluster" {
+  provisioner "local-exec" {
+    command = "ansible-playbook ~/kubespray/cluster.yml -i ../ansible/inventories/kubespray/inventory.yml --user=vagrant --become --private-key=~/.ssh/id_rsa"
+  }
+
+  depends_on = [ 
+    terraform_data.start-server-playbook-exec
+  ]
+}
