@@ -41,7 +41,7 @@ service:
 # Env values
 envs:
   - envname: ConnectionStrings__todolistDbContext
-    secretname: db-connection-temp
+    secretname: db-connection
     secretkey: connection-string
 
 resources: {}
