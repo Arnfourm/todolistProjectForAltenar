@@ -16,7 +16,7 @@ ingress:
   paths:
     - path: /
       pathType: Prefix
-      serviceName: frontend-deploy
+      serviceName: deploy-frontend-frontend-deploy
       servicePort: 8080
     - path: /api/
       pathType: Prefix

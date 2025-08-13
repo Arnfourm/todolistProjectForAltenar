@@ -2,24 +2,136 @@
 - name: deploy database postgres
   hosts: postgres-hosts
   become: true
+  vars:
+    pg_version: 17
+    root_db: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64653338363431393333623036613938303761666534323939643366393132383561663962373037
+          3433303863666530366331373638643234323734323931660a303731336364313261306334326462
+          38363864376639393962646161316530653233656335633462393339333536373538353464303762
+          6237313639353534610a663462633636373565343936323765313337633433353136376631333161
+          6463
+    user_name_db: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64393733343563616432343130656163653730383135366430663838356363396634366465396233
+          3761383461623131646339303037366535323663306662300a356239613138626137306337336563
+          37323134663831396432613830633162393931643365346164363065623634663134656165333464
+          3564366331653961320a656235356430666264623134663263306635373466633832643338323431
+          3636
+    user_pass_db: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39666237613464346530326532393736666236393266376562383563363364613062663533616636
+          6361343064376530393938316533626565666166393036610a373530393630306539386364623330
+          31316335313361346630613365316266316533613433306464386536643336636438333939396264
+          3634303630343033320a666137633135343565386239613132626333663233663766663530623836
+          6134
+    title_db: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62666438616262626534636161666531373133646261326436316131366337613563613331303162
+          3263383430653565336433323365333161646163623738390a383965623430383437666633383264
+          37333634343937323031303535633663633738323534346561636236663139323764373965373764
+          6631623461363230370a666230393431616236313063353965373235303233663661326665653832
+          3133
+
+
 
   tasks:
-    - name: Get postgres rpm
-      get_url:
-        url: https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-        dest: /opt/pgdg-redhat-repo-latest.noarch.rpm
-        mode: '0755'
+    - name: Prepare pip + depends
+      block:
+        - name: Install pip
+          dnf: 
+            name: python3.9-pip
+            state: present
+        
+        - name: Install psycopg2 for ansible
+          pip:
+            name: psycopg2-binary
 
-    - name: Install postgres repo
-      ansible.builtin.dnf:
-        name: /opt/pgdg-redhat-repo-latest.noarch.rpm
-        state: present
+    - name: Postgres installation
+      block:
+        - name: Get postgres rpm
+          get_url:
+            url: https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+            dest: /opt/pgdg-redhat-repo-latest.noarch.rpm
+            mode: '0755'
 
-    - name: Disable dnf module
-      community.general.dnf_config_manager:
-        name: postgresql
-        state: disabled
+        - name: Install postgres repo
+          dnf:
+            name: /opt/pgdg-redhat-repo-latest.noarch.rpm
+            state: present
+            disable_gpg_check: true
 
-    - name: Install postgres
-      ansible.builtin.dnf:
-        name: postgresql17-server
+        - name: Disable builtin module
+          command: "sudo dnf -qy module disable postgresql"
+
+        - name: Install postgres
+          dnf:
+            name: postgresql{{ pg_version }}-server
+            state: present
+
+    - name: Check initdb already inited
+      stat:
+        path: /var/lib/pgsql/{{ pg_version }}/data/postgresql.conf
+      register: initdb_checking
+
+    - name: Init db + configure it
+      when: initdb_checking.stat.exists == false
+      block:
+        - name: Init database
+          command: "postgresql-17-setup initdb"
+
+        - name: Start and enable postgres service
+          systemd_service:
+            name: postgresql-17
+            state: started
+            enabled: true
+
+    - name: create new db + user + permissions
+      when: initdb_checking.stat.exists == false
+      block:
+        - name: Add connections from other addresses
+          lineinfile:
+            path: /var/lib/pgsql/{{ pg_version }}/data/postgresql.conf
+            search_string: "#listen_addresses = 'localhost'         # what IP address(es) to listen on;"
+            line: "listen_addresses='*'                 # what IP address(es) to listen on;"
+            
+        - name: Postgres user without pass
+          lineinfile:
+            path: /var/lib/pgsql/{{ pg_version }}/data/pg_hba.conf
+            insertafter: "# IPv4 local connections:"
+            line: "host   {{ root_db }}     {{ root_db }}     127.0.0.1/32     trust"
+          notify:
+            - Restart postgres service
+
+        - name: Create new user
+          community.postgresql.postgresql_user:
+            name: "{{ user_name_db }}"
+            password: "{{ user_pass_db }}"
+            role_attr_flags: CREATEDB
+          become_user: "{{ root_db }}"
+
+        - name: Create new db for app
+          community.postgresql.postgresql_db:
+            name: "{{ title_db }}"
+            owner: "{{ user_name_db }}"
+          become_user: "{{ root_db }}"
+
+        - name: Add new user to pg_hba
+          lineinfile:
+            path: /var/lib/pgsql/{{ pg_version }}/data/pg_hba.conf
+            insertafter: '# replication privilege.'
+            line: 'host   {{ title_db }}    {{ user_name_db }}    192.168.0.1/24   md5'
+        
+        - name: Remove postgres from pg_hba
+          lineinfile:
+            path: /var/lib/pgsql/{{ pg_version }}/data/pg_hba.conf
+            search_string: "host   {{ root_db }}     {{ root_db }}     127.0.0.1/32     trust"
+            state: absent
+          notify:
+            - Restart postgres service
+
+  handlers:
+    - name: Restart postgres service
+      systemd_service:
+        name: postgresql-17
+        state: restarted
