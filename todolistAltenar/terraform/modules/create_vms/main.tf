@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    virtualbox = {
-      source = "terra-farm/virtualbox"
-      version = "0.2.2-alpha.1"
-    }
-  }
-}
-
 resource "virtualbox_vm" "vm_create" {
   count = var.vm_number_to_create
   name = "vm-${count.index}"

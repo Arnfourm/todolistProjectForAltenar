@@ -16,8 +16,8 @@ imagePullSecrets:
   - name: docker-connection-key
 
 # Chart name override
-nameOverride: "frontend-deploy"
-fullnameOverride: ""
+nameOverride: ""
+fullnameOverride: "frontend-deploy"
 
 # Service acc
 serviceAccount:

@@ -16,8 +16,8 @@ imagePullSecrets:
   - name: docker-connection-key
 
 # Name override
-nameOverride: "backend-deploy"
-fullnameOverride: ""
+nameOverride: ""
+fullnameOverride: "backend-deploy"
 
 # Service account values
 serviceAccount:
