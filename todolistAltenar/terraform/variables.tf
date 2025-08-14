@@ -15,3 +15,23 @@ variable "diskstorage_size" {
   description = "disk storage for single VM"
   default = "20GB"
 }
+
+variable "docker-config-name" {
+  type = string
+  sensitive = true
+}
+
+variable "docker-config-path" {
+  type = string
+  sensitive = true
+}
+
+variable "db-connection-name" {
+  type = string
+  sensitive = true
+}
+
+variable "db-connection-string" {
+  type = string
+  sensitive = true
+}

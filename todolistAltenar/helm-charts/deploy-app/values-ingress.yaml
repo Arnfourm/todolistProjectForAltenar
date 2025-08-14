@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 # Chart name override
-nameOverride: "ingress-deploy"
-fullnameOverride: ""
+nameOverride: ""
+fullnameOverride: "ingress-deploy"
 
 # Ingress values
 ingress:
@@ -16,7 +16,7 @@ ingress:
   paths:
     - path: /
       pathType: Prefix
-      serviceName: deploy-frontend-frontend-deploy
+      serviceName: frontend-deploy
       servicePort: 8080
     - path: /api/
       pathType: Prefix

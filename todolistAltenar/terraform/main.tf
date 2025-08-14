@@ -1,17 +1,11 @@
-terraform {
-  required_providers {
-    virtualbox = {
-      source = "terra-farm/virtualbox"
-      version = "0.2.2-alpha.1"
-    }
-    vagrant = {
-      source = "bmatcuk/vagrant"
-    }
-    ansible = {
-      source = "ansible/ansible"
-      version = "~> 1.3.0"
-    }
+provider "helm" {
+  kubernetes = {
+    config_path = "~/.kube/config"
   }
+}
+
+provider "kubectl" {
+  config_path = "/home/luver/.kube/config"
 }
 
 module "Vms-create-via-Vagrant" {
@@ -58,5 +52,18 @@ resource "terraform_data" "post-installation-settings" {
 
   depends_on = [ 
     terraform_data.kubespray-creation-cluster
+  ]
+}
+
+
+module "deploy-app" {
+  source = "./modules/deploy-app"
+  docker-config-key-path = var.docker-config-path
+  docker-config-key-name = var.docker-config-name
+  connection-to-db-name = var.db-connection-name
+  connection-to-db-string = var.db-connection-string
+
+  depends_on = [ 
+    terraform_data.post-installation-settings
   ]
 }
