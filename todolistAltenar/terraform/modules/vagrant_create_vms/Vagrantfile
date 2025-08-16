@@ -13,8 +13,6 @@ Vagrant.configure("2") do |config|
     config.ssh.forward_agent = true
 
     config.vm.synced_folder ".", "/vagrant", disabled: true
-
-    config.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}"
   
     config.vm.provision "shell" do |s|
         ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
@@ -29,24 +27,29 @@ Vagrant.configure("2") do |config|
         vb.cpus = ENV['vm_cpus']
         vb.memory = ENV['vm_memory']
     end
-    
+
     for master_index in (1..ENV['vm_masters_count'].to_i)
         config.vm.define "masternode-#{master_index}" do |masternode|
             masternode.vm.hostname = "masternode-#{master_index}"
-            # masternode.vm.cpus = ENV['vm_cpus'].to_i * 2
-            # masternode.vm.memory = ENV['vm_memory'].to_i * 2
+            masternode.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.17#{master_index}"
+            masternode.vm.provider :virtualbox do |vb|
+                vb.cpus = (ENV['vm_cpus'].to_i * 2)
+                vb.memory = (ENV['vm_memory'].to_i * 2)
+            end
         end
     end
 
     for worker_index in (1..ENV['vm_workers_count'].to_i)
         config.vm.define "workernode-#{worker_index}" do |workernode|
             workernode.vm.hostname = "workernode-#{worker_index}"
+            workernode.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.18#{worker_index}"
         end
     end
 
     for db_index in (1..ENV['vm_dbs_count'].to_i)
         config.vm.define "database-#{db_index}" do |database|
             database.vm.hostname = "databasenode-#{db_index}"
+            database.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.19#{db_index}"
         end
     end
 end
