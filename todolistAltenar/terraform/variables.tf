@@ -1,10 +1,20 @@
-variable "vagrantfile_path" {
-  type = string
-  description = "vagrantfile path"
-  default = "./modules/vagrant_create_vms"
+# ========= vms variables =========== #
+variable "count_masters" {
+  type = number
+  default = 1
 }
 
-variable "bridge_interface" {
+variable "count_workers" {
+  type = number
+  default = 2
+}
+
+variable "count_dbs" {
+  type = number
+  default = 1
+}
+
+variable "network_interface" {
   type = string
   description = "network bridge interface"
   default = "wlp1s0"
@@ -16,6 +26,17 @@ variable "diskstorage_size" {
   default = "20GB"
 }
 
+variable "cpus_count" {
+  type = number
+  default = 2
+}
+
+variable "ram_volume" {
+  type = number
+  default = 2048
+}
+
+# ========== k8s variables =========== #
 variable "docker-config-name" {
   type = string
   sensitive = true

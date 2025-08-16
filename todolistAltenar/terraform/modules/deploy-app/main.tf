@@ -31,6 +31,30 @@
 #   }
 # }
 
+# resource "kubernetes_secret" "image-pull-secrets" {
+#   metadata {
+#     name = "${var.docker-config-key-name}"
+#   }
+
+#   data = {
+#     ".dockerconfigjson" = "${file("${var.docker-config-key-path}")}"
+#   }
+
+#   type = "kubernetes.io/dockerconfigjson"
+# }
+
+# resource "kubernetes_secret" "name" {
+#   metadata {
+#     name = "${var.connection-to-db-name}"
+#   }
+
+#   data = {
+#     connection-string: "${var.connection-to-db-string}"
+#   }
+
+#   type = "opaque"
+# }
+
 resource "kubectl_manifest" "metalLB-config-p1" {
   yaml_body = <<YAML
 apiVersion: metallb.io/v1beta1
@@ -58,14 +82,6 @@ spec:
     YAML
 }
 
-resource "helm_release" "deploy-nginx-ingress-controller" {
-  name = "deploy-ingress-nginx"
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart = "ingress-nginx"
-  namespace = "ingress-nginx"
-  create_namespace = "true"
-}
-
 resource "kubectl_manifest" "image-pull-secrets" {
   yaml_body = <<YAML
 apiVersion: v1
@@ -90,29 +106,22 @@ type: opaque
   YAML
 }
 
-# resource "kubernetes_secret" "image-pull-secrets" {
-#   metadata {
-#     name = "${var.docker-config-key-name}"
-#   }
+resource "helm_release" "deploy-nginx-ingress-controller" {
+  name = "deploy-ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart = "ingress-nginx"
+  namespace = "ingress-nginx"
+  create_namespace = "true"
+}
 
-#   data = {
-#     ".dockerconfigjson" = "${file("${var.docker-config-key-path}")}"
-#   }
+resource "helm_release" "create-deploy-ingress" {
+  name = "deploy-ingress"
+  chart = "../helm-charts/deploy-app/"
 
-#   type = "kubernetes.io/dockerconfigjson"
-# }
-
-# resource "kubernetes_secret" "name" {
-#   metadata {
-#     name = "${var.connection-to-db-name}"
-#   }
-
-#   data = {
-#     connection-string: "${var.connection-to-db-string}"
-#   }
-
-#   type = "opaque"
-# }
+  values = [
+    file("../helm-charts/deploy-app/values-ingress.yaml")
+  ]
+}
 
 resource "helm_release" "create-deploy-frontend" {
   name = "deploy-frontend"
@@ -120,6 +129,11 @@ resource "helm_release" "create-deploy-frontend" {
 
   values = [
     file("../helm-charts/deploy-app/values-frontend.yaml")
+  ]
+
+  depends_on = [ 
+    kubectl_manifest.image-pull-secrets,
+    kubectl_manifest.db-connection-string
   ]
 }
 
@@ -130,13 +144,9 @@ resource "helm_release" "create-deploy-backend" {
   values = [
     file("../helm-charts/deploy-app/values-backend.yaml")
   ]
-}
 
-resource "helm_release" "create-deploy-ingress" {
-  name = "deploy-ingress"
-  chart = "../helm-charts/deploy-app/"
-
-  values = [
-    file("../helm-charts/deploy-app/values-ingress.yaml")
+  depends_on = [ 
+    kubectl_manifest.image-pull-secrets,
+    kubectl_manifest.db-connection-string
   ]
 }
