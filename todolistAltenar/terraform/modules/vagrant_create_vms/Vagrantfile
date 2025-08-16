@@ -4,8 +4,8 @@
 #   1. vagrant-disksize
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "rockylinux/9"
-    config.vm.box_version = "6.0.0"
+    config.vm.box = "#{ENV['vm_os_image']}"
+    config.vm.box_version = "#{ENV['vm_os_image_version']}"
 
     config.disksize.size = "#{ENV['vm_diskstorage_size']}"
 
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.synced_folder ".", "/vagrant", disabled: true
 
-    # config.vm.network "public_network", bridge: "#{ENV['vm_bridge_interface']}"
+    config.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}"
   
     config.vm.provision "shell" do |s|
         ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
@@ -29,19 +29,24 @@ Vagrant.configure("2") do |config|
         vb.cpus = ENV['vm_cpus']
         vb.memory = ENV['vm_memory']
     end
-
-    config.vm.define "masternode" do |masternode|
-        masternode.vm.network "public_network", bridge: "#{ENV['vm_bridge_interface']}", ip: "192.168.0.199"
-        masternode.vm.hostname = "masternode"
+    
+    for master_index in (1..ENV['vm_masters_count'].to_i)
+        config.vm.define "masternode-#{master_index}" do |masternode|
+            masternode.vm.hostname = "masternode-#{master_index}"
+            # masternode.vm.cpus = ENV['vm_cpus'].to_i * 2
+            # masternode.vm.memory = ENV['vm_memory'].to_i * 2
+        end
     end
 
-    config.vm.define "workernode" do |workernode|
-        workernode.vm.network "public_network", bridge: "#{ENV['vm_bridge_interface']}", ip: "192.168.0.198"
-        workernode.vm.hostname = "workernode"
+    for worker_index in (1..ENV['vm_workers_count'].to_i)
+        config.vm.define "workernode-#{worker_index}" do |workernode|
+            workernode.vm.hostname = "workernode-#{worker_index}"
+        end
     end
 
-    config.vm.define "database" do |database|
-        database.vm.network "public_network", bridge: "#{ENV['vm_bridge_interface']}", ip: "192.168.0.197"
-        database.vm.hostname = "databasenode"
+    for db_index in (1..ENV['vm_dbs_count'].to_i)
+        config.vm.define "database-#{db_index}" do |database|
+            database.vm.hostname = "databasenode-#{db_index}"
+        end
     end
 end
