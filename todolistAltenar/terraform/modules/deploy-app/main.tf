@@ -106,23 +106,6 @@ type: opaque
   YAML
 }
 
-resource "helm_release" "deploy-nginx-ingress-controller" {
-  name = "deploy-ingress-nginx"
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart = "ingress-nginx"
-  namespace = "ingress-nginx"
-  create_namespace = "true"
-}
-
-resource "helm_release" "create-deploy-ingress" {
-  name = "deploy-ingress"
-  chart = "../helm-charts/deploy-app/"
-
-  values = [
-    file("../helm-charts/deploy-app/values-ingress.yaml")
-  ]
-}
-
 resource "helm_release" "create-deploy-frontend" {
   name = "deploy-frontend"
   chart = "../helm-charts/deploy-app/"
@@ -148,5 +131,31 @@ resource "helm_release" "create-deploy-backend" {
   depends_on = [ 
     kubectl_manifest.image-pull-secrets,
     kubectl_manifest.db-connection-string
+  ]
+}
+
+resource "helm_release" "create-deploy-ingress" {
+  name = "deploy-ingress"
+  chart = "../helm-charts/deploy-app/"
+
+  values = [
+    file("../helm-charts/deploy-app/values-ingress.yaml")
+  ]
+
+  depends_on = [ 
+    helm_release.create-deploy-backend,
+    helm_release.create-deploy-frontend
+  ]
+}
+
+resource "helm_release" "deploy-nginx-ingress-controller" {
+  name = "deploy-ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart = "ingress-nginx"
+  namespace = "ingress-nginx"
+  create_namespace = "true"
+
+  depends_on = [ 
+    helm_release.create-deploy-ingress
   ]
 }
