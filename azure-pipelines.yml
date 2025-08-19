@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  dockerhub-registry: luverk1d/todolist-registry-test
 
 stages:
 - stage: Build
@@ -21,14 +22,16 @@ stages:
       name: luver-pool
     steps:
     - task: Docker@2
+      displayName: Login into docker account
+      inputs:
+        command: login
+        containerRegistry: $(dockerhub-registry)
+
+    - task: Docker@2
       displayName: Build an image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
+        containerRegistry: $(dockerhub-registry)
         tags: |
           $(tag)
-
-    - task: CmdLine@2
-      displayName: mk dir via bash
-      inputs:
-        script: mkdir newTestDir
