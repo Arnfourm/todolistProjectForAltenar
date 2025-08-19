@@ -33,6 +33,6 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
-        repository: ${dockerhub-repo}
+        repository: $(dockerhub-repo):backend-image
         tags: |
           $(tag)
