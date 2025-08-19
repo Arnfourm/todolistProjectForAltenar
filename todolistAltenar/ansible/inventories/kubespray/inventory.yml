@@ -17,7 +17,14 @@
       "hosts":
         "worker-node-1": {}
         "worker-node-2": {}
+    "postgres-hosts":
+      "hosts":
+        "database-node-1": {}
   "hosts":
+    "database-node-1":
+      "access_ip": "192.168.0.191"
+      "ansible_host": "192.168.0.191"
+      "ip": "192.168.0.191"
     "master-node-1":
       "access_ip": "192.168.0.171"
       "ansible_host": "192.168.0.171"

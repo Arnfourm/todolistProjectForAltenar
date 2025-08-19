@@ -22,7 +22,7 @@ module "Vms-create-via-Vagrant" {
   vagrantfile_diskstorage_in_stock = var.diskstorage_size
 }
 
-resource "local_sensitive_file" "kubespray-inventory-create" {
+resource "local_sensitive_file" "inventory-create" {
   content = yamlencode({
   "all" = {
     "hosts" = merge(
@@ -38,6 +38,13 @@ resource "local_sensitive_file" "kubespray-inventory-create" {
           "ansible_host": "192.168.0.18${worker_index}"
           "ip": "192.168.0.18${worker_index}"
           "access_ip": "192.168.0.18${worker_index}"
+        }
+      },
+      {
+        for db_index in range(1, var.count_dbs + 1) : "database-node-${db_index}" => {
+          "ansible_host": "192.168.0.19${db_index}"
+          "ip": "192.168.0.19${db_index}"
+          "access_ip": "192.168.0.19${db_index}"
         }
       }
     )
@@ -70,6 +77,11 @@ resource "local_sensitive_file" "kubespray-inventory-create" {
       },
       "calico_rr:" = {
         "hosts:" = {}
+      },
+      "postgres-hosts" = {
+        hosts = {
+          for db_index in range(1, var.count_dbs + 1) : "database-node-${db_index}" => {}
+        }
       }
     }
     }
@@ -78,79 +90,44 @@ resource "local_sensitive_file" "kubespray-inventory-create" {
   filename = "../ansible/inventories/kubespray/inventory.yml"
 }
 
-resource "local_sensitive_file" "infra-inventory-create" {
-  content = yamlencode({
-  "master-nodes" = {
-    "hosts" = {
-      for master_index in range(1, var.count_masters + 1) : "192.168.0.17${master_index}" => {}
-    }
-  }
-
-  "worker-nodes" = {
-    "children" = {
-      "backend-hosts" = {
-        "hosts" = {
-          for worker_index in range(1, var.count_workers + 1) : "192.168.0.18${worker_index}" => {}
-        }
-      },
-      "frontend-hosts" = {
-        "hosts" = {
-
-        }
-      }
-    }
-  }
-
-  "database-hosts" = {
-    "children" = {
-      "postgres-hosts" = {
-        "hosts" = {
-          for db_index in range(1, var.count_dbs + 1) : "192.168.0.19${db_index}" => {}
-        }
-      }
-    }
-  }
-  })
-
-  filename = "../ansible/inventories/infra/hosts.yml"
-}
-
 resource "terraform_data" "start-server-playbook-exec" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass -i ../ansible/inventories/infra/hosts.yml"
+    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml "
   }
 
   depends_on = [ 
     module.Vms-create-via-Vagrant,
-    local_sensitive_file.infra-inventory-create
+    local_sensitive_file.inventory-create
+    # local_sensitive_file.infra-inventory-create
   ]
 }
 
 resource "terraform_data" "db_creation" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/db-deploy.yml --vault-password-file ./pass -i ../ansible/inventories/infra/hosts.yml"
+    command = "ansible-playbook ../ansible/playbooks/db-deploy.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml"
   }  
 
   depends_on = [ 
     terraform_data.start-server-playbook-exec,
-    local_sensitive_file.infra-inventory-create
+    local_sensitive_file.inventory-create
+    # local_sensitive_file.infra-inventory-create
   ]
 }
 
 resource "terraform_data" "kubespray-creation-cluster" {
   provisioner "local-exec" {
-    command = "ansible-playbook ~/kubespray/cluster.yml -i ../ansible/inventories/kubespray/inventory.yml --user=vagrant --become  --private-key=~/.ssh/id_rsa --vault-password-file ./pass"
+    command = "ansible-playbook ~/kubespray/cluster.yml -i ../ansible/inventories/kubespray/inventory.yml --become --vault-password-file ./pass"
   }
 
   depends_on = [ 
     terraform_data.start-server-playbook-exec,
-    local_sensitive_file.kubespray-inventory-create
+    local_sensitive_file.inventory-create
   ]
 }
 
 resource "terraform_data" "post-installation-settings" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/post-installation-configure.yml --vault-password-file ./pass -i ../ansible/inventories/infra/hosts.yml"
+    command = "ansible-playbook ../ansible/playbooks/post-installation-configure.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml"
   }
 
   depends_on = [ 

@@ -6,7 +6,7 @@
   tasks:
     - name: kube config editing + fetch block
       run_once: true
-      when: inventory_hostname in groups["master-nodes"]
+      delegate_to: master-node-1
       block:
         - name: Create dir /opt/.kube/
           file:
@@ -24,7 +24,7 @@
           lineinfile:
             path: /opt/.kube/config
             search_string: 'server: https://127.0.0.1:6443'
-            line: '    server: https://{{ inventory_hostname }}:6443'
+            line: '    server: https://{{ hostvars["master-node-1"].ip }}:6443'
 
         - name: Copy kube config from remote to local host
           fetch:
