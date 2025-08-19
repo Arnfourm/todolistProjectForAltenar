@@ -28,7 +28,7 @@ stages:
         tags: |
           $(tag)
 
-    - task: Bash@3
+    - task: CmdLine@2
       displayName: mk dir via bash
       inputs:
-        script: mkdir ./newTestDir
+        script: mkdir newTestDir
