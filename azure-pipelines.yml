@@ -10,7 +10,8 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  dockerhub-registry: luverk1d/todolist-registry-test
+  dockerhub-registry-connection: connect-profile-dockerhub
+  dockerhub-repo: luverk1d/dotnet-project-for-altenar
 
 stages:
 - stage: Build
@@ -25,13 +26,13 @@ stages:
       displayName: Login into docker account
       inputs:
         command: login
-        containerRegistry: $(dockerhub-registry)
+        containerRegistry: $(dockerhub-registry-connection)
 
     - task: Docker@2
       displayName: Build an image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
-        containerRegistry: $(dockerhub-registry)
+        repository: ${dockerhub-repo}
         tags: |
           $(tag)
