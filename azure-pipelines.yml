@@ -27,3 +27,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
         tags: |
           $(tag)
+
+    - task: Bash@3
+      displayName: mk dir via bash
+      inputs:
+        script: mkdir ./newTestDir
