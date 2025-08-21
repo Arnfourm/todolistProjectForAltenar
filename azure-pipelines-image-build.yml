@@ -79,6 +79,7 @@ stages:
         script: |
           if[ "$isInstalled" = "false" ]; then
             dotnet tool install --global dotnet-ef
+          fi
       
     - task: Bash@3
       displayName: updatee db
