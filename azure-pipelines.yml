@@ -72,7 +72,8 @@ stages:
       inputs:
         targetType: inline
         script: |
-          if [ "$isInstalled" = "false" ]; then
+          if [ "$(isInstalled)" = "false" ]; then
+            echo "$(isInstalled)"
             dotnet tool install --global dotnet-ef
           fi
       
