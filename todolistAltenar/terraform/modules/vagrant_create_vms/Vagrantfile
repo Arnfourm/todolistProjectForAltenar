@@ -29,7 +29,6 @@ Vagrant.configure("2") do |config|
     end
 
     (1..ENV['vm_masters_count'].to_i).each do |master_index|
-    # for master_index in (1..ENV['vm_masters_count'].to_i)
         config.vm.define "masternode-#{master_index}" do |masternode|
             masternode.vm.hostname = "masternode-#{master_index}"
             masternode.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.17#{master_index}"
@@ -41,7 +40,6 @@ Vagrant.configure("2") do |config|
     end
 
     (1..ENV['vm_workers_count'].to_i).each do |worker_index|
-    # for worker_index in (1..ENV['vm_workers_count'].to_i)
         config.vm.define "workernode-#{worker_index}" do |workernode|
             workernode.vm.hostname = "workernode-#{worker_index}"
             workernode.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.18#{worker_index}"
@@ -49,7 +47,6 @@ Vagrant.configure("2") do |config|
     end
 
     (1..ENV['vm_dbs_count'].to_i).each do |db_index|
-    # for db_index in (1..ENV['vm_dbs_count'].to_i)
         config.vm.define "database-#{db_index}" do |database|
             database.vm.hostname = "databasenode-#{db_index}"
             database.vm.network "public_network", bridge: "#{ENV['vm_network_interface']}", ip: "192.168.0.19#{db_index}"

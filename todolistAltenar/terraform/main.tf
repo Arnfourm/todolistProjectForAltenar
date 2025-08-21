@@ -98,7 +98,6 @@ resource "terraform_data" "start-server-playbook-exec" {
   depends_on = [ 
     module.Vms-create-via-Vagrant,
     local_sensitive_file.inventory-create
-    # local_sensitive_file.infra-inventory-create
   ]
 }
 
@@ -110,7 +109,6 @@ resource "terraform_data" "db_creation" {
   depends_on = [ 
     terraform_data.start-server-playbook-exec,
     local_sensitive_file.inventory-create
-    # local_sensitive_file.infra-inventory-create
   ]
 }
 

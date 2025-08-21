@@ -23,7 +23,7 @@ variable "network_interface" {
 variable "diskstorage_size" {
   type = string
   description = "disk storage for single VM"
-  default = "35GB"
+  default = "50GB"
 }
 
 variable "cpus_count" {
