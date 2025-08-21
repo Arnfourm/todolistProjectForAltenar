@@ -1,13 +1,12 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
 resources:
 - repo: self
 
+pool:
+  name: luver-pool
+  
 variables:
   backend-tag: 'backend-image-v$(Build.BuildId)'
   frontend-tag: 'frontend-image-v$(Build.BuildId)'
@@ -15,40 +14,67 @@ variables:
   dockerhub-repo: luverk1d/dotnet-project-for-altenar
 
 stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      name: luver-pool
+# - stage: CI
+#   displayName: Build an app and push do docker registry
+#   jobs:
+#   - job: Docker-work
+#     displayName: Build a docker image and push
+#     steps:
+#     - task: Docker@2
+#       displayName: Login into docker account
+#       inputs:
+#         command: login
+#         containerRegistry: $(dockerhub-registry-connection)
+
+#     - task: Docker@2
+#       displayName: Build a backend image
+#       inputs:
+#         command: buildAndPush
+#         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
+#         repository: $(dockerhub-repo)
+#         tags: |
+#           $(backend-tag)
+
+#     - task: Docker@2
+#       displayName: Build a frontend image
+    #   inputs:
+    #     command: buildAndPush
+    #     dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/frontend/dockerfile'
+    #     repository: $(dockerhub-repo)
+    #     tags: |
+    #       $(frontend-tag)
+
+    # - task: Docker@2
+    #   displayName: Logout from docker account
+    #   inputs:
+    #     command: logout
+    #     containerRegistry: $(dockerhub-registry-connection)
+  
+- stage: CD
+  displayName: Db update by migration
+  jobs: 
+  - job: Migration_work
+    displayName: Update db via dotnet migrations
     steps:
-    - task: Docker@2
-      displayName: Login into docker account
+    - task: Bash@3
+      displayName: dotnet-ef tool instattion check
       inputs:
-        command: login
-        containerRegistry: $(dockerhub-registry-connection)
+        targetType: inline
+        script: "##vso[task.setvariable variable=isInstalled]  $(dotnet tool list -g | grep dotnet-ef)"
 
-    - task: Docker@2
-      displayName: Build a backend image
+    - task: Bash@3
       inputs:
-        command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
-        repository: $(dockerhub-repo)
-        tags: |
-          $(backend-tag)
+        targetType: inline
+        script: "echo $(isInstalled)"
 
-    - task: Docker@2
-      displayName: Build a frontend image
-      inputs:
-        command: buildAndPush
-        dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/frontend/dockerfile'
-        repository: $(dockerhub-repo)
-        tags: |
-          $(frontend-tag)
-
-    - task: Docker@2
-      displayName: Logout from docker account
-      inputs:
-        command: logout
-        containerRegistry: $(dockerhub-registry-connection)
+    # - task: Bash@3
+    #   displayName: Install dotnet-ef tool
+    #   inputs:
+    #     targetType: inline
+    #     script: dotnet tool install --global dotnet-ef
+      
+    # - task: Bash@3
+    #   displayName: updatee db
+    #   inputs:
+    #     targetType: inline
+    #     script: dotnet ef database update --connection $(CONNECTION-STRING)
