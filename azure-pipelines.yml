@@ -88,7 +88,5 @@ stages:
       displayName: updatee db
       inputs:
         targetType: inline
-        script: |
-          pwd
-          dotnet ef database update --connection "Host=192.168.0.191;Database=todolistdb;Username=luverov;Password=123456789"
+        script: dotnet-ef database update --connection "$(CONNECTION-STRING)"
         workingDirectory: "$(Build.SourcesDirectory)/todolistAltenar/backend/todolistProject.API"
