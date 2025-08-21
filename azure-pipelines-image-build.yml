@@ -62,9 +62,9 @@ stages:
         targetType: inline
         script: |
           if dotnet tool list -g | grep dotnet-ef; then
-            "##vso[task.setvariable variable=isInstalled]true"
+            echo "##vso[task.setvariable variable=isInstalled]true"
           else
-            "##vso[task.setvariable variable=isInstalled]false"
+            echo "##vso[task.setvariable variable=isInstalled]false"
           fi
         
     - task: Bash@3
