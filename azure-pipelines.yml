@@ -81,5 +81,5 @@ stages:
       displayName: updatee db
       inputs:
         targetType: inline
-        script: dotnet ef database update --connection $(CONNECTION-STRING)
-        workingDirectory: "$(Build.SourcesDirectory)/todolistAltenar/backend/todolistProject.dataAccess/"
+        script: dotnet ef database update --connection "$(CONNECTION-STRING)"
+        workingDirectory: "$(Build.SourcesDirectory)/todolistAltenar/backend/todolistProject.API/"
