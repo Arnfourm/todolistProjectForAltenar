@@ -72,14 +72,16 @@ stages:
         targetType: inline
         script: "echo $(isInstalled)"
 
-    # - task: Bash@3
-    #   displayName: Install dotnet-ef tool
-    #   inputs:
-    #     targetType: inline
-    #     script: dotnet tool install --global dotnet-ef
+    - task: Bash@3
+      displayName: Install dotnet-ef tool
+      inputs:
+        targetType: inline
+        script: |
+          if $(isInstalled) == false; then
+            dotnet tool install --global dotnet-ef
       
-    # - task: Bash@3
-    #   displayName: updatee db
-    #   inputs:
-    #     targetType: inline
-    #     script: dotnet ef database update --connection $(CONNECTION-STRING)
+    - task: Bash@3
+      displayName: updatee db
+      inputs:
+        targetType: inline
+        script: dotnet ef database update --connection $(CONNECTION-STRING)
