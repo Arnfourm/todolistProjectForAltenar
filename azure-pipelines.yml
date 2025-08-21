@@ -73,8 +73,8 @@ stages:
         targetType: inline
         script: |
           if [ "$(isInstalled)" = "false" ]; then
-            echo "$(isInstalled)"
             dotnet tool install --global dotnet-ef
+            export PATH="$PATH:/home/luver/.dotnet/tools"
           fi
       
     - task: Bash@3
