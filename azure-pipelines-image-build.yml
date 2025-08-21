@@ -77,7 +77,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          if $(isInstalled) == false; then
+          if ["$isInstalled" = false]; then
             dotnet tool install --global dotnet-ef
       
     - task: Bash@3
