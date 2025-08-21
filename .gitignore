@@ -14,5 +14,8 @@
 # tfvars
 *.tfvars
 
-# ansible passwork skip
+# ansible password skip
 pass
+
+# ansible inventory
+inventory.yml

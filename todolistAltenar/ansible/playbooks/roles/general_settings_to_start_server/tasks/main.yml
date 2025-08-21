@@ -22,3 +22,14 @@
     name: "*"
     state: latest
     update_cache: yes
+
+- name: Install 
+  dnf:
+    name: cloud-utils-growpart
+    state: latest
+
+- name: Growpart root disk
+  shell: growpart /dev/sda 5
+
+- name: Filesystem 
+  shell: xfs_growfs /
