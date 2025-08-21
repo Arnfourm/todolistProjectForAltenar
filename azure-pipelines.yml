@@ -76,7 +76,12 @@ stages:
             dotnet tool install --global dotnet-ef
             export PATH="$PATH:/home/luver/.dotnet/tools"
           fi
-      
+
+    - task: Bash@3
+      inputs:
+        targetType: inline
+        script: echo "$(CONNECTION-STRING)"
+
     - task: Bash@3
       displayName: updatee db
       inputs:
