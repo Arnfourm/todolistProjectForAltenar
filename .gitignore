@@ -17,8 +17,5 @@
 # ansible password skip
 pass
 
-# ansible inventory
-inventory.yml
-
 # vscode
 **/.vscode/
