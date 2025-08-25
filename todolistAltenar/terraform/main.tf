@@ -87,12 +87,12 @@ resource "local_sensitive_file" "inventory-create" {
     }
   })
 
-  filename = "../ansible/inventories/kubespray/inventory.yml"
+  filename = "../ansible/inventories/inventory.yml"
 }
 
 resource "terraform_data" "start-server-playbook-exec" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml "
+    command = "ansible-playbook ../ansible/playbooks/startServer.yml --vault-password-file ./pass -i ../ansible/inventories/inventory.yml "
   }
 
   depends_on = [ 
@@ -103,7 +103,7 @@ resource "terraform_data" "start-server-playbook-exec" {
 
 resource "terraform_data" "db_creation" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/db-deploy.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml"
+    command = "ansible-playbook ../ansible/playbooks/db-deploy.yml --vault-password-file ./pass -i ../ansible/inventories/inventory.yml"
   }  
 
   depends_on = [ 
@@ -114,7 +114,7 @@ resource "terraform_data" "db_creation" {
 
 resource "terraform_data" "kubespray-creation-cluster" {
   provisioner "local-exec" {
-    command = "ansible-playbook ~/kubespray/cluster.yml -i ../ansible/inventories/kubespray/inventory.yml --become --vault-password-file ./pass"
+    command = "ansible-playbook ~/kubespray/cluster.yml -i ../ansible/inventories/inventory.yml --become --vault-password-file ./pass"
   }
 
   depends_on = [ 
@@ -125,7 +125,7 @@ resource "terraform_data" "kubespray-creation-cluster" {
 
 resource "terraform_data" "post-installation-settings" {
   provisioner "local-exec" {
-    command = "ansible-playbook ../ansible/playbooks/post-installation-configure.yml --vault-password-file ./pass -i ../ansible/inventories/kubespray/inventory.yml"
+    command = "ansible-playbook ../ansible/playbooks/post-installation-configure.yml --vault-password-file ./pass -i ../ansible/inventories/inventory.yml"
   }
 
   depends_on = [ 
