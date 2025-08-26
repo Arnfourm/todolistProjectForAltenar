@@ -22,72 +22,10 @@ module "Vms-create-via-Vagrant" {
   vagrantfile_diskstorage_in_stock = var.diskstorage_size
 }
 
-resource "local_sensitive_file" "inventory-create" {
-  content = yamlencode({
-  "all" = {
-    "hosts" = merge(
-      {
-        for master_index in range(1, var.count_masters + 1) : "master-node-${master_index}" => {
-          "ansible_host": "192.168.0.17${master_index}"
-          "ip": "192.168.0.17${master_index}"
-          "access_ip": "192.168.0.17${master_index}"
-        }
-      },
-      {
-        for worker_index in range(1, var.count_workers + 1) : "worker-node-${worker_index}" => {
-          "ansible_host": "192.168.0.18${worker_index}"
-          "ip": "192.168.0.18${worker_index}"
-          "access_ip": "192.168.0.18${worker_index}"
-        }
-      },
-      {
-        for db_index in range(1, var.count_dbs + 1) : "database-node-${db_index}" => {
-          "ansible_host": "192.168.0.19${db_index}"
-          "ip": "192.168.0.19${db_index}"
-          "access_ip": "192.168.0.19${db_index}"
-        }
-      }
-    )
-
-    "children" = {
-      "kube_control_plane" = {
-        "hosts" = {
-          for master_index in range(1, var.count_masters + 1) : "master-node-${master_index}" => {}
-        }
-      },
-      "kube_node" = {
-        "hosts" = {
-          for worker_index in range(1, var.count_workers + 1) : "worker-node-${worker_index}" => {}
-        }
-      },
-      "etcd" = {
-        "hosts" = {
-          for master_index in range(1, var.count_masters + 1) : "master-node-${master_index}" => {}
-        }
-      },
-      "k8s_cluster" = {
-        hosts = merge(
-          {
-            for master_index in range(1, var.count_masters + 1) : "master-node-${master_index}" => {}
-          },
-          {
-            for worker_index in range(1, var.count_workers + 1) : "worker-node-${worker_index}" => {}
-          }
-        ),
-      },
-      "calico_rr:" = {
-        "hosts:" = {}
-      },
-      "postgres-hosts" = {
-        hosts = {
-          for db_index in range(1, var.count_dbs + 1) : "database-node-${db_index}" => {}
-        }
-      }
-    }
-    }
-  })
-
-  filename = "../ansible/inventories/inventory.yml"
+resource "terraform_data" "inventory-create" {
+  provisioner "local-exec" {
+    command = "ansible-playbook ../ansible/playbooks/inventory-create.yml --vault-password-file ./pass --extra-vars 'count_masters=${var.count_masters} count_workers=${var.count_workers} count_dbs=${var.count_dbs}'"
+  }
 }
 
 resource "terraform_data" "start-server-playbook-exec" {
@@ -97,7 +35,7 @@ resource "terraform_data" "start-server-playbook-exec" {
 
   depends_on = [ 
     module.Vms-create-via-Vagrant,
-    local_sensitive_file.inventory-create
+    terraform_data.inventory-create
   ]
 }
 
@@ -108,7 +46,7 @@ resource "terraform_data" "db_creation" {
 
   depends_on = [ 
     terraform_data.start-server-playbook-exec,
-    local_sensitive_file.inventory-create
+    terraform_data.inventory-create
   ]
 }
 
@@ -119,7 +57,7 @@ resource "terraform_data" "kubespray-creation-cluster" {
 
   depends_on = [ 
     terraform_data.start-server-playbook-exec,
-    local_sensitive_file.inventory-create
+    terraform_data.inventory-create
   ]
 }
 

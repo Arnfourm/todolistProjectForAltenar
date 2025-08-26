@@ -38,20 +38,20 @@ namespace todolistProject.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Guid>> CreateUser([FromBody] UsersRequest request)
-        {
-            var newUser = new User(
-                Guid.NewGuid(),
-                request.username,
-                request.userEmail,
-                request.userPassword
-            );
+        // [HttpPost]
+        // public async Task<ActionResult<Guid>> CreateUser([FromBody] UsersRequest request)
+        // {
+        //     var newUser = new User(
+        //         Guid.NewGuid(),
+        //         request.username,
+        //         request.userEmail,
+        //         request.userPassword
+        //     );
 
-            await _userService.CreateUser(newUser);
+        //     await _userService.CreateUser(newUser);
 
-            return Ok(newUser);
-        }
+        //     return Ok(newUser);
+        // }
 
         [HttpPut("{userid:guid}")]
         public async Task<ActionResult<Guid>> UpdateUser(Guid userid, [FromBody] UsersRequest request)
