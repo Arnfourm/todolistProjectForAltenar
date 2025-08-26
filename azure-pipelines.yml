@@ -17,6 +17,20 @@ stages:
 - stage: CI
   displayName: Build an app and push do docker registry
   jobs:
+  - job: Git_versioning
+    displayName: Calculate new version and create tag/release
+    steps:
+      - checkout: self
+        fetchDepth: 0
+
+      - task: gitversion-setup@4
+        displayName: Gitversion install
+        inputs:
+          versionSpec: '2.x.x'
+
+      - task: gitversion-execute@4
+        displayName: Calculate git version
+
   - job: Docker_work
     displayName: Build a docker image and push
     steps:
@@ -49,7 +63,7 @@ stages:
       inputs:
         command: logout
         containerRegistry: $(dockerhub-registry-connection)
-  
+
 - stage: CD
   displayName: Db update by migration
   jobs: 
