@@ -49,33 +49,33 @@ type: opaque
   YAML
 }
 
-resource "helm_release" "create-deploy-frontend" {
-  name = "deploy-frontend"
-  chart = "../helm-charts/deploy-app/"
+# resource "helm_release" "create-deploy-frontend" {
+#   name = "deploy-frontend"
+#   chart = "../helm-charts/deploy-app/"
 
-  values = [
-    file("../helm-charts/deploy-app/values-frontend.yaml")
-  ]
+#   values = [
+#     file("../helm-charts/deploy-app/values-frontend.yaml")
+#   ]
 
-  depends_on = [ 
-    kubectl_manifest.image-pull-secrets,
-    kubectl_manifest.db-connection-string
-  ]
-}
+#   depends_on = [ 
+#     kubectl_manifest.image-pull-secrets,
+#     kubectl_manifest.db-connection-string
+#   ]
+# }
 
-resource "helm_release" "create-deploy-backend" {
-  name = "deploy-backend"
-  chart = "../helm-charts/deploy-app/"
+# resource "helm_release" "create-deploy-backend" {
+#   name = "deploy-backend"
+#   chart = "../helm-charts/deploy-app/"
 
-  values = [
-    file("../helm-charts/deploy-app/values-backend.yaml")
-  ]
+#   values = [
+#     file("../helm-charts/deploy-app/values-backend.yaml")
+#   ]
 
-  depends_on = [ 
-    kubectl_manifest.image-pull-secrets,
-    kubectl_manifest.db-connection-string
-  ]
-}
+#   depends_on = [ 
+#     kubectl_manifest.image-pull-secrets,
+#     kubectl_manifest.db-connection-string
+#   ]
+# }
 
 resource "helm_release" "create-deploy-ingress" {
   name = "deploy-ingress"
@@ -85,10 +85,10 @@ resource "helm_release" "create-deploy-ingress" {
     file("../helm-charts/deploy-app/values-ingress.yaml")
   ]
 
-  depends_on = [ 
-    helm_release.create-deploy-backend,
-    helm_release.create-deploy-frontend
-  ]
+  # depends_on = [ 
+  #   helm_release.create-deploy-backend,
+  #   helm_release.create-deploy-frontend
+  # ]
 }
 
 resource "helm_release" "deploy-nginx-ingress-controller" {

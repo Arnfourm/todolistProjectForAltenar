@@ -126,6 +126,29 @@ provider "registry.terraform.io/hashicorp/local" {
   ]
 }
 
+provider "registry.terraform.io/nikolalohinski/jinja" {
+  version     = "2.4.3"
+  constraints = "2.4.3"
+  hashes = [
+    "h1:H6A7QZAJqQ7iRKEDVyszilO4V3Re5zLklFFWiDhxQrk=",
+    "zh:05912cd76c0a54ad6e30fb30d1bbe51a29863b37d782915548cb820e11d5463e",
+    "zh:33d42899aeeb49a7ad000a443b100278567c6f8e93f530eed13fab1b1a8aac9d",
+    "zh:44eb97910e6b75be04249998d7376ddf6198fa2d98733eb9e4f701764dd079b2",
+    "zh:5ec2d0a9e61d99e8128d0f9763c98097c6d3ecaeb5cd1d5d6404c8cf76f18a79",
+    "zh:6c5e713277fe3cce7c599c84744dd51d4075c9ed290bdcfcdebc17778d002d02",
+    "zh:71958517d80bc862c686d1af19e015db1ea3f1a8d6f10e4f811e36556ad81052",
+    "zh:773f58f7554159320a7305592c65bd29512b319536e8c3d431846c64b0c23f3f",
+    "zh:78d5eefdd9e494defcb3c68d282b8f96630502cac21d1ea161f53cfe9bb483b3",
+    "zh:85532d539523d7e34fdd3935b27cadf2277c8751d066b9460c183405baf495f9",
+    "zh:882a3899b2fde5f7f522dd8b50b795e8ecda2018640b9126ebc70e37adf722d8",
+    "zh:8e607a136f55f87f38f8f375eb1b8ec3e3bbaee0aa45f95b1bf7bc1a03b1aca6",
+    "zh:b32315ca0d2447372eb0549f5b158e1f3a866b87da70e1bdf1547ff49fbb669b",
+    "zh:bbb9762595cc42eded2deb2dea56869b9c2f32c36dcd13d21190a8bc5fbd19b1",
+    "zh:bcb2304e01bfd99210dda8ed5c32597d372102a2c428c1f3cec3b6d45a0638d8",
+    "zh:becfd1d6ee3f196af44a5bbdb94100c2249033ba125e08e965416994e28733e7",
+  ]
+}
+
 provider "registry.terraform.io/terra-farm/virtualbox" {
   version     = "0.2.2-alpha.1"
   constraints = "0.2.2-alpha.1"

@@ -1,6 +1,7 @@
 # Terraform state ignoring
 *.tfstate
 *.tfstate*
+*.terraform.lock.hcl
 
 # Terraform provider
 **/.terraform/

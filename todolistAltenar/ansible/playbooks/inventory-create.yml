@@ -1,0 +1,9 @@
+---
+- name: Test jinja2 template
+  hosts: localhost
+
+  tasks:
+    - name: Template create
+      ansible.builtin.template:
+        src: "./templates/inventory-template.j2"
+        dest: "../inventories/inventory.yml"
