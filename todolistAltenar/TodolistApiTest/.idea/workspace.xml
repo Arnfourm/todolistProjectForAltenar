@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="188e9b09-25c0-4c3c-ba49-42fad3f969fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ansible/inventories/inventory.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../ansible/inventories/inventory.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="31prFz2TfAGKQrhtUzwdfPybCb2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "JUnit.ApiTest.executor": "Run",
+    "JUnit.ApiTest.testGetNote.executor": "Run",
+    "JUnit.ApiTest.testGetNoteById.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "ansible-inventory-creation-fixing",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test/java",
+    "onboarding.tips.debug.path": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/main/java/tests/backendTest/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.ApiTest">
+    <configuration name="ApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TodolistApiTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.backendTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.backendTest" />
+      <option name="MAIN_CLASS_NAME" value="tests.backendTest.ApiTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiTest.testGetNoteById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TodolistApiTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.backendTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.backendTest" />
+      <option name="MAIN_CLASS_NAME" value="tests.backendTest.ApiTest" />
+      <option name="METHOD_NAME" value="testGetNoteById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ApiTest" />
+        <item itemvalue="JUnit.ApiTest.testGetNoteById" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="188e9b09-25c0-4c3c-ba49-42fad3f969fd" name="Changes" comment="" />
+      <created>1756231757345</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756231757345</updated>
+    </task>
+    <servers />
+  </component>
+</project>
