@@ -64,11 +64,21 @@ stages:
         tags: |
           $(frontend-tag)
 
+    - task: Bash@3
+      displayName: outputVars
+      name: docker_tag_variables
+      inputs:
+        targetType: inline
+        script: |
+          echo "##vso[task.setvariable variable=docker_backend_tag]$(backend-tag)"
+          echo "##vso[task.setvariable variable=docker_frontend_tag]$(frontend-tag)"
+
   - job: Api_tests
     displayName: Api test for new docker image
     dependsOn: Docker_build
     variables:
-      backend-tag: $[ dependencies.Docker_build.outputs['Build_backend_docker_image.backend-tag'] ]
+      backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
+      frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
     steps:
       - script: "echo $(backend-tag)"
         displayName: test
