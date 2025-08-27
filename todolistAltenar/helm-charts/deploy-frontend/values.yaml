@@ -6,7 +6,7 @@
 image:
   repository: luverk1d/todolistproject
   pullPolicy: Always
-  tag: "frontend-image"
+  tag: "frontend-image-v2.0.3-13"
 
 # Image pull secrets
 imagePullSecrets: []
