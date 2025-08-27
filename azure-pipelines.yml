@@ -30,25 +30,14 @@ stages:
         name: gitVersion_vars
         displayName: Calculate git version
 
-      - task: Bash@3
-        displayName: Show git version
-        inputs:
-          targetType: inline
-          script: "echo $(GitVersion_FullSemVer)"
-
-  - job: Docker_work
-    displayName: Build a docker image and push
+  - job: Docker_build
+    displayName: Build a docker image
     dependsOn: Git_versioning
     variables:
       gitVersion: $[ dependencies.Git_versioning.outputs['gitVersion_vars.GitVersion_FullSemVer'] ]
       backend-tag: 'backend-image-v$(gitVersion)'
       frontend-tag: 'frontend-image-v$(gitVersion)'
     steps:
-    - task: Bash@3
-      inputs:
-        targetType: inline
-        script: "echo 'newVersion is $(gitVersion)'"
-
     - task: Docker@2
       displayName: Login into docker account
       inputs:
@@ -57,8 +46,9 @@ stages:
 
     - task: Docker@2
       displayName: Build a backend image
+      name: Build_backend_docker_image
       inputs:
-        command: buildAndPush
+        command: build
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
         repository: $(dockerhub-repo)
         tags: |
@@ -66,18 +56,33 @@ stages:
 
     - task: Docker@2
       displayName: Build a frontend image
+      name: Build_frontend_docker_image
       inputs:
-        command: buildAndPush
+        command: build
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/frontend/dockerfile'
         repository: $(dockerhub-repo)
         tags: |
           $(frontend-tag)
 
-    - task: Docker@2
-      displayName: Logout from docker account
-      inputs:
-        command: logout
-        containerRegistry: $(dockerhub-registry-connection)
+  - job: Api_tests
+    displayName: Api test for new docker image
+    dependsOn: Docker_build
+    variables:
+      backend-tag: $[ dependencies.Docker_build.outputs['Build_backend_docker_image.backend-tag'] ]
+    steps:
+      - script: "echo $(backend-tag)"
+        displayName: test
+
+  # - job: Push_docker_images
+  #   displayName: Push tested images to dockerhub
+  #   dependsOn: Api_tests
+  #   steps:
+  #     - task: Docker@2
+  #       displayName: Logout from docker account
+  #       inputs:
+  #         command: logout
+  #         containerRegistry: $(dockerhub-registry-connection)
+
 
 - stage: CD
   displayName: Db update by migration
