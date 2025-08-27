@@ -118,6 +118,8 @@ stages:
       backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
       frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
     steps:
+      - script: echo $(backend-tag)
+
       - task: Docker@2
         displayName: Push backend image
         inputs:
