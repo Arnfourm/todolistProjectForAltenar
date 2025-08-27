@@ -27,6 +27,7 @@ stages:
           versionSpec: '6.4.x'
 
       - task: gitversion-execute@4
+        name: gitVersion_vars
         displayName: Calculate git version
 
       - task: Bash@3
@@ -38,8 +39,9 @@ stages:
   - job: Docker_work
     displayName: Build a docker image and push
     variables:
-      backend-tag: 'backend-image-v$(GitVersion_FullSemVer)'
-      frontend-tag: 'frontend-image-v$(GitVersion_FullSemVer)'
+      gitVersion: $[ dependencies.Git_versioning.outputs['gitVersion_vars.GitVersion_FullSemVer'] ]
+      backend-tag: 'backend-image-v$(gitVersion)'
+      frontend-tag: 'frontend-image-v$(gitVersion)'
     steps:
     - task: Docker@2
       displayName: Login into docker account
