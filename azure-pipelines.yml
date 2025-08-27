@@ -38,8 +38,9 @@ stages:
 
   - job: Docker_work
     displayName: Build a docker image and push
+    dependsOn: Git_versioning
     variables:
-      gitVersion: $[ dependencies.Git_versioning.outputs['gitVersion_vars.GitVersion.FullSemVer'] ]
+      gitVersion: $[ dependencies.Git_versioning.outputs['gitVersion_vars.GitVersion_FullSemVer'] ]
       backend-tag: 'backend-image-v$(gitVersion)'
       frontend-tag: 'frontend-image-v$(gitVersion)'
     steps:
