@@ -46,7 +46,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: inline
-        script: "echo $(gitVersion)"
+        script: "echo 'newVersion is $(gitVersion)'"
 
     - task: Docker@2
       displayName: Login into docker account
