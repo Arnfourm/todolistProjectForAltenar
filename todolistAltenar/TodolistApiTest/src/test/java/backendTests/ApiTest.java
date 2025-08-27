@@ -37,7 +37,7 @@ public class ApiTest {
         String newUser = String.format("""
                 {
                   "username": "%s",
-                  "userEmail": "%s",
+                  "usermEmail": "%s",
                   "userPassword": "%s"
                 }
                 """, newUserName, newEmailAddress, newPassword);
