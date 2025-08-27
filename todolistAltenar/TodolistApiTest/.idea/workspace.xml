@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="188e9b09-25c0-4c3c-ba49-42fad3f969fd" name="Changes" comment="" />
+    <list default="true" id="188e9b09-25c0-4c3c-ba49-42fad3f969fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-backendTests.ApiTest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/backendTests.ApiTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tests/backendTest/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/backendTests/ApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tests/backendTest/ApiTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/backendTests/ApiTest.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +23,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="31prFz2TfAGKQrhtUzwdfPybCb2" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,6 +43,7 @@
     "git-widget-placeholder": "ansible-inventory-creation-fixing",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test/java",
+    "last_opened_file_path": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test",
     "onboarding.tips.debug.path": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/main/java/tests/backendTest/Main.java",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
@@ -40,17 +51,25 @@
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.ApiTest">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="ApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TodolistApiTest" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.backendTest.*" />
+          <option name="PATTERN" value="backendTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.backendTest" />
-      <option name="MAIN_CLASS_NAME" value="tests.backendTest.ApiTest" />
+      <option name="PACKAGE_NAME" value="backendTests" />
+      <option name="MAIN_CLASS_NAME" value="backendTests.ApiTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -60,12 +79,12 @@
       <module name="TodolistApiTest" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.backendTest.*" />
+          <option name="PATTERN" value="backendTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.backendTest" />
-      <option name="MAIN_CLASS_NAME" value="tests.backendTest.ApiTest" />
+      <option name="PACKAGE_NAME" value="backendTests" />
+      <option name="MAIN_CLASS_NAME" value="backendTests.ApiTest" />
       <option name="METHOD_NAME" value="testGetNoteById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
