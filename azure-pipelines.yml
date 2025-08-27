@@ -79,6 +79,7 @@ stages:
     variables:
       backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
       frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
+      container-name: backend-test-container
       temp-app-backend-port: 2020
     steps:
       - task: Bash@3
@@ -86,7 +87,7 @@ stages:
         inputs:
           targetType: inline
           script: | 
-            docker run -d --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
+            docker run -d --name $(container-name) --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
       
       - task: Bash@3
         displayName: Start tests
@@ -96,22 +97,71 @@ stages:
           script: |
             mvn test
 
+      - task: Bash@3
+        displayName: Set output variables
+        name: docker_container_backend_vars
+        inputs:
+          targetType: inline
+          script: |
+            echo "##vso[task.setvariable variable=backend-docker-container-name;isOutput=true]$(container-name)"
+
       # - task: Maven@4
       #   displayName: Start tests 
       #   inputs:
       #     mavenDirectory: "todolistAltenar/TodolistApiTest"
       #     mavenPomFile: "pom.xml"
 
-  # - job: Push_docker_images
-  #   displayName: Push tested images to dockerhub
-  #   dependsOn: Api_tests
-  #   steps:
-  #     - task: Docker@2
-  #       displayName: Logout from docker account
-  #       inputs:
-  #         command: logout
-  #         containerRegistry: $(dockerhub-registry-connection)
+  - job: Push_docker_images
+    displayName: Push tested images to dockerhub
+    dependsOn: Api_tests
+    variables:
+      backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
+      frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
+    steps:
+      - task: Docker@2
+        displayName: Push backend image
+        inputs:
+          command: push
+          repository: $(dockerhub-repo)
+          tags: |
+            $(backend-tag)
 
+      - task: Docker@2
+        displayName: Push frontend image
+        inputs:
+          command: push
+          repository: $(dockerhub-repo)
+          tags: |
+            $(frontend-tag)
+
+      - task: Docker@2
+        displayName: Logout from docker account
+        inputs:
+          command: logout
+          containerRegistry: $(dockerhub-registry-connection)
+
+  - job: Clean_all
+    displayName: Clean all from host
+    dependsOn: Push_docker_images
+    variables:
+      backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
+      frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
+      backend-container-name: $[ dependencies.Api_tests.outputs['docker_container_backend_vars.backend-docker-container-name'] ]
+    steps:
+      - task: Bash@3
+        displayName: Stop all running containers
+        inputs:
+          targetType: inline
+          script: |
+            docker stop $(backend-container-name)
+        
+      - task: Bash@3
+        displayName: Delete all images
+        inputs:
+          targetType: inline
+          script: |
+            docker image rm $(dockerhub-repo):$(backend-tag)
+            docker image rm $(dockerhub-repo):$(frontend-tag)
 
 - stage: CD
   displayName: Db update by migration
