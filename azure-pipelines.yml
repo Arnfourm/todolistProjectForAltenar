@@ -37,6 +37,9 @@ stages:
 
   - job: Docker_work
     displayName: Build a docker image and push
+    variables:
+      backend-tag: 'backend-image-v$(GitVersion_FullSemVer)'
+      frontend-tag: 'frontend-image-v$(GitVersion_FullSemVer)'
     steps:
     - task: Docker@2
       displayName: Login into docker account
@@ -51,7 +54,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/backend/dockerfile'
         repository: $(dockerhub-repo)
         tags: |
-          'backend-image-v$(GitVersion_FullSemVer)'
+          $(backend-tag)
 
     - task: Docker@2
       displayName: Build a frontend image
@@ -60,7 +63,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/todolistAltenar/frontend/dockerfile'
         repository: $(dockerhub-repo)
         tags: |
-          'frontend-image-v$(GitVersion_FullSemVer)'
+          $(frontend-tag)
 
     - task: Docker@2
       displayName: Logout from docker account
