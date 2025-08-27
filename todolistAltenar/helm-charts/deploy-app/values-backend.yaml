@@ -9,7 +9,7 @@ deployment:
 image:
   repository: luverk1d/dotnet-project-for-altenar
   pullPolicy: Always
-  tag: "backend-image-v63"
+  tag: "backend-image-v2.0.3-13"
 
 # image pull secrets
 imagePullSecrets:
