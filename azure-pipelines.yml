@@ -87,6 +87,12 @@ stages:
           targetType: inline
           script: | 
             docker run -d --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
+      
+      - task: Maven@4
+        displayName: Start tests 
+        inputs:
+          mavenDirectory: "todolistAltenar/TodolistApiTest"
+          mavenPomFile: "pom.xml"
 
   # - job: Push_docker_images
   #   displayName: Push tested images to dockerhub
