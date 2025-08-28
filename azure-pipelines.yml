@@ -96,6 +96,9 @@ stages:
           goals: clean test
           publishJUnitResults: true
           testResultsFiles: "**/surefire-reports/TEST-*.xml"
+        env: 
+          WEBAPP-URL: $(JAVA-HOST-ENV)
+          WEBAPP-PORT: $(JAVA-HOST-PORT)
 
       - task: Bash@3
         displayName: Set output variables
