@@ -88,20 +88,14 @@ stages:
           targetType: inline
           script: | 
             docker run -d --name $(container-name) --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
-      
-      # - task: Bash@3
-      #   displayName: Start tests
-      #   inputs:
-      #     workingDirectory: "todolistAltenar/TodolistApiTest/"
-      #     targetType: inline
-      #     script: |
-      #       mvn test
 
       - task: Maven@4
         displayName: Start tests 
         inputs:
           mavenPomFile: "todolistAltenar/TodolistApiTest/pom.xml"
-          goals: test
+          goals: clean test
+          publishJUnitResults: true
+          testResultsFiles: "**/surefire-reports/TEST-*.xml"
 
       - task: Bash@3
         displayName: Set output variables
