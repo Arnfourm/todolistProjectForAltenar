@@ -141,7 +141,7 @@ stages:
 
   - job: Clean_all
     displayName: Clean all from host
-    continueOnError: true
+    condition: always()
     dependsOn: 
       - Docker_build
       - Api_tests
