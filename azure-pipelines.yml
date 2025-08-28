@@ -113,13 +113,13 @@ stages:
 
   - job: Push_docker_images
     displayName: Push tested images to dockerhub
-    dependsOn: Api_tests
+    dependsOn: 
+      - Docker_build
+      - Api_tests
     variables:
       backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
       frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
     steps:
-      - script: echo $(backend-tag)
-
       - task: Docker@2
         displayName: Push backend image
         inputs:
@@ -144,19 +144,22 @@ stages:
 
   - job: Clean_all
     displayName: Clean all from host
-    dependsOn: Push_docker_images
+    dependsOn: 
+      - Docker_build
+      - Api_tests
+      - Push_docker_images
     variables:
       backend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
       frontend-tag: $[ dependencies.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
       backend-container-name: $[ dependencies.Api_tests.outputs['docker_container_backend_vars.backend-docker-container-name'] ]
     steps:
       - task: Bash@3
-        displayName: Stop all running containers
+        displayName: Stop all and delete running containers
         inputs:
           targetType: inline
           script: |
-            docker stop $(backend-container-name)
-        
+            docker stop $(backend-container-name) && docker rm $(backend-container-name)
+
       - task: Bash@3
         displayName: Delete all images
         inputs:
