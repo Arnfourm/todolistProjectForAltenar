@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ApiTest {
 
-    private static final String BASE_URL = "http://localhost:2020/api";
+    private static final String BASE_URL = System.getProperty("WEBAPP-URL") + ":" + System.getProperty("WEBAPP-PORT") + "/api";
     private static final String NOTE_ENDPOINT = "/Note";
     private static final String GROUP_ENDPOINT = "/Group";
     private static final String USER_ENDPOINT = "/User";
@@ -25,6 +25,8 @@ public class ApiTest {
     @BeforeEach
     public void setUp() {
         RestAssured.baseURI = BASE_URL;
+
+        System.out.println(BASE_URL);
     }
 
     @Test

@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="188e9b09-25c0-4c3c-ba49-42fad3f969fd" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-backendTests.ApiTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/backendTests.ApiTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tests/backendTest/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/backendTests/ApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tests/backendTest/ApiTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/backendTests/ApiTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/backendTests/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/backendTests/ApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-backendTests.ApiTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-backendTests.ApiTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/backendTests.ApiTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/backendTests.ApiTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/backendTests/ApiTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/backendTests/ApiTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,26 +28,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "JUnit.ApiTest.executor": "Run",
-    "JUnit.ApiTest.testGetNote.executor": "Run",
-    "JUnit.ApiTest.testGetNoteById.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "ansible-inventory-creation-fixing",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test/java",
-    "last_opened_file_path": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test",
-    "onboarding.tips.debug.path": "/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/main/java/tests/backendTest/Main.java",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;JUnit.ApiTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApiTest.testGetNote.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApiTest.testGetNoteById.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ansible-inventory-creation-fixing&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/test&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/luver/todolistProjectForAltenar/todolistAltenar/TodolistApiTest/src/main/java/tests/backendTest/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test" />
@@ -59,7 +56,7 @@
       <recent name="$PROJECT_DIR$/src/test" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ApiTest">
     <configuration name="ApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TodolistApiTest" />
       <extension name="coverage">
