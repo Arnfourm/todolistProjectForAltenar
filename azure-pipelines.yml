@@ -104,7 +104,7 @@ stages:
           goals: clean test
           publishJUnitResults: true
           testResultsFiles: "**/surefire-reports/TEST-*.xml"
-          mavenOptions: '-DWEBAPP-URL="$(JAVA-HOST-ENV)" -DWEBAPP-PORT="$(JAVA-HOST-PORT)"'
+          options: '-DWEBAPP-URL="$(JAVA-HOST-ENV)" -DWEBAPP-PORT="$(JAVA-HOST-PORT)"'
 
   - job: Push_docker_images
     displayName: Push tested images to dockerhub
