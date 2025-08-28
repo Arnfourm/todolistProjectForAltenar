@@ -89,13 +89,19 @@ stages:
           script: | 
             docker run -d --name $(container-name) --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
       
-      - task: Bash@3
-        displayName: Start tests
+      # - task: Bash@3
+      #   displayName: Start tests
+      #   inputs:
+      #     workingDirectory: "todolistAltenar/TodolistApiTest/"
+      #     targetType: inline
+      #     script: |
+      #       mvn test
+
+      - task: Maven@4
+        displayName: Start tests 
         inputs:
-          workingDirectory: "todolistAltenar/TodolistApiTest/"
-          targetType: inline
-          script: |
-            mvn test
+          mavenPomFile: "todolistAltenar/TodolistApiTest/pom.xml"
+          goals: test
 
       - task: Bash@3
         displayName: Set output variables
@@ -104,12 +110,6 @@ stages:
           targetType: inline
           script: |
             echo "##vso[task.setvariable variable=backend-docker-container-name;isOutput=true]$(container-name)"
-
-      # - task: Maven@4
-      #   displayName: Start tests 
-      #   inputs:
-      #     mavenDirectory: "todolistAltenar/TodolistApiTest"
-      #     mavenPomFile: "pom.xml"
 
   - job: Push_docker_images
     displayName: Push tested images to dockerhub
