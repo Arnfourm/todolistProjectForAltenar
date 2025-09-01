@@ -35,8 +35,7 @@ stages:
         inputs:
           targetType: inline
           script: |
-            "echo ##vso[build.updatebuildnumber]v$(gitVersion_vars.GitVersion_FullSemVer)-$(Build.SourceBranchName)"
-            echo "v$(gitVersion_vars.GitVersion_FullSemVer)-$(Build.SourceBranchName)"
+            echo "##vso[build.updatebuildnumber]v$(gitVersion_vars.GitVersion_FullSemVer)-$(Build.SourceBranchName)"
 
 
   - job: Docker_build
