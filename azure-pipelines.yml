@@ -30,6 +30,12 @@ stages:
         name: gitVersion_vars
         displayName: Calculate git version
 
+      - task: Bash@3
+        displayName: Rename pipeline
+        inputs:
+          targetType: inline
+          script: "##vso[build.updatebuildnumber]v$(gitVersion_vars.GitVersion_FullSemVer)-$(Build.SourceBranchName)"
+
   - job: Docker_build
     displayName: Build a docker image
     dependsOn: Git_versioning
