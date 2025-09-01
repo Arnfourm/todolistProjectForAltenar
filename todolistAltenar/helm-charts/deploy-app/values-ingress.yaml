@@ -20,7 +20,7 @@ ingress:
       servicePort: 8080
     - path: /api/
       pathType: Prefix
-      serviceName: backend-deploy
+      serviceName: backend-deploy.backend-space.svc.todolist.cluster
       servicePort: 5140
 
 deployment:
