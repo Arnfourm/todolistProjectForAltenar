@@ -776,7 +776,7 @@ server:
     # Size of the PVC created
     size: 10Gi
     # Location where the PVC will be mounted.
-    mountPath: "/mnt/data"
+    mountPath: "/tmp/pvc/"
     # Name of the storage class to use.  If null it will use the
     # configured default Storage Class.
     storageClass: manual
@@ -832,7 +832,7 @@ server:
   # the "file" backend.  This mode is not highly available and should not be scaled
   # past a single replica.
   standalone:
-    enabled: "-"
+    enabled: true
 
     # config is a raw string of default configuration when using a Stateful
     # deployment. Default is to use a PersistentVolumeClaim mounted at /vault/data
@@ -856,7 +856,7 @@ server:
         #}
       }
       storage "file" {
-        path = "/vault/data"
+        path = "/vault/data/"
       }
 
       # Example configuration for using auto-unseal, using Google Cloud KMS. The
@@ -882,7 +882,7 @@ server:
   # different HA backend.
   ha:
     enabled: false
-    replicas: 3
+    replicas: 2
 
     # Set the api_addr configuration for Vault HA
     # See https://developer.hashicorp.com/vault/docs/configuration#api_addr
