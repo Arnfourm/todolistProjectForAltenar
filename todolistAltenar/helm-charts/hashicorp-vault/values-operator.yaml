@@ -581,7 +581,7 @@ controller:
 
   # Configures the environment variable KUBERNETES_CLUSTER_DOMAIN used by KubeDNS.
   # @type: string
-  kubernetesClusterDomain: cluster.local
+  kubernetesClusterDomain: todolist.cluster
 
   # Duration in seconds the pod needs to terminate gracefully.
   # See: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
@@ -615,12 +615,12 @@ metricsService:
 defaultVaultConnection:
   # toggles the deployment of the VaultAuthMethod CR
   # @type: boolean
-  enabled: true
+  enabled: false
 
   # Address of the Vault Server
   # @type: string
   # Example: http://vault.default.svc.cluster.local:8200
-  address: "http://hashicorp-vault.hashicorp-vault .svc.cluster.local:8200"
+  address: "http://hashicorp-vault.hashicorp-vault.svc.todolist.cluster:8200"
 
   # CACertSecret is the name of a Kubernetes secret containing the trusted PEM encoded CA certificate chain as `ca.crt`.
   # Note: This secret must exist prior to deploying the CR.

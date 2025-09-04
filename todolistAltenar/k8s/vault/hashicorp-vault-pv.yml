@@ -4,11 +4,11 @@ metadata:
   name: hashicorp-vault-pv
   namespace: hashicorp-vault
 spec:
-  storageClassName: manual
   volumeMode: Filesystem
   capacity: 
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: manual
   hostPath:
     path: "/vault/data/"

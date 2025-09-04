@@ -1,0 +1,8 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: hashicorp-vault-operator
+  name: vault-connection
+spec:
+  address: http://hashicorp-vault.hashicorp-vault.svc.todolist.cluster:8200
+  skipTLSVerify: false

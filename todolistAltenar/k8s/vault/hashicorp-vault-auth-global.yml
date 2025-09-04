@@ -1,0 +1,16 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuthGlobal
+metadata:
+  name: default
+  namespace: admin
+spec:
+  allowedNamespaces:
+    - hashicorp-vault-operator
+  defaultAuthMethod: kubernetes
+  kubernetes:
+    audiences:
+      - vault
+    mount: kubernetes
+    role: default
+    serviceAccount: default
+    tokenExpirationSeconds: 600
