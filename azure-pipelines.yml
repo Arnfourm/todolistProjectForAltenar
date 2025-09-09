@@ -184,8 +184,8 @@ stages:
   displayName: Db update by migration
   dependsOn: CI
   variables:
-    backend-tag: $[ stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_backend_tag}'] ]
-    frontend-tag: $[ stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_frontend_tag}'] ]
+    backend-tag: stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_backend_tag}']
+    frontend-tag: stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_frontend_tag}']
   jobs: 
   - job: New_image_helm
     displayName: push new tag image in helm value
