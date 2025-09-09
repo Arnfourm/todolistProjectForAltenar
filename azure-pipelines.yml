@@ -181,7 +181,7 @@ stages:
             docker image rm $(dockerhub-repo):$(frontend-tag)
 
 - stage: CD
-  displayName: Db update by migration
+  displayName: CD part
   dependsOn: CI
   variables:
     backend-tag: $[ stageDependencies.CI.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
@@ -195,8 +195,17 @@ stages:
       inputs:
         targetType: inline
         script: |
-          sed 's/tag: "backend-image-.*"/tag: "$(backend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
-          sed 's/tag: "frontend-image-.*"/tag: "$(frontend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml
+          sed 's/tag: "backend-image-.*"/tag: "$(backend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+          sed 's/tag: "frontend-image-.*"/tag: "$(frontend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+
+    - task: Bash@3
+      displayName: Commit new helm value
+      inputs:
+        targetType: inline
+        script: |
+          git add .
+          git commit -m "Helm new chart commit"
+          git push
 
   - job: Migration_work
     displayName: Update db via dotnet migrations
