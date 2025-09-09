@@ -200,8 +200,9 @@ stages:
 
     - task: Bash@3
       displayName: Commit new helm value
-      inputs:
+      inputs: 
         targetType: inline
+        workingDirectory: $(Build.SourcesDirectory)
         script: |
           git add .
           git commit -m "Helm new chart commit"
