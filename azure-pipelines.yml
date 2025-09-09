@@ -182,6 +182,7 @@ stages:
 
 - stage: CD
   displayName: Db update by migration
+  dependsOn: CI
   variables:
     backend-tag: $[ stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_backend_tag}'] ]
     frontend-tag: $[ stageDependencies.CI.Docker_build.outputs['{docker_tag_variables}.{docker_frontend_tag}'] ]
@@ -206,6 +207,7 @@ stages:
 
   - job: Migration_work
     displayName: Update db via dotnet migrations
+    dependsOn: New_image_helm
     steps:
     - task: Bash@3
       displayName: dotnet-ef tool installation check
