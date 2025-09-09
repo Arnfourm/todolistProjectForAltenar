@@ -191,19 +191,12 @@ stages:
     displayName: push new tag image in helm value
     steps:
     - task: Bash@3
-      displayName: Test
-      inputs:
-        targetType: inline
-        script: |
-          echo $(backend-tag)
-          echo $(frontend-tag)
-
-    - task: Bash@3
       displayName: Change value in local file
       inputs:
         targetType: inline
         script: |
-          sed 's/tag: "backend-image-.*"/$()/' ./todolistAltenar/helm-charts/deploy-app/values-backend.yml
+          sed 's/tag: "backend-image-.*"/$(tag: "$(backend-tag)")/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yml
+          sed 's/tag: "frontend-image-.*"/$(tag: "$(frontend-tag)")/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yml
 
   - job: Migration_work
     displayName: Update db via dotnet migrations
