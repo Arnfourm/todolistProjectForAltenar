@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ApiTest {
 
-    private static final String BASE_URL = System.getenv("WEBAPP-URL") + ":" + System.getenv("WEBAPP-PORT") + "/api";
-    private static final String NOTE_ENDPOINT = "/Note";Property
+    private static final String BASE_URL = System.getProperty("WEBAPP-URL") + ":" + System.getProperty("WEBAPP-PORT") + "/api";
+    private static final String NOTE_ENDPOINT = "/Note";
     private static final String GROUP_ENDPOINT = "/Group";
     private static final String USER_ENDPOINT = "/User";
     private static final String NOTE_CONTENT_ENDPOINT = "/Note/Content";

@@ -1,5 +1,12 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+      - README.md
+      - azure-pipelines.yml
+      - .gitignore
 
 resources:
 - repo: self
@@ -29,6 +36,14 @@ stages:
       - task: gitversion-execute@4
         name: gitVersion_vars
         displayName: Calculate git version
+
+      - task: Bash@3
+        displayName: Rename pipeline
+        inputs:
+          targetType: inline
+          script: |
+            echo "##vso[build.updatebuildnumber]v$(gitVersion_vars.GitVersion_FullSemVer)-$(Build.SourceBranchName)"
+
 
   - job: Docker_build
     displayName: Build a docker image
@@ -89,17 +104,6 @@ stages:
           script: | 
             docker run -d --name $(container-name) --env ConnectionStrings__todolistDbContext="$(CONNECTION-STRING)" -p $(temp-app-backend-port):$(BACKEND-APP-PORT) $(dockerhub-repo):$(backend-tag)
 
-      - task: Maven@4
-        displayName: Start tests 
-        inputs:
-          mavenPomFile: "todolistAltenar/TodolistApiTest/pom.xml"
-          goals: clean test
-          publishJUnitResults: true
-          testResultsFiles: "**/surefire-reports/TEST-*.xml"
-        env: 
-          WEBAPP-URL: $(JAVA-HOST-ENV)
-          WEBAPP-PORT: $(JAVA-HOST-PORT)
-
       - task: Bash@3
         displayName: Set output variables
         name: docker_container_backend_vars
@@ -107,6 +111,15 @@ stages:
           targetType: inline
           script: |
             echo "##vso[task.setvariable variable=backend-docker-container-name;isOutput=true]$(container-name)"
+
+      - task: Maven@4
+        displayName: Start tests 
+        inputs:
+          mavenPomFile: "todolistAltenar/TodolistApiTest/pom.xml"
+          goals: clean test
+          publishJUnitResults: true
+          testResultsFiles: "**/surefire-reports/TEST-*.xml"
+          options: '-DWEBAPP-URL="$(JAVA-HOST-ENV)" -DWEBAPP-PORT="$(JAVA-HOST-PORT)"'
 
   - job: Push_docker_images
     displayName: Push tested images to dockerhub
@@ -167,10 +180,36 @@ stages:
             docker image rm $(dockerhub-repo):$(frontend-tag)
 
 - stage: CD
-  displayName: Db update by migration
+  displayName: CD part
+  dependsOn: CI
+  variables:
+    backend-tag: $[ stageDependencies.CI.Docker_build.outputs['docker_tag_variables.docker_backend_tag'] ]
+    frontend-tag: $[ stageDependencies.CI.Docker_build.outputs['docker_tag_variables.docker_frontend_tag'] ]
   jobs: 
+  - job: New_image_helm
+    displayName: push new tag image in helm value
+    steps:
+    # - task: Bash@3
+    #   displayName: Change value in local file
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       sed 's/tag: "backend-image-.*"/tag: "$(backend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+    #       sed 's/tag: "frontend-image-.*"/tag: "$(frontend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+
+      - task: Bash@3
+        displayName: Helm upgrade to new version
+        inputs:
+          targetType: inline
+          script: |
+            helm upgrade $(HELM-DEPLOY-NAME-BACKEND) $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/ -f $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml \
+              -n $(K8S-BACKEND-NS) --set image.tag=$(backend-tag)
+            helm upgrade $(HELM-DEPLOY-NAME-FRONTEND) $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/ -f $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml \
+              -n $(K8S-FRONTEND-NS) --set image.tag=$(frontend-tag)
+
   - job: Migration_work
     displayName: Update db via dotnet migrations
+    dependsOn: New_image_helm
     steps:
     - task: Bash@3
       displayName: dotnet-ef tool installation check

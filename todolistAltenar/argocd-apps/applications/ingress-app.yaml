@@ -1,26 +1,26 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: ingress-application
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  destination:
-    name: "in-cluster"
-    namespace: default
-  source:
-    repoURL: https://github.com/Arnfourm/todolistProjectForAltenar.git
-    targetRevision: HEAD
-    path: todolistAltenar/helm-charts/deploy-app
-    helm:
-      releaseName: deploy-ingress
-      valueFiles:
-      - values-ingress.yaml
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=false
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: ingress-application
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   destination:
+#     name: "in-cluster"
+#     namespace: default
+#   source:
+#     repoURL: https://github.com/Arnfourm/todolistProjectForAltenar.git
+#     targetRevision: HEAD
+#     path: todolistAltenar/helm-charts/deploy-app
+#     helm:
+#       releaseName: deploy-ingress
+#       valueFiles:
+#       - values-ingress.yaml
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=false
