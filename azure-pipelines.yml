@@ -7,7 +7,6 @@ trigger:
       - README.md
       - azure-pipelines.yml
       - .gitignore
-      - todolistAltenar/helm-charts/deploy-app/values*
 
 resources:
 - repo: self
@@ -190,23 +189,23 @@ stages:
   - job: New_image_helm
     displayName: push new tag image in helm value
     steps:
-    - task: Bash@3
-      displayName: Change value in local file
-      inputs:
-        targetType: inline
-        script: |
-          sed 's/tag: "backend-image-.*"/tag: "$(backend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
-          sed 's/tag: "frontend-image-.*"/tag: "$(frontend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+    # - task: Bash@3
+    #   displayName: Change value in local file
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       sed 's/tag: "backend-image-.*"/tag: "$(backend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
+    #       sed 's/tag: "frontend-image-.*"/tag: "$(frontend-tag)"/' $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml > $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml
 
-    - task: Bash@3
-      displayName: Commit new helm value
-      inputs: 
-        targetType: inline
-        workingDirectory: $(Build.SourcesDirectory)
-        script: |
-          git add .
-          git commit -m "Helm new chart commit"
-          git push
+      - task: Bash@3
+        displayName: Helm upgrade to new version
+        inputs:
+          targetType: inline
+          script: |
+            helm upgrade $(HELM-DEPLOY-NAME-BACKEND) $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/ -f $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-backend.yaml \
+              -n $(K8S-BACKEND-NS) --set image.tag=$(backend-tag)
+            helm upgrade $(HELM-DEPLOY-NAME-FRONTEND) $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/ -f $(Build.SourcesDirectory)/todolistAltenar/helm-charts/deploy-app/values-frontend.yaml \
+              -n $(K8S-FRONTEND-NS) --set image.tag=$(frontend-tag)
 
   - job: Migration_work
     displayName: Update db via dotnet migrations
