@@ -1,0 +1,17 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: backend-space
+  name: vault-connection-backend
+spec:
+  address: http://hashicorp-vault.hashicorp-vault.svc.todolist.cluster:8200
+  skipTLSVerify: false
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: default
+  name: vault-connection-default
+spec:
+  address: http://hashicorp-vault.hashicorp-vault.svc.todolist.cluster:8200
+  skipTLSVerify: false

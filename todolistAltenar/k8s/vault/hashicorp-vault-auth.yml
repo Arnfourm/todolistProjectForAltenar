@@ -1,0 +1,31 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: backend-app-auth
+  namespace: backend-space
+spec:
+  vaultConnectionRef: vault-connection-backend
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: hashicorp-vault-operator
+    serviceAccount: default
+  vaultAuthGlobalRef:
+    allowDefault: true
+    namespace: admin
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: docker-service-auth
+  namespace: default
+spec:
+  vaultConnectionRef: vault-connection-default
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: hashicorp-vault-operator
+    serviceAccount: default
+  vaultAuthGlobalRef:
+    allowDefault: true
+    namespace: admin
