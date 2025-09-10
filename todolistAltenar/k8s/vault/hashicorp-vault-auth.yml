@@ -1,10 +1,10 @@
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
-  name: backend-app
-  namespace: hashicorp-vault-operator
+  name: backend-app-auth
+  namespace: backend-space
 spec:
-  vaultConnectionRef: vault-connection
+  vaultConnectionRef: vault-connection-backend
   method: kubernetes
   mount: kubernetes
   kubernetes:
@@ -15,16 +15,17 @@ spec:
     namespace: admin
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
-kind: VaultStaticSecret
+kind: VaultAuth
 metadata:
-  name: backend-app-static
-  namespace: hashicorp-vault-operator
+  name: docker-service-auth
+  namespace: default
 spec:
-  destination:
-    create: true
-    name: backend-app-secret
-  hmacSecretData: true
-  mount: docker-stuff
-  path: docker-connection-key
-  type: kv-v2
-  vaultAuthRef: backend-app
+  vaultConnectionRef: vault-connection-default
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: hashicorp-vault-operator
+    serviceAccount: default
+  vaultAuthGlobalRef:
+    allowDefault: true
+    namespace: admin

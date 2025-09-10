@@ -6,11 +6,14 @@ metadata:
 spec:
   allowedNamespaces:
     - hashicorp-vault-operator
+    - hashicorp-vault
+    - default
+    - backend-space
   defaultAuthMethod: kubernetes
   kubernetes:
     audiences:
       - vault
     mount: kubernetes
-    role: default
+    role: hashicorp-vault-operator
     serviceAccount: default
     tokenExpirationSeconds: 600
